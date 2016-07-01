@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.marca {
+    width: 100%;
+    display: table;
+    padding: 10px;
+    background-color: black;
+}
+.marca li {
+    float: left;
+    width: 8%;
+    display: table;
+    padding: 1px 40px;
+    color: white;
+    font-family: verdana,sans-serif;
+    border-right: white 1px solid;
+    text-align: center;
+}
+.marca li:first-child {
+    width: 50%;
+    border: none;
+    text-align: left;
+}
+.marca li:last-child {
+    border: none;
+}
+.navMenu {
+    width: 100%;
+    display: table;
+    padding-bottom: 5px;
+    border-bottom: gray 1px solid;
+}
+.navMenu li {
+    float: left;
+    width: 19%;
+    height: 50px;
+    font-size: 19px;
+    font-family: calibri light;
+    text-align: center;
+    padding-top: 40px;
+}

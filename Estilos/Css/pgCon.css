@@ -1,0 +1,65 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+    background-image: url('../Imagenes/pgCon.png');
+    background-size: 100% 100%;
+    text-align: right;
+}
+img {
+    box-shadow: 1px 2px 3px black;
+    margin-right: 100px;
+}
+h1 {
+    font-family: kalinga;
+    margin-top: 30px;
+    margin-right: 140px;
+}
+h2 {
+    font-family: calibri light;
+    margin-right: 70px;
+    margin-top: 30px;
+}
+ul {
+    margin-top: 30px;
+    width: 300px;
+    display: table;
+    float: right;
+    list-style: none;
+    background: gray;
+    font-family: kalinga;
+    text-align: center;
+    margin-right: 180px;
+    padding: 5px;
+    border-radius: 7px;
+}
+ul li {
+    width: 100%;
+    display: table;
+    margin-top: 10px;
+}
+li input[type=text] {
+    width: 95%;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+li input[type=button] {
+    width: 80px;
+    height: 30px;
+    background-color: blue;
+    cursor: pointer;
+    color: white;
+}
+li input[type=button]:hover {
+    background-color: #A4A4A4;
+    color: black;
+}
