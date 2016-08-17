@@ -19,6 +19,7 @@ class Usuario extends ModeloBaseDeDatos{
         $this->sentencia_sql="SELECT fun_crear_usuario('$this->documento','$this->correo') as respuesta";
                 
         if($this->insertar_registro()){
+            $this->id_usuario=$this->respuesta_funcion->respuesta;
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE,
                 "nuevo_registro"=>$this->respuesta_funcion->respuesta);
@@ -42,7 +43,7 @@ class Usuario extends ModeloBaseDeDatos{
         
     }
     function obtener_registro_por_valor($valor){
-        $this->sentencia_sql="CALL  pa_consultar_usuario_por_campo('$valor')";
+        $this->sentencia_sql="CALL  pa_consultar_cliente_por_identificacion('$valor')";
         
         
         if($this->consultar_registros()){
@@ -50,7 +51,7 @@ class Usuario extends ModeloBaseDeDatos{
                 "respuesta"=>TRUE,
                 "valores_consultados"=>$this->filas_json);
         }else{
-            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+            return array("mensaje"=>  "No hay registros con el documento que buscas","respuesta"=> FALSE);
         }
         
     }
@@ -66,7 +67,8 @@ class Usuario extends ModeloBaseDeDatos{
     }
     function actualizar_recurso(){
         
-        $this->sentencia_sql="SELECT fun_actualizar_usuario('$this->id_usuario','$this->documento','$this->correo') as respuesta";
+        $this->sentencia_sql="SELECT fun_actualizar_usuario('$this->id_usuario',"
+                . "'$this->documento','$this->correo') as respuesta";
         if($this->actualizar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);
@@ -75,8 +77,8 @@ class Usuario extends ModeloBaseDeDatos{
         }
     }
 
-    function crear_registro_usuario_empleado($nombre,$apellido){
-        $this->sentencia_sql="SELECT fun_crear_empleado('$nombre','$apellido','$this->id_usuario') as respuesta";
+    function crear_registro_usuario_empleado($nombre,$apellido,$telefono){
+        $this->sentencia_sql="SELECT fun_crear_empleado('$nombre','$apellido','$this->id_usuario','$telefono') as respuesta";
         if($this->insertar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE,
@@ -86,7 +88,7 @@ class Usuario extends ModeloBaseDeDatos{
         }
     }
     function crear_registro_usuario_cliente($nombre,$apellido,$tipo,$nombre_contacto,$telefono,$direccion){
-        $this->sentencia_sql="SELECT fun_crear_cliente('$nombre','$apellido,'$tipo','$nombre_contacto','$telefono','$direccion','$this->id_usuario') as respuesta";
+        $this->sentencia_sql="SELECT fun_crear_cliente('$nombre','$apellido','$tipo','$nombre_contacto','$telefono','$direccion','$this->id_usuario') as respuesta";
         if($this->insertar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE,
@@ -128,7 +130,7 @@ class Usuario extends ModeloBaseDeDatos{
                 "respuesta"=>TRUE,
                 "valores_consultados"=>$this->filas_json);
         }else{
-            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+            return array("mensaje"=>  "No hay registros con el valor que busca","respuesta"=> FALSE);
         }
     }
     function consultar_registro_usuario_cliente($valor){
@@ -143,8 +145,17 @@ class Usuario extends ModeloBaseDeDatos{
             return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
         }
     }
-    function actualizar_registro_usuario_empleado($nombre,$apellido){
-        $this->sentencia_sql="SELECT fun_actualizar_empleado('$this->id_usuario','$nombre','$apellido') as respuesta";
+    function actualizar_registro_usuario_empleado($nombre,$apellido,$telefono){
+        $this->sentencia_sql="SELECT fun_actualizar_empleado('$this->id_usuario','$nombre','$apellido','$telefono') as respuesta";
+        if($this->actualizar_registro()){
+            return array("mensaje"=> $this->mensajeDepuracion,
+                "respuesta"=>TRUE);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>TRUE);
+        }     
+    }
+    function actualizar_rol($id_rol){
+        $this->sentencia_sql="SELECT fun_actualizar_rol('$this->id_usuario','$id_rol') as respuesta";
         if($this->actualizar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);
@@ -179,11 +190,11 @@ class Usuario extends ModeloBaseDeDatos{
         
         
         if($this->consultar_registros()){
-            return array("mensaje"=>$this->mensajeDepuracion,
+            return array("mensaje"=>"Bienvenido",
                 "respuesta"=>TRUE,
                 "valores_consultados"=>$this->filas_json);
         }else{
-            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+            return array("mensaje"=> "Parece que no estas registrado o tus datos son incorrectos por favor verifica y vueve a intentarlo","respuesta"=> FALSE);
         }
     }
     
@@ -207,6 +218,21 @@ class Usuario extends ModeloBaseDeDatos{
         }else{
             return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>TRUE);
         }        
+        
+    }
+    
+    function consultar_menu_rol($rol){
+        $this->sentencia_sql="SELECT * 
+                FROM vw_vista_permisos WHERE IdRol = '$rol'";        
+        
+        if($this->ejecutar_consulta_sql()){
+            //return array("codigo"=>"00","mensaje"=>"Estos son los resultados de la consulta a la tabla usuario","respuesta"=>TRUE);
+            return array("mensaje"=>  $this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>FALSE);
+        }
         
     }
 }

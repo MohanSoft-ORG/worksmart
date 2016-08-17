@@ -21,7 +21,7 @@ if(isset($_POST['datos'])){
             $objeto->correo=  trim($post->datos->correo);
             $r=$objeto->crear_registro();
             if($r["respuesta"]){
-                $r2=$objeto->crear_registro_usuario_empleado(trim($post->datos->nombre), trim($post->datos->apellido));
+                $r2=$objeto->crear_registro_usuario_empleado(trim($post->datos->nombre), trim($post->datos->apellido),trim($post->datos->telefono));
                 if($r2["respuesta"]){
                     $r3=$objeto->crear_registro_ingreso_aplicacion($post->datos->rol, $post->datos->clave, $post->hora_cliente);
                     if($r3["respuesta"]){
@@ -57,8 +57,9 @@ if(isset($_POST['datos'])){
             $objeto->documento=trim($post->datos->documento);
             $r=$objeto->actualizar_recurso();
             if($r["respuesta"]){
-                $r2=$objeto->actualizar_registro_usuario_empleado(trim($post->datos->nombre), trim($post->datos->apellido));
+                $r2=$objeto->actualizar_registro_usuario_empleado(trim($post->datos->nombre), trim($post->datos->apellido),trim($post->datos->telefono));
                 if($r2["respuesta"]){
+                    $objeto->actualizar_rol($post->datos->rol);
                     echo json_encode(array("respuesta"=>TRUE,"mensaje"=>"Usuario actualizado exitosamente"));
                 }else{
                     echo json_encode(array("respuesta"=>FALSE,"mensaje"=>"No se ha podido actualizar los datos del empleado"));
@@ -88,12 +89,43 @@ if(isset($_POST['datos'])){
             echo json_encode($objeto->consultar_registro_usuario_empleado($post->datos->valor));
             break;
         case "login":
-            echo $objeto->consultar_ingreso_aplicacion(trim($post->datos->nombre_usuario), trim($post->datos->clave));
+            echo json_encode($objeto->consultar_ingreso_aplicacion(trim($post->datos->nombre_usuario), trim($post->datos->clave)));
             break;
         case "cerrarSesion":
             $objeto->id_usuario=trim($post->datos->id_usuario);
-            echo json_encode($objeto->actualizar_ultima_actividad($post->hora_cliente));
-            break;  
+            $r=$objeto->actualizar_ultima_actividad($post->hora_cliente);
+            if($r["respuesta"]){
+                $r["mensaje"]="Hasta pronto";
+            }
+            echo json_encode($r);
+            break;
+        case "contactar":
+            $con=new Contacto();
+            $con->nombre_contacto=trim($post->datos->nombre_contacto);
+            $con->telefono_contacto=trim($post->datos->telefono);
+            $con->correo_contacto=trim($post->datos->correo);
+            $con->observacion=trim($post->datos->observaciones);
+            $con->fecha_contacto=trim($post->hora_cliente);
+            $m=new Mail();
+            $mensajeMail="Hola soy "
+                    .$con->nombre_contacto
+                    ." me pueden contactar al numero de telefono"
+                    .$con->telefono_contacto
+                    ." o al correo "
+                    .$con->correo_contacto
+                    ."\nEstoy interesado en\n :"
+                    .$con->observacion;
+            
+            $m->enviarMailAmigo("contacto@worksmart.com.co", "contacto pagina web", $mensajeMail);
+            
+            echo json_encode($con->crear_registro());
+            break;
+        case "consularRol":
+            echo json_encode($objeto->consultar_menu_rol($post->datos->id_rol));
+            break;
+        case "consultarTodosLosEmpleados":
+            echo json_encode($objeto->consultar_todos_los_registros_usuario_empleado());
+            break;
         default :
             echo json_encode(array("respuesta"=>FALSE,"mensaje"=>"Por favor defina una operacion o agrege una opcion en el swicth"));
             break;

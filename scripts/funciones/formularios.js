@@ -152,10 +152,31 @@ function validar_campo_formulario(e,name){
         break;
     }
 }
-function agregar_session_storage(nombreSession,valor){
-    sessionStorage.setItem("ssUsuario",JSON.stringify(valor));
+
+
+function obtener_valores_filas_tabla(id){
+    var valores=[];
+    console.log(document.getElementById(id));
+    var n=document.getElementById(id).childNodes;
+    console.log(n);
+    console.log(n.childNodes);
+    console.log(n.firstChild);
     
- }
- function eliminar_session_storage(){
-    sessionStorage.clear();
+    for(var e in n){
+        console.log(n[e].nodeName);
+        console.log(n[e].firstElementChild);
+        if(n[e].nodeName=="TD"){
+                var el=n[e];    
+                console.log(n[e].firstElementChild);
+                if(el.firstElementChild!=null){
+                         console.log(el.firstElementChild.value);	
+                         valores.push(el.firstElementChild.value);
+                }
+
+            }
+    }
+    console.log(valores);
+    return valores;
+    
+    
 }

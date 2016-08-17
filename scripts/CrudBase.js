@@ -25,7 +25,7 @@ function registrarDato(url,evento_server,datos,funcion_despues,formulario){
         }).fail(function(){});
     
     }else{
-        mostrarMensaje({mensaje:"por favor ingresa valores"});
+        mostrarMensaje({mensaje:"por favor ingresa valores ☻"});
     }
    
 }

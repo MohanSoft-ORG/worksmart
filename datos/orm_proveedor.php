@@ -51,7 +51,7 @@ class Proveedor extends ModeloBaseDeDatos{
                 "respuesta"=>TRUE,
                 "valores_consultados"=>$this->filas_json);
         }else{
-            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+            return array("mensaje"=>  "No hay registros con los terminos buscados","respuesta"=> FALSE);
         }
         
     }

@@ -257,7 +257,7 @@ class Log{
     }
     public function registrar_log_mysql($archivo,$numeroError,$msnError){
         //ejemplo ../logs/error.log
-        $this->archivo =  fopen("../".$archivo,"a");
+        $this->archivo =  fopen($archivo,"a");
             $mensaje='Mysql Error['.date("d-m-y H:i:s",time()).'] => {'.$numeroError.'}=>{'.$msnError."}\n";
             
             if(fputs($this->archivo, $this->mensaje)){

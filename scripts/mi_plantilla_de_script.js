@@ -1,20 +1,19 @@
-var _contexto;//Aqui nombre del contexto ejemplo => _contexto='_producto';En este caso se usara el valor producto como nombre del contexto
+var _contextoObjeto;//Aqui nombre del contexto ejemplo => _contexto='_producto';En este caso se usara el valor producto como nombre del contexto
 //ejemplo => _
 /*AQUI EL NOMBRE DE LOS BOTONES QUE PERTENECEN A ESTE CONTEXTO*/
-var _btnRegistro;
-var _btnConsulta;
-var _btnActualizar;
-var _btnSeleccionarActualizar;
-var _btnBuscarEliminar;
-var _btnEliminar;
+var _btnRegistroObjeto;
+var _btnConsultaObjeto;
+var _btnConsultarActualizarObjeto;
+var _btnConsultarEliminarObjeto;
+
 /*AQUI EL NOMBRE DE LOS FORMULARIOS QUE PERTENECEN A ESTE CONTEXTO*/
-var _formRegistro;
-var _formConsulta;
-var _formActualizar;
-var _formEliminar;
+var _formRegistroObjeto;
+var _formConsultaObjeto;
+var _formActualizarObjeto;
+var _formEliminarObjeto;
 
 
-function iniciar_contexto(){
+function iniciar_contexto_objeto(){
    
      _contexto;//Aqui nombre del contexto ejemplo => _contexto='_producto';En este caso se usara el valor producto como nombre del contexto
     //ejemplo => _

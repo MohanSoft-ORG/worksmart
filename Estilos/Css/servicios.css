@@ -1,0 +1,543 @@
+@font-face {
+    font-family: "h1";
+    src: url('../Fuentes/h1.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+.marca {
+    width: 100%;
+    display: table;
+    padding: 10px;
+    background-color: black;
+}
+.marca li {
+    float: left;
+    width: 8%;
+    display: table;
+    padding: 30px 20px 1px 20px;
+    color: white;
+    font-family: verdana,sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+.marca li:first-child {
+    width: 50%;
+    border: none;
+    text-align: left;
+    padding-top: 1px;
+}
+.marca li:first-child img {
+    width: 200px;
+    height: 40px;
+    margin-left: 100px;
+}
+.marca li:first-child img:nth-child(2) {
+    height: 30px;
+}
+.marca li:last-child {
+    border: none;
+}
+.navMenu {
+    width: 100%;
+    display: table;
+}
+.navMenu li {
+    float: left;
+    width: 20%;
+    height: 60px;
+    font-size: 19px;
+    font-family: calibri light;
+    text-align: center;
+    padding-top: 30px;
+    cursor: pointer;
+    border-bottom: 3px solid black;
+}
+.navMenu li:hover {
+    background-color: gray;
+    color: white;
+    opacity: 0.8;
+    transition: 1s;
+}
+.uno {
+    background-image: url('../Imagenes/fondos/degra.jpg');
+}
+.uno img {
+    float: right;
+    width: 800px;
+    height: 600px;
+    margin-top: 50px;
+}
+.cinco {
+    overflow: hidden;
+}
+.cinco img {
+    float: left;
+    width: 800px;
+    height: 900px;
+    margin-top: -200px;
+}
+.cinco h2 {
+    float: right;
+    color: black;
+    margin-top: 200px;
+    text-align: left;
+    text-shadow: 2px 2px 4px gray;
+}
+.dos {
+    background-image: url('../Imagenes/fondos/degra1.jpg');
+}
+.dos img {
+    float: left;
+    width: 800px;
+    height: 600px;
+    margin-top: 50px;
+}
+.dos h2 {
+    float: right;
+}
+.tres {
+    background-image: url('../Imagenes/fondos/degra2.jpg');
+}
+.tres img {
+    float: right;
+    width: 800px;
+    height: 600px;
+    margin-top: 50px;
+}
+.seis {
+    background-image: url('../Imagenes/fondos/capacita.png');
+}
+.seis h2 {
+    margin-top: 200px;
+}
+.cuatro {
+    background-image: url('../Imagenes/fondos/cuatro.jpg');
+}
+section {
+    width: 100%;
+    height: 700px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+section h1 {
+    font-family: h1;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 45px;
+}
+section h2 {
+    font-family: h1;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 55px;
+    width: 30%;
+    margin-left: 100px;
+    float: left;
+}
+.contacto {
+    margin-top: 50px;
+    width: 45%;
+    margin-left: 5%;
+    float: left;
+    display: table;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: gray;
+}
+.contacto li {
+    width: 47%;
+    margin: 1%;
+    float: left;
+    display: table;
+    text-align: center;
+}
+.contacto li input[type="text"] {
+    width: 100%;
+    height: 35px;
+    font-size: 25px;
+    font-family: calibri light;
+}
+.contacto li:nth-child(3) {
+    width: 96%;
+}
+.contacto li:nth-child(4) {
+    width: 96%;
+}
+.contacto li:nth-child(4) input[type="text"] {
+    height: 200px;
+}
+.contacto li:last-child {
+    width: 98%;
+}
+.contacto li input[type="button"] {
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+}
+.map {
+    width: 42%;
+    float: right;
+    margin-right: 5%;
+    margin-top: 50px;
+    height: 380px;
+    border: 1px solid red;
+}
+.formulario {
+    width: 400px;
+    margin: auto;
+    margin-top: 10px;
+    display: table;
+    border: 1px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    position: relative;
+    display: none;
+    z-index: 9999;
+}
+.salirContacto {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    font-family: kalinga;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirContacto:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.salirMenu {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    font-family: kalinga;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirMenu:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.formulario ul {
+    width: 95%;
+    margin: auto;
+    margin-top: 5px;
+    display: table;
+    background-image: url('../Imagenes/fondos/listaForm.jpg');
+}
+.formulario ul li {
+    width: 100%;
+    display: table;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: Calibri Light;
+}
+.contactoMenu li:nth-child(2) {
+    width: 50%;
+    float: left;
+}
+.contactoMenu li:nth-child(3) {
+    width: 50%;
+    float: left;
+}
+.formulario li input[type="text"] {
+    width: 90%;
+    height: 30px;
+}
+.formulario li input[type="button"] {
+    width: 100px;
+    height: 30px;
+}
+.formulario li input[type="button"]:hover {
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    background-size: 100% 100%;
+    color: white;
+    cursor: pointer;
+}
+.formulario li select {
+    width: 90%;
+    height: 30px;
+}
+.footer {
+    bottom: 0;
+    width: 100%;
+    display: table;
+    background-color: #0B0B3B;
+    color: white;
+    padding: 50px 20px 30px 20px;
+}
+.imgLogoFot {
+    width: 30%;
+    float: left;
+    display: table;
+}
+.imgLogoFot img {
+    width: 95%;
+    text-align: center;
+    display: table;
+}
+.imgLogoFot img:first-child {
+    height: 60px
+}
+.imgLogoFot img:nth-child(2) {
+    height: 30px;
+}
+.datosFooter {
+    width: 30%;
+    display: table;
+    float: left;
+    font-family: Calibri Light;
+    font-size: 20px;
+}
+.datosFooter li {
+    width: 100%;
+    display: table;
+    padding: 2px;
+}
+.datosFooter img {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-right: 5px;
+}
+.redes {
+    width: 15%;
+    float: left;
+    font-family: h1;
+}
+.redes li {
+    width: 100%;
+    display: table;
+    margin-top: 5px;
+}
+.redes img {
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-right: 5px;
+}
+.sitio {
+    font-family: h1;
+    font-size: 25px;
+}
+.sitio li {
+    margin-top: 5px;
+}
+.sitio a {
+    text-decoration: none;
+    color: white;
+}
+
+.formulario {
+    width: 400px;
+    margin: auto;
+    margin-top: 10px;
+    display: table;
+    border: 1px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    position: relative;
+    display: none;
+    z-index: 9999;
+}
+.salirContacto {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    font-family: kalinga;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirContacto:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.salirMenu {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    font-family: kalinga;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirMenu:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.formulario ul {
+    width: 95%;
+    margin: auto;
+    margin-top: 5px;
+    display: table;
+    background-image: url('../Imagenes/fondos/listaForm.jpg');
+}
+.formulario ul li {
+    width: 100%;
+    display: table;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: Calibri Light;
+}
+.contactoMenu li:nth-child(2) {
+    width: 50%;
+    float: left;
+}
+.contactoMenu li:nth-child(3) {
+    width: 50%;
+    float: left;
+}
+.formulario li input[type="text"] {
+    width: 90%;
+    height: 30px;
+}
+.formulario li input[type="button"] {
+    width: 100px;
+    height: 30px;
+}
+.formulario li input[type="button"]:hover {
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    background-size: 100% 100%;
+    color: white;
+    cursor: pointer;
+}
+.formulario li select {
+    width: 90%;
+    height: 30px;
+}
+
+.resultadoBus {
+    margin: auto;
+    margin-top: 20px;
+    display: table;
+    border: 2px solid black;
+    text-align: center;
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    font-family: Calibri Light;
+    display: none;
+}
+.resultadoBus h2 {
+    color: white;
+}
+.resultadoBus table {
+    display: table;
+    margin: 5px;
+    border-collapse: collapse;
+}
+.resultadoBus td {
+    background-color: rgba(255,255,255,0.8);
+    padding: 5px;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+.resultadoBus td input {
+    height: 25px;
+    padding: 0 10px;
+    border-radius: 3px;
+}
+.resultadoBus td select {
+    height: 25px;
+    border-radius: 3px;
+}
+.resultadoBus td input[type="button"] {
+    cursor: pointer;
+    border-radius: 0;
+}
+.resultadoBus td input[type="button"]:hover {
+    background-color: black;
+    color: white;
+}
+.resultadoDescarga td:last-child {
+    cursor: pointer;
+    color: red;
+}
+.resultadoDescarga td:last-child:hover {
+    color: blue;  
+}
+.salirTabla {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border-radius: 100%;
+    border: 1px solid white;
+    margin-top: -25px;
+    margin-left: 5px;
+    cursor: pointer;
+    color: white;
+}
+.salirTabla:hover {
+    background-color: white;
+    color: black;
+}
+.salirDescarga {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    font-family: kalinga;
+    text-align: center;
+    color: white;
+    float: right;
+    margin-top: 35px;
+    margin-right: 250px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirDescarga:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.mascara {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(1,1,1,0.7);
+    display: none;
+    position: fixed;
+    z-index: 9000;
+}
+

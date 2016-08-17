@@ -1,0 +1,202 @@
+@font-face {
+    font-family: "h1";
+    src: url('../Fuentes/h1.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+.marca {
+    width: 100%;
+    display: table;
+    padding: 10px;
+    background-color: black;
+}
+.marca li {
+    float: left;
+    width: 8%;
+    display: table;
+    padding: 30px 20px 1px 20px;
+    color: white;
+    font-family: verdana,sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+.marca li:first-child {
+    width: 50%;
+    border: none;
+    text-align: left;
+    padding-top: 1px;
+}
+.marca li:first-child img {
+    width: 200px;
+    height: 40px;
+    margin-left: 100px;
+}
+.marca li:first-child img:nth-child(2) {
+    height: 30px;
+}
+.marca li:last-child {
+    border: none;
+}
+.navMenu {
+    width: 100%;
+    display: table;
+}
+.navMenu li {
+    float: left;
+    width: 20%;
+    height: 60px;
+    font-size: 19px;
+    font-family: calibri light;
+    text-align: center;
+    padding-top: 30px;
+    cursor: pointer;
+    border-bottom: 3px solid black;
+}
+.navMenu li:hover {
+    background-color: gray;
+    color: white;
+    opacity: 0.8;
+    transition: 1s;
+}
+.formulario {
+    width: 400px;
+    margin: auto;
+    margin-top: 10px;
+    display: table;
+    border: 1px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    position: relative;
+    display: none;
+    z-index: 9999;
+}
+.salirContacto {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    font-family: kalinga;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirContacto:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.salirMenu {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    font-family: kalinga;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirMenu:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.formulario ul {
+    width: 95%;
+    margin: auto;
+    margin-top: 5px;
+    display: table;
+    background-image: url('../Imagenes/fondos/listaForm.jpg');
+}
+.formulario ul li {
+    width: 100%;
+    display: table;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: Calibri Light;
+}
+.contactoMenu li:nth-child(2) {
+    width: 50%;
+    float: left;
+}
+.contactoMenu li:nth-child(3) {
+    width: 50%;
+    float: left;
+}
+.formulario li input[type="text"] {
+    width: 90%;
+    height: 30px;
+}
+.formulario li input[type="button"] {
+    width: 100px;
+    height: 30px;
+}
+.formulario li input[type="button"]:hover {
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    background-size: 100% 100%;
+    color: white;
+    cursor: pointer;
+}
+.formulario li select {
+    width: 90%;
+    height: 30px;
+}
+.filtro {
+    width: 200px;
+    display: table;
+    float: left;
+    position: fixed;
+    border: 1px solid black;  
+    font-family: kalinga;
+    text-align: center;
+}
+.vistaProductos {
+    width: 70%;
+    margin: auto;
+    margin-top: 30px;
+    display: table;
+    text-align: center;
+}
+.vistaProductos li {
+    width: 47%;
+    margin: 1%;
+    float: left;
+    border: 1px solid gray;
+    padding-bottom: 20px;
+    font-family: Calibri Light;
+}
+.vistaProductos li img {
+    width: 90%;
+    height: 350px;
+}
+.vistaProductos li h1 {
+    font-family: Calibri Light;
+}
+.vistaProductos li h2 {
+    font-family: Kalinga;
+}
+.vistaProductos li input[type="button"] {
+    padding: 5px 10px;
+    margin: 1%;
+    cursor: pointer;
+}

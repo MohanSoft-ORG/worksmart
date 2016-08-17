@@ -20,6 +20,7 @@ if(isset($_POST['datos'])){
              * $post a la proiedad datos ejemplo
              * $post->datos->miDatoEnviadoDesdeElCliente
              */
+            //var_dump($post->datos);
             $objeto->nombre_categoria=trim($post->datos->nombre_categoria);
             $objeto->descripcion_categoria=trim($post->datos->descripcion_categoria);
             $objeto->imagen_categoria=trim($post->datos->imagen_categoria);
@@ -55,6 +56,7 @@ if(isset($_POST['datos'])){
              * $post a la proiedad datos ejemplo
              * $post->datos->miDatoEnviadoDesdeElCliente
              */
+            $objeto->id_categoria=$post->datos->id_categoria;
             $objeto->nombre_categoria=trim($post->datos->nombre_categoria);
             $objeto->descripcion_categoria=trim($post->datos->descripcion_categoria);
             $objeto->imagen_categoria=trim($post->datos->imagen_categoria);

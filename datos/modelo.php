@@ -21,6 +21,7 @@ abstract class ModeloBaseDeDatos{
 
     private function abrir_conexion(){
         $this->conexion=new mysqli(DB_HOST, DB_USUARIO, DB_CLAVE, DB_NOMBRE_DATABASE, DB_PUERTO);
+        
         if($this->conexion->connect_error){
                         
             $this->mensajeDepuracion=$this->conexion->error;
@@ -102,6 +103,7 @@ abstract class ModeloBaseDeDatos{
                     //var_dump($this->filas_json);
                     return TRUE;
                 }else{
+                    //echo count($this->filas);
                     $log=new Log();
                     $this->mensajeDepuracion="No existen registros con la especificacion que busca";
                     $log->registrar_log_php("../logs/errorApp.log","1", $this->sentencia_sql);
@@ -124,7 +126,7 @@ abstract class ModeloBaseDeDatos{
     
     public function ejecutar_sentencia_sql(){
           if($this->abrir_conexion()){
-              echo $this->sentencia_sql;
+              //echo $this->sentencia_sql;
               $this->conexion->set_charset('utf8');
               if($this->conexion->query($this->sentencia_sql)){
                   $this->ultimoRegistro=$this->conexion->insert_id;

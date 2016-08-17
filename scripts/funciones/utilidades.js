@@ -39,41 +39,46 @@ function horaCliente(){
 /*Funcion para limpiar un formulario*/
 function limpiarFormulario(idForm){
     var form=document.getElementById(idForm);
-    for(var i in form.elements){
-         
-        if(form.elements[i].nodeName == "TEXTAREA"){
-            form.elements[i].value="";  
-        }
-        //console.log(form.elements[i].type);
-        //console.log(form.elements[i].checked);
-        //console.log(form.elements[i].value);
-        
-        
-        switch(form.elements[i].type){
-            case "text":
-                form.elements[i].value="";
+    if(form!=null){
+            for(var i in form.elements){
+
+            if(form.elements[i].nodeName == "TEXTAREA"){
+                form.elements[i].value="";  
+            }
+            //console.log(form.elements[i].type);
+            //console.log(form.elements[i].checked);
+            //console.log(form.elements[i].value);
+
+
+            switch(form.elements[i].type){
+                case "text":
+                    form.elements[i].value="";
+                    break;
+                case "email":
+                    form.elements[i].value="";
+                    break;
+                case "number":
+                    form.elements[i].value="";
+                    break;
+                case "password":
+                    form.elements[i].value="";
+                    break;
+                case "select-one":
+                    form.elements[i].value="0";
+                    break;
+                case "checkbox":
+                    form.elements[i].checked=false;
+                    break;
+                case "radio":
+                    form.elements[i].checked=false;
                 break;
-            case "email":
-                form.elements[i].value="";
-                break;
-            case "number":
-                form.elements[i].value="";
-                break;
-            case "password":
-                form.elements[i].value="";
-                break;
-            case "select-one":
-                form.elements[i].value="0";
-                break;
-            case "checkbox":
-                form.elements[i].checked=false;
-                break;
-            case "radio":
-                form.elements[i].checked=false;
-            break;
+            }
         }
     }
+    
     console.log(form);
+    console.log(idForm);
+    
 }
 /*Funcion para agregar un evento a un elemento del objeto DOCUMENT*/
 function agregarEvento(idElemento,evento,funcion){
@@ -116,6 +121,8 @@ function redireccionar(url){
 }
 function imprimir(datos){
     console.log(datos);
+    console.log(datos.respuesta);
+    console.log(datos.valores_consultados);
     
 }
 function imprimir_en_documento(datos){
@@ -137,4 +144,219 @@ function validar_igualdad_campos(id1,id2){
         return true;
     }
     return false;
+}
+
+function abrir_ventana(u,ancho,largo){
+    
+    var w=window;
+    w.fullScreen=true;
+    //var ancho= screen.availWidth-19;
+    //var largo=screen.availHeight-180;
+    if(w.open("administracion.html",u.nombre_usuario,"menubar=no,toolbar=no,width="+ancho+","+"height="+largo+",resizable=no,location=no")==null){
+         mostrarMensaje("Parece que tiene desabilitadas las ventanas emergentes en su navegador por favor cambie la configuracion para tener acceso");   
+    }else{
+        location.href="index.html";
+    }
+
+
+}
+
+function consultar_menu_rol(u){
+    consultarDatos("usuario","consularRol",{id_rol:u.rol},dibujar_menu);
+    
+    
+}
+function dibujar_menu(d){
+    var dat=d.valores_consultados;
+    for(var d in dat){
+        console.log(dat[d]);
+        if(dat[d].Crear==0){
+            if(dat[d].IdCrear!=""){
+                $("#"+dat[d].IdCrear).hide();
+            }
+
+        }
+
+        if(dat[d].Consultar==0){
+            if(dat[d].IdConsultar!=""){
+                $("#"+dat[d].IdConsultar).hide();
+            }
+        }
+
+        if(dat[d].Actualizar==0){
+            if(dat[d].IdActualizar!=""){
+                $("#"+dat[d].IdActualizar).hide();
+            }
+
+        }
+
+        if(dat[d].Eliminar==0){
+            if(dat[d].IdEliminar!=""){
+                $("#"+dat[d].IdEliminar).hide();
+            }
+
+        }
+
+    }
+    
+       
+    
+    
+    
+}
+function cerrar_ventana(){
+    
+    eliminar_session_storage();
+    window.close();
+}
+
+
+function cambiarAccion(){
+    switch(this.id){
+        //USUARIO
+        case "buscarUsu":
+                accionUsuario="consulta";
+                document.getElementById("h2TituloTabla").innerHTML="Usuarios Consultados";
+            break;
+        case "editarUsu":
+                accionUsuario="editar";
+                document.getElementById("h2TituloTabla").innerHTML="Edicion de usuarios";
+             break;
+         case "eliminarUsu":
+                document.getElementById("h2TituloTabla").innerHTML="Deshabilitar Usuarios";
+                accionUsuario="eliminar";
+             break;
+        //PRODUCTO
+        case "buscarProd":
+             accionUsuario="consulta";
+            break;
+         case "eliminarProd":
+             accionUsuario="eliminar";
+            break;
+        case "editarProd":
+             accionUsuario="editar";
+            break;           
+        //PROVEEDOR
+        case "buscarProv":
+             accionUsuario="consulta";
+            break;
+        case "eliminarProv":
+             accionUsuario="eliminar";
+            break;
+        case "editarProv":
+             accionUsuario="editar";
+            break;
+         //CATEGORIA
+        case "buscarCat":
+             accionUsuario="consulta";
+            break;
+        case "eliminarCat":
+             accionUsuario="eliminar";
+            break;
+        case "editarCat":
+             accionUsuario="editar";
+            break;
+        //CLIENTE
+        case "buscarCli":
+             accionUsuario="consulta";
+            break;
+        case "eliminarCli":
+             accionUsuario="eliminar";
+            break;
+        case "editarCli":
+             accionUsuario="editar";
+            break;
+        //ARRIENDO
+        case "buscarArr":
+             accionUsuario="consulta";
+            break;
+        case "eliminarArr":
+             accionUsuario="eliminar";
+            break;
+        case "editarArr":
+             accionUsuario="editar";
+            break;
+        case "finalizarArr":
+            accionUsuario='finalizar';
+            break;
+        //AGENDA
+        case "buscarAge":
+             accionUsuario="consulta";
+            break;
+        case "eliminarAge":
+             accionUsuario="cancelarCita";
+            break;
+        case "editarAge":
+             accionUsuario="reprogramarCita";
+            break;   
+         //DEFAULT   
+         default:
+             mostrarMensaje({mensaje:"Por favor agrega una accion para el usuario "+accionUsuario});
+             break;
+    }
+}
+function iniciar_contexto(){
+    
+   switch(this.id){
+       case "usu":
+           _contexto="usuario";
+           break;
+       case "prod":
+           _contexto="producto";
+           break;
+       case "cat":
+            _contexto="categoria";
+           break;
+       case "prov":
+            _contexto="proveedor";
+           break;
+       case "ent":
+           _contexto="entrada";
+           break;
+        case "sal":
+            _contexto="salida";
+           break;
+       case "cli":
+           _contexto="cliente";
+           break;
+       case "fac":
+           _contexto="factura";
+           break;
+       case "arr":
+           _contexto="arriendo";
+           break;
+       case "age":
+           _contexto="agenda";
+           break;  
+       case "rep":
+           _contexto="reporte";
+           break;
+       case "elementoMenuPrincipal":
+           mostrarMensaje({mensaje:"por favor agrega el elemto a la funcion"});
+        break;
+       default:
+           mostrarMensaje({mensaje:"por favor agrega el elemto a la funcion"});
+         break;
+   }
+   
+   //mostrarMensaje(_contexto);
+}
+
+function salir(){
+    
+    if(usuario){
+     if(confirm("Desea salir de la aplicacion?")){
+            //Creo el objeto que voy a enviar con datos a la peticion
+        var datos={
+            id_usuario:usuario.id_usuario
+                     
+        };
+        //Invoco mi funcion 
+        registrarDato(_contexto,"cerrarSesion",datos,cerrar_ventana);
+        eliminar_session_storage("ssUsuario");
+     }
+    }else{
+       mostrarMensaje({mensaje:"por favor ingresa correctamente al sistema"});
+       location.href="index.html";
+    }
 }

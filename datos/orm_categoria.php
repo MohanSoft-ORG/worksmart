@@ -43,7 +43,7 @@ class Categoria extends ModeloBaseDeDatos{
         
     }
     function obtener_registro_por_valor($valor){
-        $this->sentencia_sql="CALL pa_consultar_categoria_por_identificacion('$valor')";
+         $this->sentencia_sql="CALL pa_consultar_categoria_por_identificacion('$valor%')";
         
         
         if($this->consultar_registros()){

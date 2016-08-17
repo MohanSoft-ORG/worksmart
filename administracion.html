@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>WorkSmart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="Estilos/Css/administracion.css" rel="stylesheet" type="text/css"/>
+        <script src="Estilos/Script/jquery-2.1.3.js" type="text/javascript"></script>
+        <script src="Estilos/Script/jquery-ui.js" type="text/javascript"></script>
+        <script src="Estilos/Script/administracion.js" type="text/javascript"></script>
+        <!--Scripts agregados Edgar-->
+        <script src="scripts/funciones/formatos.js" type="text/javascript"></script>
+        <script src="scripts/funciones/formularios.js" type="text/javascript"></script>
+        <script src="scripts/funciones/peticiones_ajax.js" type="text/javascript"></script>
+        <script src="scripts/funciones/session_storage.js" type="text/javascript"></script>
+        <script src="scripts/funciones/utilidades.js" type="text/javascript"></script>
+        <script src="scripts/prototipos/prototipos.js" type="text/javascript"></script>
+        <script src="scripts/CrudBase.js" type="text/javascript"></script>
+        <script src="scripts/sc_usuario.js" type="text/javascript"></script>
+        <script src="scripts/sc_categoria.js" type="text/javascript"></script>
+        <script src="scripts/sc_producto.js" type="text/javascript"></script>
+        <script src="scripts/sc_proveedor.js" type="text/javascript"></script>
+        <script src="scripts/sc_entrada.js" type="text/javascript"></script>
+        <script src="scripts/sc_salida.js" type="text/javascript"></script>
+        <script src="scripts/sc_factura.js" type="text/javascript"></script>
+        <script src="scripts/sc_cliente.js" type="text/javascript"></script>
+        <script src="scripts/load.js" type="text/javascript"></script>
+        <script src="scripts/sc_agenda.js" type="text/javascript"></script>
+        <script src="scripts/sc_arriendo.js" type="text/javascript"></script>
+        <!--FIN Scripts agregados Edgar-->
+        
+    </head>
+    <body>
+        <!--MENU-->
+        <div class="menuAdmin">
+            <ul>
+                <li id="usu">
+                    <img src="Estilos/Imagenes/Iconos/usuarioE.png">
+                    <h4>Usuarios</h4>
+                </li>
+                <li id="cat">
+                    <img src="Estilos/Imagenes/Iconos/categorias.png">
+                    <h4>Categorias</h4>
+                </li>
+                <li id="prod">
+                    <img src="Estilos/Imagenes/Iconos/productos.png">
+                    <h4>Productos</h4>
+                </li>
+                <li id="prov">
+                    <img src="Estilos/Imagenes/Iconos/proveedor.png">
+                    <h4>Proveedores</h4>
+                </li>
+                <li id="ent">
+                    <img src="Estilos/Imagenes/Iconos/entradas.png">
+                    <h4>Entradas</h4>
+                </li>
+                <li id="sal">
+                    <img src="Estilos/Imagenes/Iconos/salidas.png">
+                    <h4>Salidas</h4>
+                </li>
+                <li id="cli">
+                    <img src="Estilos/Imagenes/Iconos/usuario.png">
+                    <h4>Clientes</h4>
+                </li>
+                <li id="fac">
+                    <img src="Estilos/Imagenes/Iconos/facturas.png">
+                    <h4>Facturas</h4>
+                </li>
+                <li id="arr">
+                    <img src="Estilos/Imagenes/Iconos/arriendo.png">
+                    <h4>Arriendos</h4>
+                </li>
+                <li id="age">
+                    <img src="Estilos/Imagenes/Iconos/agenda.png">
+                    <h4>Agenda</h4>
+                </li>
+                <li id="rep">
+                    <img src="Estilos/Imagenes/Iconos/reportes.png">
+                    <h4>Reportes</h4>
+                </li>
+                <li id="salir">
+                    <img src="Estilos/Imagenes/Iconos/salir.png">
+                    <h4>Salir</h4>
+                </li>
+            </ul>
+        </div>
+        <!--FIN MENU-->
+        <!--*************************************USUARIOS**************************************************************************-->
+        <!--SUBMENU-->
+        <div class="mascara" id="crudUsu">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearUsu">
+                    <h3>Crear Usuarios</h3>
+                </li>
+                <li id="buscarUsu">
+                    <h3>Buscar Usuarios</h3>
+                </li>
+                <li id="editarUsu">
+                    <h3>Editar Usuarios</h3>
+                </li>
+                <li id="eliminarUsu">
+                    <h3>Eliminar Usuarios</h3>
+                </li>
+            </ul>
+        </div>
+        <!--SUBMENU-->
+        <!--REGISTRO USUARIO-->
+        <div class="mascara" id="formCrearUsu">    
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formRegistrarUsuario">
+                    <ul>
+                        <li>
+                            <h2>Crear de usuario</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Nombre"  required/>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Apellido" required/>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Documento" required/>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Telefono" required/>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="E-mail" required/>
+                        </li>
+                        <li>
+                            <select id="selRol">
+                                <option value="1">Administrador</option>
+                                <option value="2">Asesor comercial</option>
+                                <option value="3">Técnico</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="password" placeholder="Contraseña" />
+                        </li>
+                        <li>
+                            <input type="password" placeholder="Confirmela" />
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearUsuario" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <!--BUSCAR USUARIO-->
+        <div class="mascara" id="formBuscarUsu">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarUsuario">
+                    <ul>
+                        <li>
+                            <h2>Buscar Usuarios</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Usuario" required/>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarUsuario"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoUsu" class="resultadoBus">
+                <h2 id="h2TituloTabla"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaUsuario"></table>
+            </div>
+            
+        </div>
+        <!--************************************PRODUCTOS**************************************************************************-->
+         <!--SUBMENU-->
+        <div class="mascara" id="crudProd">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearProd">
+                    <h3>Crear Producto</h3>
+                </li>
+                <li id="crearIns">
+                    <h3>Crear Insumos y partes</h3>
+                </li>
+                <li id="buscarProd">
+                    <h3>Buscar Producto</h3>
+                </li>
+                <li id="editarProd">
+                    <h3>Editar Producto</h3>
+                </li>
+                <li id="eliminarProd">
+                    <h3>Eliminar Producto</h3>
+                </li>
+                <li id="crearHojaProd">
+                    <h3>Crear Hoja de vida</h3>
+                </li>
+                <li id="crearMantenimiento">
+                    <h3>Crear Mantenimiento</h3>
+                </li>
+            </ul>
+        </div>
+        <!--REGISTRO PRODUCTO-->
+        <div class="mascara" id="crearProductoE">
+            <h4 class="salirDescarga">x</h4>
+            <div class="formularioProd">
+                <form id="formCrearProducto">
+                    <ul>
+                        <li>
+                            <h2>Datos Generales</h2>
+                        </li>
+                        <li>
+                            <select id="selMarca" required>
+                                <option value="0">Marca</option>
+                                <option value="1">Kyocera</option>
+                                <option value="2">Sharp</option>
+                                <option value="3">Toshiba</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select required>
+                                <option value="0">Categoria</option>
+                                <option value="1">Alto Volumen</option>
+                                <option value="2">Mediano Volumen</option>
+                                <option value="3">Bajo Volumen</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select>
+                                <option value="0">Tipo</option>
+                                <option value="Impresora">Impresion</option>
+                                <option value="Fotocopiadora">Fotocopiadora</option>
+                                <option value="Multifuncional">Multifuncional</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Nombre del Producto" />
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Codigo" />
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Modelo" />
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Velocidad_PPM" />
+                        </li>
+                        <li>
+                            <input type="radio" name="caracteristicas" value="Blanco y Negro"/>Blanco Y Negro
+                        </li>
+                        <li>
+                            <input type="radio" name="caracteristicas" value="Color"/>Color
+                        </li>
+                        <!--<li>
+                            <input type="checkbox" name="caracteristicas" value="Copiado"/>Copiado
+                        </li>
+                        <li>
+                            <input type="checkbox" name="caracteristicas" value="Impresion"/>Impresion
+                        </li>
+                        <li>
+                            <input type="checkbox" name="caracteristicas" value="Scanner"/>Scanner
+                        </li>-->
+                        <li> Imagen del producto
+                            <input type="file" id="flvImagenesProducto">
+                        </li>
+                        <li>
+                            <ul id="liImagenesProducto">
+                            
+                            </ul> 
+                        </li>
+                    </ul>
+                    <ul id="caracteristicas">
+                        <li>
+                            <h2>Caracteristicas Especificas</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Tipo Caracteristica" id="txtTipoCaracteristica"/>
+                            <input type="text" placeholder="Caracteristica" id="txtCaracteristica"/>
+                            <input type="button" value="Agregar" id="btnAgregarCaracteristica" />
+                        </li>
+                        
+                    </ul >
+                    <ul id="liCaracteristicas"></ul>
+                    <ul id="materialDescargable">
+                        <li>
+                            <h2>Material Descargable</h2>
+                        </li>
+                        <li>
+                            <input id="txtNombreArchivo" type="text" placeholder="Nombre Archivo">
+                        </li>
+                        <li>
+                            <select id="selTipoArchivo" required>
+                                <option value="0">--selecciona un tipo de archivo--</option>
+                                <option value="drivers">Controlador</option>
+                                <option value="manuales">Manuales de Usuario</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="file" id="flArchivoProducto"/>
+                        </li>
+                        <li>
+                            <!--<input type="button"  value="Aceptar" id="btnSubirArchivo"/>-->
+                        </li>
+                        
+                    </ul>
+                    <input type="button" value="Crear Producto" id="btnCrearProducto"/>
+                </form>
+            </div>
+        </div>
+        
+        <!--BUSCAR PRODUCTO-->
+        <div class="mascara" id="formBuscarProd">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarProducto">
+                    <ul>
+                        <li>
+                            <h2>Buscar Producto</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Codigo Producto" required/>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarProducto"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoProd" class="resultadoBus">
+                <h2 id="h2TituloTablaProd"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaProd"></table>
+            </div>
+            
+        </div>
+        <!--CREAR HOJA DE VIDA-->
+        <div class="mascara" id="formCrearHojaVida">    
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formRegistrarHojaDeVida">
+                    <ul>
+                        <li>
+                            <h2>Crear hoja de vida</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Codigo Producto"  required/>
+                        </li>
+                        <li>
+                            <input type="button" value="Buscar Producto" id="btnBuscarProdHv" />
+                        </li>
+                        <li>
+                            <h4 id="hNombreProducto">Nombre Producto</h4>
+                            <input type="hidden"  id="hdIdProducto"  />
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Serial Producto"/>
+                        </li>
+                        
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearHojaDeVida" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <!--CREAR MANTENIMIENTO-->
+        <div class="mascara" id="formCrearMantenimiento">    
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formRegistrarMantenimiento">
+                    <ul>
+                        <li>
+                            <h2>Crear mantenimiento</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Serial Producto"  required/>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Descripcion Mantenimiento"  required/>
+                        </li>    
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearMantenimiento" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <!--FORMULARIO EDITAR PRODUCTO-->
+        <div class="mascara" id="editarProductoE">
+            <h4 class="salirDescarga">x</h4>
+            <div class="formularioProd">
+                <form id="formEditarProducto">
+                    <ul>
+                        <li>
+                            <h2>Datos Generales</h2>
+                        </li>
+                        <li>
+                            <select id="selMarcaEdicion" required>
+                                <option value="0">Marca</option>
+                                <option value="1">Kyocera</option>
+                                <option value="2">Sharp</option>
+                                <option value="3">Toshiba</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select id="selEditarCategoriaProducto" required>
+                                <option value="0">Categoria</option>
+                                <option value="1">Alto Volumen</option>
+                                <option value="2">Mediano Volumen</option>
+                                <option value="3">Bajo Volumen</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select id="selEdicionTipoProducto">
+                                <option value="0">Tipo</option>
+                                <option value="Impresora">Impresion</option>
+                                <option value="Fotocopiadora">Fotocopiadora</option>
+                                <option value="Multifuncional">Multifuncional</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input id="txtEdicionNombreProducto" type="text" placeholder="Nombre del Producto" />
+                        </li>
+                        <li>
+                            <input id="txtEdicionCodigoProducto" type="text" placeholder="Codigo" />
+                        </li>
+                        <li>
+                            <input id="txtEdicionModelo" type="text" placeholder="Modelo" />
+                        </li>
+                        <li>
+                            <input id="txtEdicionPPM" type="text" placeholder="Velocidad_PPM" />
+                        </li>
+                        <li>
+                            <input id="rdBN" type="radio" name="caracteristicas" value="Blanco y Negro"/>Blanco Y Negro
+                        </li>
+                        <li>
+                            <input id="rdColor" type="radio" name="caracteristicas" value="Color"/>Color
+                        </li>
+                        <!--<li>
+                            <input type="checkbox" name="caracteristicas" value="Copiado"/>Copiado
+                        </li>
+                        <li>
+                            <input type="checkbox" name="caracteristicas" value="Impresion"/>Impresion
+                        </li>
+                        <li>
+                            <input type="checkbox" name="caracteristicas" value="Scanner"/>Scanner
+                        </li>-->
+                        <li> Imagen del producto
+                            <input type="file" id="flvImagenesProductoEdicion">
+                        </li>
+                        <li>
+                            <ul id="liEdicionImagenesProducto">
+                            
+                            </ul> 
+                        </li>
+                    </ul>
+                    <ul id="caracteristicas">
+                        <li>
+                            <h2>Caracteristicas Especificas</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Tipo Caracteristica" id="txtEdicionTipoCaracteristica"/>
+                            <input type="text" placeholder="Caracteristica" id="txtEdicionCaracteristica"/>
+                            <input type="button" value="Agregar" id="btnAgregarCaracteristicaEdicion" />
+                        </li>
+                        
+                    </ul >
+                        <ul id="liEdicionCaracteristicas"></ul>
+                    <ul id="materialDescargableEdicion">
+                        <li>
+                            <h2>Material Descargable</h2>
+                        </li>
+                        <li>
+                            <input id="txtEdicionNombreArchivo" type="text" placeholder="Nombre Archivo">
+                        </li>
+                        <li>
+                            <select id="selTipoArchivoEdicion" required>
+                                <option value="0">--selecciona un tipo de archivo--</option>
+                                <option value="drivers">Controlador</option>
+                                <option value="manuales">Manuales de Usuario</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="file" id="flArchivoProductoEditar"/>
+                        </li>
+                        
+                        
+                    </ul>
+                    <ul id="listaArchivosDescargables">
+                        <li>
+
+                        </li>
+                    </ul>    
+                    <input type="button" value="Crear Producto" id="btnEditarProducto"/>
+                </form>
+            </div>
+        </div>
+        
+        <!--CREAR INSUMO-->
+            <div class="mascara" id="formCrearInsumo">    
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                  <form id="formCrearProductoInsumo">
+                    <ul>
+                        <li>
+                            <h2>Crear insumo</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Codigo Producto Insumo"  />
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Marca Producto"  />
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Nombre Insumo"  />
+                        </li>    
+                        
+                        <li>
+                            <input type="text" placeholder="Descripcion Insumo"  />
+                        </li>    
+                        <li>
+                            <input type="text" placeholder="Valor venta"  />
+                        </li>    
+                        <li>
+                            <select id="selProductosInsumo"></select>
+                        </li>    
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearInsumo" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+        <!--************************************CATEGORIA**************************************************************************-->
+        <div class="mascara" id="crudCat">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearCat">
+                    <h3>Crear Categoria</h3>
+                </li>                
+                <li id="buscarCat">
+                    <h3>Buscar Categoria</h3>
+                </li>
+                <li id="editarCat">
+                    <h3>Editar Categoria</h3>
+                </li>
+                <li id="eliminarCat">
+                    <h3>Eliminar Categoria</h3>
+                </li>
+            </ul>
+        </div>
+        <!--REGISTRO CATEGORIA-->
+        <div class="mascara" id="crearCategoria">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarCategoria">
+                    <ul>
+                        <li>
+                            <h2>Registrar categoria</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Nombre categoria">
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Descripcion categoria">
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearCategoria">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--BUSCAR CATEGORIA-->
+        <div class="mascara" id="formBuscarCat">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarCategoria">
+                    <ul>
+                        <li>
+                            <h2>Buscar Categoria</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Nombre categoria" required/>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarCategoria"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoCat" class="resultadoBus">
+                <h2 id="h2TituloTablaProd"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaCat"></table>
+            </div>
+            
+        </div>
+        <!--************************************PROVEEDORES**************************************************************************-->
+        <div class="mascara" id="crudProv">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearProv">
+                    <h3>Crear Proveedor</h3>
+                </li>
+                <li id="buscarProv">
+                    <h3>Buscar Proveedor</h3>
+                </li>
+                <li id="editarProv">
+                    <h3>Editar Proveedor</h3>
+                </li>
+                <li id="eliminarProv">      
+                  <h3>Eliminar Proveedor</h3>
+                </li>
+            </ul>
+        </div>
+        <!--REGISTRO PROVEEDOR-->
+        <div class="mascara" id="crearProveedor">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarProveedor">
+                    <ul>
+                        <li>
+                            <h2>Registrar proveedor</h2>
+                        </li>
+                        <li>
+                            <input placeholder="Documento proveedor " >
+                        </li>
+                        <li>
+                            <input placeholder="Nombre Proveedor " required>
+                        </li>
+                        <li>
+                            <input placeholder="Nombre contacto" >
+                        </li>
+                        <li>
+                            <input placeholder="Correo contacto" >
+                        </li>
+                        <li>
+                            <input placeholder="Telefono Contacto">
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearProveedor">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--BUSCAR PROVEEDOR-->
+        <div class="mascara" id="formBuscarProv">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarProveedor">
+                    <ul>
+                        <li>
+                            <h2>Buscar proveedor</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Nombre o Documento proveedor" required/>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarProveedor"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoProv" class="resultadoBus">
+                <h2 id="h2TituloTablaProv"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaProv"></table>
+            </div>
+            
+        </div>
+        <!--************************************ENTRADAS**************************************************************************-->
+        <div class="mascara" id="crudEnt">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearEntPed">
+                    <h3>Crear Entrada Pedido</h3>
+                </li>
+                <!--<li id="crearEntObs">
+                    <h3>Crear Entrada Obsequio</h3>
+                </li>
+                <li id="crearEntOtr">
+                    <h3>Crear Entrada Otros</h3>
+                </li>-->                
+            </ul>
+        </div>
+        <!--CREAR ENTRADA PEDIDO-->
+        <div class="mascara" id="crearEntPedido">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarEntradaPedido">
+                    <ul>
+                        <li>
+                            <select id="selProveedoresEntrada">
+                                <option>--Selecciona un proveedor--</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Codigo producto" id="txtCodigoProduto">
+                        </li>
+                        <li>
+                            <input type="button" value="Buscar producto" id="btnBuscarProductoListaEntrada">
+                        </li>
+                        <li>
+                            <h4 id="h4Nombreproducto"></h4>
+                            <input type="hidden" id="hdIdProductoEntradaPedido" >
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Cantidad producto" id="txtCantidadEntradaPedido">
+                        </li>
+                        <li>
+                            <input type="text" placeholder="comentario producto" id="txtComentarioEntradaPedido">
+                        </li>
+                        <li>
+                            <input type="button" value="Agregar producto" id="btnAgregarProductoListaEntrada">
+                        </li>
+                        <li id="liMisListaEntrada">
+                            
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearEntradaPedido">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--CREAR ENTRADA OBSEQUIO-->
+        <div class="mascara" id="crearEntObsequio">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarEntradaObsequio">
+                    <ul>
+                        
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearEntradaObsequio">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--CREAR ENTRADA OTROS-->
+        <div class="mascara" id="crearEntOtros">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarEntradaOtros">
+                    <ul>                        
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearEntradaOtros">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--************************************SALIDAS**************************************************************************-->
+        <div class="mascara" id="crudSal">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearSalVenta">
+                    <h3>Crear Salida Venta</h3>
+                </li>
+                                
+            </ul>
+        </div>
+        <div class="mascara" id="crearSalidaVenta">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarSalidaVenta">
+                    <ul>                        
+                        <li>
+                            <select id="selFacturasSP"></select>                            
+                        </li>
+                        <li>                            
+                            <input type="button" value="Crear" id="btnCrearSalidaVenta">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--************************************CLIENTES**************************************************************************-->
+        <div class="mascara" id="crudCli">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearCli">
+                    <h3>Crear Cliente</h3>
+                </li>
+                <li id="buscarCli">
+                    <h3>Buscar Cliente</h3>
+                </li>
+                <li id="editarCli">
+                    <h3>Editar Cliente</h3>
+                </li>
+                <li id="eliminarCli">
+                    <h3>Eliminar Cliente</h3>
+                </li>
+            </ul>
+        </div>
+        <!--REGISTRO CLIENTE-->
+        <div class="mascara" id="crearCliente">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarCliente">
+                    <ul>
+                        <li>
+                            <h2>Registrar cliente</h2>
+                        </li>
+                        <li>
+                            <input placeholder="Documento cliente " required>
+                        </li>
+                        <li>
+                            <input placeholder="Nombre cliente " required>
+                        </li>
+                        <li>
+                            <input placeholder="Apellido cliente" >
+                        </li>
+                        <li>
+                            <input placeholder="Correo cliente" >
+                        </li>
+                        <li>
+                            <select>
+                                <option>--SELECCIONA UN TIPO--</option>
+                                <option>Emprendedor</option>
+                                <option>Empresa</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input placeholder="contacto cliente" >
+                        </li>
+                        <li>
+                            <input placeholder="Telefono cliente" >
+                        </li>
+                        <li>
+                            <input placeholder="Direccion cliente" >
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearCliente">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--Buscar CLIENTE-->
+        <div class="mascara" id="formBuscarCli">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarCliente">
+                    <ul>
+                        <li>
+                            <h2>Buscar cliente</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Nombre o Documento cliente" required/>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarCliente"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoCliente" class="resultadoBus">
+                <h2 id="h2TituloTablaCli"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaCliente"></table>
+            </div>
+            
+        </div>
+        
+        <!--************************************FACTURAS**************************************************************************-->
+        <div class="mascara" id="crudFac">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearFac">
+                    <h3>Crear Factura</h3>
+                </li>
+                
+            </ul>
+        </div>
+        <!--REGISTRO FACTURA-->
+        <div class="mascara" id="crearFactura">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarFactura">
+                    <ul>
+                        <li>
+                            <h2>Factura</h2>
+                        </li>
+                        <li>
+                            <input id="txtNumeroCedulaCliente" placeholder="Cedula Cliente" type="text">
+                            <input id="hdIdClienteFactura" type="hidden">
+                        </li>
+                        <li>
+                            <input placeholder="Nombre Cliente" type="text" id="txtNombreClienteFactura">
+                        </li>
+                        <li>
+                            <input placeholder="Codigo " type="text">
+                            <input id="hdIdProductoFactura" type="hidden">
+                            
+                        </li>
+                        <li>
+                            <!--<input type="radio" value="servicio" name="tipo">Servicio-->
+                            <input type="radio" value="producto" name="tipo" checked>Producto
+                        </li>
+                        <li>
+                            <input id="btnBuscarProductoFactura" type="button" value="Buscar " >
+                        </li>
+                        <li>
+                            
+                            <h4 id="hNombreProductoFactura"></h4>
+                        </li>
+                        <li>
+                            <input id="txtPrecioProductoFactura" type="text" placeholder="Precio ">
+                        </li>
+                        <li>
+                            <input id="numCantidad" type="number" placeholder="Cantidad ">
+                        </li>
+                        <li>
+                            <input id="txtPrecioUnidad" type="text" placeholder="Precio unidad" readonly>
+                        </li>
+                        <li>
+                            <input id="btnAgregarProductoListaFactura" type="button" value="Agregar a lista" >
+                        </li>
+                        <li id="liListaProductosFactura"></li>
+                        
+                        <li>
+                            <h4 id="hSubTotal"></h4>
+                            <h4 id="hTotal"></h4>
+                        </li>
+                        <li>
+                            
+                            <input id="btnCrearFactura" type="button" value="Crear Factura" >
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--************************************ARRIENDOS**************************************************************************-->
+        <div class="mascara" id="crudArr">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearArr">
+                    <h3>Crear Arriendo</h3>
+                </li>
+                <li id="buscarArr">
+                    <h3>Buscar Arriendo</h3>
+                </li>
+                <li id="editarArr">
+                    <h3>Editar Arriendo</h3>
+                </li>
+                <li id="eliminarArr">
+                    <h3>Cancelar Arriendo</h3>
+                </li>
+                <li id="finalizarArr">
+                    <h3>Finalizar Arriendo</h3>
+                </li>
+            </ul>
+        </div>
+        <!--CREAR ARRIENDO-->
+        <div class="mascara" id="crearArriendo">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarArriendo">
+                    <ul>
+                        <li>
+                            <h2>Registrar arriendo</h2>
+                        </li>
+                        <li>
+                            <input id="txtDocumentoClienteArriendo" type="text" placeholder="Documento cliente " required>
+                        </li>
+                        <li>
+                            <input id="txtNombreClienteArriendo" type="text" placeholder="Nombre cliente " required>
+                            <input id="hdIdClienteArriendo" type="hidden">
+                        </li>
+                        <li>
+                            <input id="txtSerialEquipo" type="text" placeholder="Documento cliente " required>
+                                <input id="hdIdEquipoArriendo" type="hidden">
+                        </li>
+                        
+                        <li>
+                            <input id="dtFechaInicio" type="date"  required>
+                        </li>
+                        <li>
+                            <input id="dtFechaFinal" type="date"  required>
+                        </li>
+                        <li>
+                            <select id="selServicio">
+                                <option value="1">Arriendo Equipo Mensual</option>
+                                <option value="2">Arriendo Equipo Numero Copias</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input  type="text" placeholder="Comentario" >
+                        </li>   
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearArriendo">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--BUSCAR ARRIENDO-->
+        <div class="mascara" id="formBuscaArri">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarArriendo">
+                    <ul>
+                        <li>
+                            <h2>Buscar arriendo</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Cedula Cliente">
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Serial Equipo">
+                        </li>
+                        <li>
+                            <select >
+                                <option value="Activo">Activo</option>
+                                <option value="Cancelado">Cancelado</option>
+                                <option value="Finalizado">Finalizado</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarArriendo"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoArriendo" class="resultadoBus">
+                <h2 id="h2TituloTablaArr"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaArriendo"></table>
+            </div>
+            
+        </div>
+        <!--************************************AGENDA**************************************************************************-->
+        <div class="mascara" id="crudAge">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearAge">
+                    <h3>Crear Agenda</h3>
+                </li>
+                <li id="buscarAge">
+                    <h3>Buscar Agenda</h3>
+                </li>
+                <li id="editarAge">
+                    <h3>Reprogramas Cita</h3>
+                </li>
+                <li id="eliminarAge">
+                    <h3>Cancelar Cita</h3>
+                </li>
+            </ul>
+        </div>
+        
+        
+        <!--CREAR AGENDA-->
+        <div class="mascara" id="crearAgenda">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarAgenda">
+                    <ul>
+                        <li>
+                            <h2>Registrar cita</h2>
+                        </li>
+                        <li>
+                            <input id="txtDocumentoClienteAgenda" type="text" placeholder="Documento cliente " required>
+                        </li>
+                        <li>
+                            <input id="txtNombreClienteAgenda" type="text" placeholder="Nombre cliente " required>
+                            <input id="hdIdClienteAgenda" type="hidden">
+                        </li>
+                        <li>
+                            <input  id="txtDireccionClienteAgenda" type="text" placeholder="Direccion">
+                        </li>
+                        <li>
+                            <input  id="txtCoordenadas" type="text" placeholder="coordenadas">
+                        </li>
+                        <li>
+                            
+                            <select id="selEmpleadoAgenda">
+                                
+                            </select>
+                        </li>
+                        
+                        <li>
+                            <input id="dtFechaAgenda" type="date"  required>
+                        </li>
+                        <li>
+                            <input id="dtHoraAgenda" type="time"  required>
+                        </li>
+                        <li>
+                            <select id="selServicioAgenda">
+                                <option value="3">Visita Tecnica</option>
+                                <option value="4">Capacitacion</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input  type="text" placeholder="Comentario" >
+                        </li>   
+                        <li>
+                            <input type="button" value="Programar Cita" id="btnCrearAgenda">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--BUSCAR CITA-->
+        <!--BUSCAR ARRIENDO-->
+        <div class="mascara" id="formBuscarAge">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarAgenda">
+                    <ul>
+                        <li>
+                            <h2>Buscar cita</h2>
+                        </li>
+                        <li>
+                            <input type="text" id="txtCodigoCita" placeholder="Codigo cita">
+                        </li>
+                        <li>
+                            <input type="date" id="dtFechaCita">
+                        </li>
+                        <li>
+                            <select >
+                                <option value="P">Programada</option>
+                                <option value="C">Cancelada</option>
+                                <option value="R">Reprogramada</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarCita"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoCita" class="resultadoBus">
+                <h2 id="h2TituloTablaCita"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaCita"></table>
+            </div>
+        
+        <!--************************************REPORTES**************************************************************************-->
+        <div class="mascara" id="crudRep">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="repoAgenda">
+                    <h3>Reporte agenda</h3>
+                </li>
+                <li id="repoFactura">
+                    <h3>reporte Factura</h3>
+                </li>
+                <li id="repoEntrada">
+                    <h3>Reporte entradas</h3>
+                </li>
+                <li id="repoSalida">
+                    <h3>Reporte salidas</h3>
+                </li>
+                <li id="repoSolicitud">
+                    <h3>Reporte solicitudes</h3>
+                </li>
+                
+            </ul>
+        </div>
+    </body>
+</html>

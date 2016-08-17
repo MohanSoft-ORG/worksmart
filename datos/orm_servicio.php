@@ -8,6 +8,8 @@ class Servicio extends ModeloBaseDeDatos{
     public $descripcion_servicio;
     public $imagen_servicio;
     public $valor_servicio;
+    public $id_categoria;
+    
 
     public function __construct() {
         
@@ -16,7 +18,7 @@ class Servicio extends ModeloBaseDeDatos{
 
     function crear_registro(){
         
-        $this->sentencia_sql="SELECT fun_crear_servicio('$this->codigo_servicio','$this->nombre_servicio','$this->descripcion_servicio','$this->imagen_servicio','$this->valor_servicio') as respuesta";
+        $this->sentencia_sql="SELECT fun_crear_servicio('$this->codigo_servicio','$this->nombre_servicio','$this->descripcion_servicio','$this->imagen_servicio','$this->valor_servicio','$this->id_categoria') as respuesta";
                 
         if($this->insertar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,

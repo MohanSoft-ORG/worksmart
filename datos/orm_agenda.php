@@ -14,7 +14,8 @@ class Agenda extends ModeloBaseDeDatos{
     public $comentario_final;
     public $direccion;
     public $coordenadas;
-
+    public $hora_inicio;
+    public $hora_final;
 
     public function __construct() {
         
@@ -23,10 +24,18 @@ class Agenda extends ModeloBaseDeDatos{
 
     function crear_registro(){
         
-        $this->sentencia_sql="SELECT fun_crear_agenda('$this->id_empleado','$this->id_cliente','$this->fecha_asignacion','$this->fecha_inicio_servicio','$this->comentario_inicial','$this->id_servicio','$this->codigo_cita','$this->direccion','$this->coordenadas') as respuesta";
+        $this->sentencia_sql="SELECT fun_crear_agenda('$this->id_empleado',"
+                . "'$this->id_cliente',"
+                . "'$this->fecha_asignacion',"
+                . "'$this->fecha_inicio_servicio',"
+                . "'$this->comentario_inicial',"
+                . "'$this->id_servicio',"
+                . "'$this->codigo_cita',"
+                . "'$this->direccion',"
+                . "'$this->coordenadas','$this->hora_inicio') as respuesta";
                 
         if($this->insertar_registro()){
-            return array("mensaje"=> $this->mensajeDepuracion,
+            return array("mensaje"=>"Se ha creado una nueva cita con el codigo "+$this->codigo_cita,
                 "respuesta"=>TRUE,
                 "nuevo_registro"=>$this->respuesta_funcion->respuesta);
         }else{
@@ -37,6 +46,19 @@ class Agenda extends ModeloBaseDeDatos{
     function obtener_registro_todos_los_registros(){
         
         $this->sentencia_sql="CALL pa_consultar_todas_las_citas()";
+        
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+        }
+        
+    }
+    function obtener_registro_para_validacion($id_empleado,$fecha,$hora){
+        $this->sentencia_sql="CALL pa_consultar_validar_fecha('$id_empleado','$fecha','$hora')";
         
         
         if($this->consultar_registros()){
@@ -100,6 +122,19 @@ class Agenda extends ModeloBaseDeDatos{
         }
         
     }
+    function obtener_registro_filtro($fltro){
+        $this->sentencia_sql="SELECT * FROM vw_vista_agenda WHERE ".$fltro;
+        
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+        }
+        
+    }
     function cancelar_cita(){
         $this->sentencia_sql="SELECT fun_cancelar_cita('$this->id_agenda') as respuesta";
         if($this->eliminar_registro()){
@@ -121,7 +156,13 @@ class Agenda extends ModeloBaseDeDatos{
     }
     function repogramar_cita(){
         
-        $this->sentencia_sql="SELECT fun_reprogramar_agenda('$this->id_agenda','$this->id_servicio','$this->id_empleado','$this->id_cliente','$this->fecha_inicio_servicio','$this->comentario_inicial','$this->codigo_cita') as respuesta";
+        $this->sentencia_sql="SELECT fun_reprogramar_agenda('$this->id_agenda',"
+                                                    . "'$this->id_servicio',"
+                                                    . "'$this->id_empleado',"
+                                                    . "'$this->id_cliente',"
+                                                    . "'$this->fecha_inicio_servicio',"
+                                                    . "'$this->comentario_inicial',"
+                                                    . "'$this->codigo_cita') as respuesta";
         if($this->actualizar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);
