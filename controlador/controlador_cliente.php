@@ -21,7 +21,7 @@ if(isset($_POST['datos'])){
             $objeto->correo=trim($post->datos->correo);
             $r=$objeto->crear_registro();
             if($r["respuesta"]){
-                echo json_encode($objeto->crear_registro_usuario_cliente($post->datos->nombre, $post->datos->apellido, $post->datos->tipo, $post->datos->nombre_contacto, $post->datos->telefono, $post->datos->direccion));
+                echo json_encode($objeto->crear_registro_usuario_cliente($post->datos->nombre, $post->datos->apellido, $post->datos->tipo, $post->datos->nombre_contacto, $post->datos->telefono, $post->datos->direccion,$post->datos->coordenadas));
             }else{
                 echo json_encode($r);
             }
@@ -42,7 +42,7 @@ if(isset($_POST['datos'])){
             $objeto->id_usuario=trim($post->datos->id_cliente);
             $r=$objeto->actualizar_recurso();
             if($r["respuesta"]){
-                echo json_encode($objeto->actualizar_registro_usuario_cliente($post->datos->nombre, $post->datos->apellido, $post->datos->nombre_contacto, $post->datos->telefono, $post->datos->direccion));
+                echo json_encode($objeto->actualizar_registro_usuario_cliente($post->datos->nombre, $post->datos->apellido, $post->datos->nombre_contacto, $post->datos->telefono, $post->datos->direccion,$post->datos->coordenadas));
             }else{
                 echo json_encode($r);
             }
@@ -63,6 +63,9 @@ if(isset($_POST['datos'])){
             break;
         case "consultar":
             echo json_encode($objeto->obtener_registro_todos_los_registros());
+            break;
+        case "consultarTodosLosClientes":
+            echo json_encode($objeto->consultar_todos_los_registros_usuario_cliente());
             break;
         case "consultarPorValor":
             echo json_encode($objeto->obtener_registro_por_valor($post->datos->valor));

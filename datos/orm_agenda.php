@@ -24,7 +24,7 @@ class Agenda extends ModeloBaseDeDatos{
 
     function crear_registro(){
         
-        $this->sentencia_sql="SELECT fun_crear_agenda('$this->id_empleado',"
+       $this->sentencia_sql="SELECT fun_crear_agenda('$this->id_empleado',"
                 . "'$this->id_cliente',"
                 . "'$this->fecha_asignacion',"
                 . "'$this->fecha_inicio_servicio',"
@@ -35,7 +35,7 @@ class Agenda extends ModeloBaseDeDatos{
                 . "'$this->coordenadas','$this->hora_inicio') as respuesta";
                 
         if($this->insertar_registro()){
-            return array("mensaje"=>"Se ha creado una nueva cita con el codigo "+$this->codigo_cita,
+            return array("mensaje"=>"Se ha creado una nueva cita con el codigo ".$this->codigo_cita,
                 "respuesta"=>TRUE,
                 "nuevo_registro"=>$this->respuesta_funcion->respuesta);
         }else{
@@ -131,12 +131,21 @@ class Agenda extends ModeloBaseDeDatos{
                 "respuesta"=>TRUE,
                 "valores_consultados"=>$this->filas_json);
         }else{
-            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+            return array("mensaje"=>"Parece que no hay citas con los parametros que buscas" ,"respuesta"=> FALSE);
         }
         
     }
     function cancelar_cita(){
         $this->sentencia_sql="SELECT fun_cancelar_cita('$this->id_agenda') as respuesta";
+        if($this->eliminar_registro()){
+            return array("mensaje"=> $this->mensajeDepuracion,
+                "respuesta"=>TRUE);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>TRUE);
+        }
+    }
+    function finalizar_cita(){
+        $this->sentencia_sql="SELECT fun_finalizar_cita('$this->id_agenda') as respuesta";
         if($this->eliminar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);
@@ -156,13 +165,14 @@ class Agenda extends ModeloBaseDeDatos{
     }
     function repogramar_cita(){
         
-        $this->sentencia_sql="SELECT fun_reprogramar_agenda('$this->id_agenda',"
+          $this->sentencia_sql="SELECT fun_reprogramar_agenda('$this->id_agenda',"
                                                     . "'$this->id_servicio',"
                                                     . "'$this->id_empleado',"
                                                     . "'$this->id_cliente',"
                                                     . "'$this->fecha_inicio_servicio',"
                                                     . "'$this->comentario_inicial',"
-                                                    . "'$this->codigo_cita') as respuesta";
+                                                    . "'$this->codigo_cita',"
+                                                    . "'$this->fecha_fin_servicio','$this->hora_inicio' ) as respuesta";
         if($this->actualizar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);

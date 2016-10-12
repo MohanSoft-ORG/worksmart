@@ -56,7 +56,7 @@ class Solicitudes extends ModeloBaseDeDatos{
         
     }
     function obtener_registro_por_valor($valor){
-        $this->sentencia_sql="CALL  ('$valor')";
+        $this->sentencia_sql="CALL  pa_consultar_solicitudes_por_estado('$valor')";
         
         
         if($this->consultar_registros()){
@@ -68,7 +68,19 @@ class Solicitudes extends ModeloBaseDeDatos{
         }
         
     }
-    
+    function obtener_detalle_solicitud($valor){
+        $this->sentencia_sql="CALL  pa_consultar_detalle_solicitud('$valor')";
+        
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+        }
+        
+    }
     function eliminar_recurso(){
         $this->sentencia_sql="SELECT () as respuesta";
         if($this->eliminar_registro()){
@@ -88,5 +100,32 @@ class Solicitudes extends ModeloBaseDeDatos{
             return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>TRUE);
         }
     }
-    
+    function obtener_registro_todos_los_registros_contacto_web(){
+        
+        $this->sentencia_sql="CALL pa_consultar_contactos_web()";
+        
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+        }
+        
+    }
+    function obtener_registro_todos_los_registros_suscritos(){
+        
+        $this->sentencia_sql="CALL pa_consultar_suscripciones()";
+        
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+        }
+        
+    }
 }

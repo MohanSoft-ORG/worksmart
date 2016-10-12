@@ -26,7 +26,7 @@ abstract class ModeloBaseDeDatos{
                         
             $this->mensajeDepuracion=$this->conexion->error;
               $log=new Log();   
-              $log->registrar_log_mysql("../logs/error.log",$this->conexion->connect_errno, $this->conexion->connect_error);
+              $log->registrar_log_mysql("logs/error.log",$this->conexion->connect_errno, $this->conexion->connect_error);
            return FALSE;          
             
         }  else {
@@ -76,7 +76,9 @@ abstract class ModeloBaseDeDatos{
         if($this->abrir_conexion()){
             $arregloRespuesta=array();
             $this->conexion->set_charset('utf8');
+            //echo $this->sentencia_sql;
             if($resultado=  $this->conexion->query($this->sentencia_sql)){
+                //var_dump($resultado);
                 while($arregloRespuesta[]=$resultado->fetch_assoc());
                 
                 $resultado->close();                    
@@ -208,7 +210,7 @@ abstract class ModeloBaseDeDatos{
     }
     public function actualizar_registro(){
         if($this->sentencia_sql!=""){
-            if($this->ejecutar_sentencia_sql()){
+            if($this->ejecutar_funcion_sql()){
                 $this->mensajeDepuracion="se ha actualizado un nuevo registro en la Base de datos";
                 return TRUE;
             }else{

@@ -45,10 +45,11 @@ function registrarContextoCliente(){
              tipo:vf.Select[0],
              nombre_contacto:vf.Texto[4],
              telefono:vf.Texto[5],
-             direccion:vf.Texto[6]
+             direccion:vf.Texto[6],
+             coordenadas:vf.Texto[7]
         };
         //Invoco mi funcion 
-        registrarDato(_contexto,"crear",datos,mostrarMensaje);
+        registrarDato(_contexto,"crear",datos,mostrarMensaje,_formRegistroCliente);
     }else{
        mostrarMensaje({mensaje:"por favor ingresa valores"});
     }
@@ -60,8 +61,14 @@ function consultarContextoCliente(){
     
     var vf=obtener_valores_formulario(_formConsultaCliente);
     if(vf){
-        var dat={valor:vf.Texto[0]};
+        if(vf.Texto[0]=="*"){
+            
+           consultarDatos(_contexto,"consultarTodosLosClientes",{},dibujar_tabla_resultado_cliente);   
+        }else{
+            var dat={valor:vf.Texto[0]};
             consultarDatos(_contexto,"consultarPorValor",dat,dibujar_tabla_resultado_cliente);   
+        }
+        
     }else{
         mostrarMensaje({mensaje:"por favor ingresa valores"});
     }
@@ -110,11 +117,16 @@ function dibujar_tabla_resultado_cliente(datos){
          var celda=document.createElement("td");
          celda.innerHTML="Tipo cliente"; 
          fila.appendChild(celda);
+         
+         var celda=document.createElement("td");
+         celda.innerHTML="Coordenadas"; 
+         fila.appendChild(celda);
+         
          tabla.appendChild(fila);
         for(var e in d){
             console.log(d[e]);
              var fila=document.createElement("tr");
-             fila.setAttribute("id",d[e].IdUsuario);        
+             fila.setAttribute("id","cli_"+d[e].IdUsuario);        
              
                         
              switch(accionUsuario){
@@ -168,6 +180,8 @@ function dibujar_tabla_resultado_cliente(datos){
                     celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
+                    
+                    
                     var celda=document.createElement("td");  
                     var sel=document.createElement("select");
                     var op=document.createElement("option");
@@ -185,6 +199,13 @@ function dibujar_tabla_resultado_cliente(datos){
                     }
                     sel.appendChild(op);
                     celda.appendChild(sel);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].CoordenadasCliente);
+                    celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
                       var celda=document.createElement("td");
@@ -252,6 +273,7 @@ function dibujar_tabla_resultado_cliente(datos){
                     celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
+                    
                     var celda=document.createElement("td");  
                     var sel=document.createElement("select");
                     sel.setAttribute("readonly",true);
@@ -270,6 +292,13 @@ function dibujar_tabla_resultado_cliente(datos){
                     }
                     sel.appendChild(op);
                     celda.appendChild(sel);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].CoordenadasCliente);
+                    celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
                              
@@ -346,6 +375,8 @@ function dibujar_tabla_resultado_cliente(datos){
                     celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
+                    
+                    
                     var celda=document.createElement("td");  
                     var sel=document.createElement("select");
                     var op=document.createElement("option");
@@ -365,7 +396,13 @@ function dibujar_tabla_resultado_cliente(datos){
                     sel.appendChild(op);
                     celda.appendChild(sel);         
                     fila.appendChild(celda);
-                   
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].CoordenadasCliente);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
                    
                    break;
              }
@@ -386,7 +423,7 @@ function dibujar_tabla_resultado_cliente(datos){
 function editarContextoCliente(id){
     //Consulta las filas
     console.log(id);
-    var val=obtener_valores_filas_tabla(id);
+    var val=obtener_valores_filas_tabla("cli_"+id);
      console.log(val); 
     if(val.length > 0){
         var datos={
@@ -398,7 +435,8 @@ function editarContextoCliente(id){
             direccion:val[5],
             tipo:val[7],
             id_cliente:id,
-            nombre_contacto:val[6]
+            nombre_contacto:val[6],
+            coordenadas:val[8]
             
         };
         editarDato(_contexto,"actualizar",datos,mostrarMensaje);

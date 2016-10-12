@@ -1,4 +1,11 @@
 $(document).ready(function(){
+    //Cierra con Tecla ESC
+    //evento atento a responder cuando la tecla ya ha si presionada  
+    $(document).keyup(function (e){
+        if(e.which==27){
+            $('.mascara').fadeOut('fast');
+        }        
+    });
     $('.salirCrud,.salirTabla, .salirContacto').click(function(){
         $('.mascara').fadeOut('fast');
     });
@@ -14,14 +21,16 @@ $(document).ready(function(){
         $('#crudUsu').fadeOut('fast');
         $('#formCrearUsu').toggle('puff');
     });
+    $('#miPerfil').click(function(){
+        $('#crudUsu').fadeOut('fast');
+        $('#formMiPerfil').toggle('puff');
+    });
     $('#buscarUsu, #editarUsu, #eliminarUsu').click(function(){
         $('#crudUsu').fadeOut('fast');
         $('#formBuscarUsu').toggle('puff');
+        limpiar_elemento("tblRespuestaUsuario");
     });
-    $('#btnBuscarUsuario').click(function(){
-        $('#resultadoUsu').css({"visibility":"visible"});
-    });
-    
+        
     //Crud Productos
     $('#prod').click(function(){
         $('#crudProd').toggle('puff');
@@ -33,6 +42,7 @@ $(document).ready(function(){
     $('#buscarProd, #editarProd, #eliminarProd').click(function(){
        $('#crudProd').fadeOut('fast');
         $('#formBuscarProd').toggle('puff');
+        limpiar_elemento("tblRespuestaProd");
     });
     $('#crearHojaProd').click(function(){
         $('#crudProd').fadeOut('fast');
@@ -46,6 +56,11 @@ $(document).ready(function(){
         $('#crudProd').fadeOut('fast');
         $('#formCrearInsumo').toggle('puff');
     });
+    $('#buscarHojaProd').click(function(){
+        $('#crudProd').fadeOut('fast');
+        $('#formBuscarHojaVida').toggle('puff');
+    });
+    
     
     //CRUD CATEGORIA
     //Crud Productos
@@ -60,6 +75,7 @@ $(document).ready(function(){
     $('#buscarCat, #editarCat, #eliminarCat').click(function(){
        $('#crudCat').fadeOut('fast');
         $('#formBuscarCat').toggle('puff');
+        limpiar_elemento("tblRespuestaCat");
     });
     //CRUD PROVEEDOR
     $('#prov').click(function(){
@@ -73,6 +89,7 @@ $(document).ready(function(){
     $('#buscarProv, #editarProv, #eliminarProv').click(function(){
        $('#crudProv').fadeOut('fast');
         $('#formBuscarProv').toggle('puff');
+        limpiar_elemento("tblRespuestaProv");
     });
     ///CRUD ENTRADA
     $('#ent').click(function(){
@@ -115,6 +132,7 @@ $(document).ready(function(){
     $('#buscarCli, #editarCli, #eliminarCli').click(function(){
        $('#crudCli').fadeOut('fast');
         $('#formBuscarCli').toggle('puff');
+            limpiar_elemento("tblRespuestaCliente");
     });
     //CRUD FACTURA
     $('#fac').click(function(){
@@ -123,6 +141,11 @@ $(document).ready(function(){
     $('#crearFac').click(function(){
         $('#crudFac').fadeOut('fast');
         $('#crearFactura').toggle('puff');
+        
+    });
+    $('#crearCCobro').click(function(){
+        $('#crudFac').fadeOut('fast');
+            $('#crearDivCCobro').toggle('puff');
         
     });
     //CRUD ARRIENDO
@@ -157,7 +180,7 @@ $(document).ready(function(){
     });
     
     
-    $('#buscarAge, #editarAge, #eliminarAge').click(function(){
+    $('#buscarAge, #editarAge, #eliminarAge, #finalizarAge').click(function(){
         
        $('#crudAge').fadeOut('fast');
         $('#formBuscarAge').toggle('puff');
@@ -174,12 +197,73 @@ $(document).ready(function(){
     });
     $('#repoEntrada').click(function(){
         $('#crudRep').fadeOut('fast');
+        $('#formBuscarEContable').toggle('puff');
      });
     $('#repoSalida').click(function(){
         $('#crudRep').fadeOut('fast');
+         $('#formBuscarSContable').toggle('puff');
     });
     $('#repoSolicitud').click(function(){
         $('#crudRep').fadeOut('fast');
     });
+   
+    //CRUD SERVICIOS
+    //Crud Usuarios
+    $('#ser').click(function(){
+        
+        $('#crudSer').toggle('puff');
+    });
+    $('#crearSer').click(function(){
+        $('#crudSer').fadeOut('fast');
+        $('#formCrearSer').toggle('puff');
+    });
+    $('#buscarSer, #editarSer, #eliminarSer').click(function(){
+        $('#crudSer').fadeOut('fast');
+        $('#formBuscarSer').toggle('puff');
+        limpiar_elemento("tblRespuestaServicio");
+    });
     
+    //CRUD SOLICITUDES
+    //Crud solicitudes
+    $('#sol').click(function(){
+        $('#crudSol').toggle('puff');
+    });
+    
+    $('#buscarSol').click(function(){
+        $('#crudSol').fadeOut('fast');
+        $('#formBuscarSol').toggle('puff');
+    });
+    $('#contactoWeb').click(function(){
+        $('#crudConWeb').fadeOut('fast');
+        $('#formBuscarConWeb').toggle('puff');
+    })
+    $('#btnBuscarSolicitud').click(function(){
+        $('#resultadoSol').css({"visibility":"visible"});
+    });
+    $('#suscripciones').click(function(){
+        $('#crudConWeb').fadeOut('fast');
+        $('#formBuscarSuscripcion').toggle('puff');
+             
+    });
+    //CRUD ENTRADA CONTABLE
+    
+    $('#crearETipoContable').click(function(){
+        $('#crudEnt').fadeOut('fast');
+        $('#crearTipoEntContable').toggle('puff');
+    });
+    $('#crearEContable').click(function(){
+        $('#crudEnt').fadeOut('fast');
+        $('#crearEntContable').toggle('puff');
+    });
+    
+    //CRUD SALIDA CONTABLE
+    $('#crearSTipoContable').click(function(){
+        $('#crudSal').fadeOut('fast');
+        $('#crearTipoSalContable').toggle('puff');
+    });
+    $('#crearSContable').click(function(){
+        $('#crudSal').fadeOut('fast');
+        $('#crearSalContable').toggle('puff');
+    });
 });
+

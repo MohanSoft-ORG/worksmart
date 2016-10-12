@@ -17,10 +17,12 @@ if(isset($_POST['datos'])){
              * $post a la proiedad datos ejemplo
              * $post->datos->miDatoEnviadoDesdeElCliente
              */
-            $objeto->codigo_servicio=trim($post->datos->codigo_servicio);
-            $objeto->nombre_servicio=trim($post->datos->nombre_servicio);
-            $objeto->descripcion_servicio=trim($post->datos->descripcion_servicio);
-            $objeto->imagen_servicio=trim($post->datos->imagen_servicio);
+            $objeto->codigo_servicio=trim($post->datos->codigo);
+            $objeto->nombre_servicio=trim($post->datos->nombre);
+            $objeto->descripcion_servicio=trim($post->datos->descripcion);
+            $objeto->imagen_servicio=trim($post->datos->imagen);
+            $objeto->valor_servicio=trim($post->datos->precio);
+            $objeto->id_categoria=trim($post->datos->id_categoria);
             
             echo json_encode($objeto->crear_registro());
             
@@ -34,11 +36,13 @@ if(isset($_POST['datos'])){
              * $post a la proiedad datos ejemplo
              * $post->datos->miDatoEnviadoDesdeElCliente
              */
-            $objeto->codigo_servicio=trim($post->datos->codigo_servicio);
-            $objeto->nombre_servicio=trim($post->datos->nombre_servicio);
-            $objeto->descripcion_servicio=trim($post->datos->descripcion_servicio);
-            $objeto->imagen_servicio=trim($post->datos->imagen_servicio);
+            $objeto->codigo_servicio=trim($post->datos->codigo);
+            $objeto->nombre_servicio=trim($post->datos->nombre);
+            $objeto->descripcion_servicio=trim($post->datos->descripcion);
+            $objeto->imagen_servicio=trim($post->datos->imagen);
             $objeto->id_servicio=trim($post->datos->id_servicio);
+            $objeto->valor_servicio=trim($post->datos->precio);
+            $objeto->id_categoria=trim($post->datos->id_categoria);
             echo json_encode($objeto->actualizar_recurso());
             break;
         case "eliminar":

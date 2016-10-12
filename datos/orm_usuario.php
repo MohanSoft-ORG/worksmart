@@ -87,8 +87,8 @@ class Usuario extends ModeloBaseDeDatos{
             return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>FALSE);
         }
     }
-    function crear_registro_usuario_cliente($nombre,$apellido,$tipo,$nombre_contacto,$telefono,$direccion){
-        $this->sentencia_sql="SELECT fun_crear_cliente('$nombre','$apellido','$tipo','$nombre_contacto','$telefono','$direccion','$this->id_usuario') as respuesta";
+    function crear_registro_usuario_cliente($nombre,$apellido,$tipo,$nombre_contacto,$telefono,$direccion,$coordenadas){
+        $this->sentencia_sql="SELECT fun_crear_cliente('$nombre','$apellido','$tipo','$nombre_contacto','$telefono','$direccion','$this->id_usuario','$coordenadas') as respuesta";
         if($this->insertar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE,
@@ -133,8 +133,32 @@ class Usuario extends ModeloBaseDeDatos{
             return array("mensaje"=>  "No hay registros con el valor que busca","respuesta"=> FALSE);
         }
     }
+    function consultar_registro_usuario_empleado_id($valor){
+        $this->sentencia_sql="CALL pa_consultar_empleado_por_id('$valor')";
+        
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  "No hay registros con el valor que busca","respuesta"=> FALSE);
+        }
+    }
     function consultar_registro_usuario_cliente($valor){
         $this->sentencia_sql="CALL pa_consultar_cliente_por_identificacion('$valor')";
+        
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+        }
+    }
+    function consultar_registro_usuario_cliente_id($valor){
+        $this->sentencia_sql="CALL pa_consultar_cliente_por_id('$valor')";
         
         
         if($this->consultar_registros()){
@@ -163,8 +187,8 @@ class Usuario extends ModeloBaseDeDatos{
             return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>TRUE);
         }     
     }
-    function actualizar_registro_usuario_cliente($nombre,$apellido,$nombre_contacto,$telefono,$direccion){
-        $this->sentencia_sql="SELECT fun_actualizar_cliente ('$this->id_usuario','$nombre','$apellido','$nombre_contacto','$telefono','$direccion') as respuesta";
+    function actualizar_registro_usuario_cliente($nombre,$apellido,$nombre_contacto,$telefono,$direccion,$coordenadas){
+        $this->sentencia_sql="SELECT fun_actualizar_cliente ('$this->id_usuario','$nombre','$apellido','$nombre_contacto','$telefono','$direccion','$coordenadas') as respuesta";
         if($this->actualizar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);
@@ -186,7 +210,8 @@ class Usuario extends ModeloBaseDeDatos{
     }
     
     function consultar_ingreso_aplicacion($nombre_usuario,$clave){
-        $this->sentencia_sql="CALL pa_consultar_ingreso_aplicacion('$nombre_usuario','$clave')";
+       // $this->sentencia_sql="CALL pa_consultar_ingreso_aplicacion('$nombre_usuario','$clave')";
+       $this->sentencia_sql="SELECT * FROM vw_vista_ingreso_aplicacion WHERE DocumentoUsuario = '$nombre_usuario' AND Clave='$clave'";
         
         
         if($this->consultar_registros()){
@@ -200,7 +225,7 @@ class Usuario extends ModeloBaseDeDatos{
     
     
     function actualizar_clave($nueva_clave,$ultima_actividad){
-        $this->sentencia_sql="SELECT fun_cambiar_clave('$this->id_usuario','$nueva_clave','$ultima_actividad') as respuesta";
+         $this->sentencia_sql="SELECT fun_cambiar_clave('$this->id_usuario','$nueva_clave','$ultima_actividad') as respuesta";
         if($this->actualizar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);

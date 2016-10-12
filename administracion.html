@@ -10,8 +10,10 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="Estilos/Css/administracion.css" rel="stylesheet" type="text/css"/>
-        <script src="Estilos/Script/jquery-2.1.3.js" type="text/javascript"></script>
-        <script src="Estilos/Script/jquery-ui.js" type="text/javascript"></script>
+        <!--<script src="Estilos/Script/jquery-2.1.3.js" type="text/javascript"></script>
+        <script src="Estilos/Script/jquery-ui.js" type="text/javascript"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
         <script src="Estilos/Script/administracion.js" type="text/javascript"></script>
         <!--Scripts agregados Edgar-->
         <script src="scripts/funciones/formatos.js" type="text/javascript"></script>
@@ -28,10 +30,16 @@ and open the template in the editor.
         <script src="scripts/sc_entrada.js" type="text/javascript"></script>
         <script src="scripts/sc_salida.js" type="text/javascript"></script>
         <script src="scripts/sc_factura.js" type="text/javascript"></script>
+        <script src="scripts/sc_cuenta_cobro.js" type="text/javascript"></script>
         <script src="scripts/sc_cliente.js" type="text/javascript"></script>
         <script src="scripts/load.js" type="text/javascript"></script>
         <script src="scripts/sc_agenda.js" type="text/javascript"></script>
         <script src="scripts/sc_arriendo.js" type="text/javascript"></script>
+        <script src="scripts/sc_servicio.js" type="text/javascript"></script>
+        <script src="scripts/sc_solicitudes.js" type="text/javascript"></script>
+        <script src="scripts/sc_econtable.js" type="text/javascript"></script>
+        <script src="scripts/sc_scontable.js" type="text/javascript"></script>
+        <script src="scripts/sc_reportes.js" type="text/javascript"></script>
         <!--FIN Scripts agregados Edgar-->
         
     </head>
@@ -51,6 +59,11 @@ and open the template in the editor.
                     <img src="Estilos/Imagenes/Iconos/productos.png">
                     <h4>Productos</h4>
                 </li>
+                <li id="ser">
+                    <img src="Estilos/Imagenes/Iconos/productos.png">
+                    <h4>Servicios</h4>
+                </li>
+                
                 <li id="prov">
                     <img src="Estilos/Imagenes/Iconos/proveedor.png">
                     <h4>Proveedores</h4>
@@ -73,11 +86,15 @@ and open the template in the editor.
                 </li>
                 <li id="arr">
                     <img src="Estilos/Imagenes/Iconos/arriendo.png">
-                    <h4>Arriendos</h4>
+                    <h4>Alquiler</h4>
                 </li>
                 <li id="age">
                     <img src="Estilos/Imagenes/Iconos/agenda.png">
                     <h4>Agenda</h4>
+                </li>
+                <li id="sol">
+                    <img src="Estilos/Imagenes/Iconos/agenda.png">
+                    <h4>Solicitudes</h4>
                 </li>
                 <li id="rep">
                     <img src="Estilos/Imagenes/Iconos/reportes.png">
@@ -95,6 +112,9 @@ and open the template in the editor.
         <div class="mascara" id="crudUsu">
             <h2 class="salirCrud">x</h2>
             <ul class="crud">
+                <li id="miPerfil">
+                    <h3>Mi Perfil</h3>
+                </li>
                 <li id="crearUsu">
                     <h3>Crear Usuarios</h3>
                 </li>
@@ -107,9 +127,57 @@ and open the template in the editor.
                 <li id="eliminarUsu">
                     <h3>Eliminar Usuarios</h3>
                 </li>
+                
             </ul>
         </div>
         <!--SUBMENU-->
+         <!--REGISTRO USUARIO-->
+        <div class="mascara" id="formMiPerfil">    
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formPerfil">
+                    <ul>
+                        <li>
+                            <h2>Mi perfil</h2>
+                        </li>
+                        <li>
+                            <input id="txtNombreUsuario" type="text" placeholder="Nombre"  />
+                        </li>
+                        <li>
+                            <input id="txtApellidoUsuario" type="text" placeholder="Apellido" />
+                        </li>
+                        <li>
+                            <input id="txtDocumentoUsuario" type="text" placeholder="Documento" />
+                        </li>
+                        <li>
+                            <input id="txtTelefonoUsuario" type="text" placeholder="Telefono" />
+                        </li>
+                        <li>
+                            <input id="txtEmailUsuario" type="text" placeholder="E-mail" />
+                        </li>
+                        <li>
+                            <select id="selRolMp">
+                                <option value="1">Administrador</option>
+                                <option value="2">Asesor comercial</option>
+                                <option value="3">Técnico</option>
+                            </select>
+                        </li>
+                        <li>
+                            <h4>Ingresa una nueva contraseña solo si la dese cambiar</h4>
+                        </li>
+                        <li>
+                            <input  id="pssClaveUsuario" type="password" placeholder="Contraseña" />
+                        </li>
+                        <li>
+                            <input id="pssRepClaveUsuario" type="password" placeholder="Confirmela" />
+                        </li>
+                        <li>
+                            <input type="button" value="Guardar" id="btnActualizarUsuario" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
         <!--REGISTRO USUARIO-->
         <div class="mascara" id="formCrearUsu">    
             <div class="formulario">
@@ -202,6 +270,9 @@ and open the template in the editor.
                 <li id="crearHojaProd">
                     <h3>Crear Hoja de vida</h3>
                 </li>
+                <li id="buscarHojaProd">
+                    <h3>Buscar Hoja de vida</h3>
+                </li>
                 <li id="crearMantenimiento">
                     <h3>Crear Mantenimiento</h3>
                 </li>
@@ -209,7 +280,7 @@ and open the template in the editor.
         </div>
         <!--REGISTRO PRODUCTO-->
         <div class="mascara" id="crearProductoE">
-            <h4 class="salirDescarga">x</h4>
+            <h4 class="salirContacto">x</h4>
             <div class="formularioProd">
                 <form id="formCrearProducto">
                     <ul>
@@ -288,7 +359,7 @@ and open the template in the editor.
                         
                     </ul >
                     <ul id="liCaracteristicas"></ul>
-                    <ul id="materialDescargable">
+                    <!--<ul id="materialDescargable">
                         <li>
                             <h2>Material Descargable</h2>
                         </li>
@@ -296,7 +367,7 @@ and open the template in the editor.
                             <input id="txtNombreArchivo" type="text" placeholder="Nombre Archivo">
                         </li>
                         <li>
-                            <select id="selTipoArchivo" required>
+                            <select id="selTipoArchivo" >
                                 <option value="0">--selecciona un tipo de archivo--</option>
                                 <option value="drivers">Controlador</option>
                                 <option value="manuales">Manuales de Usuario</option>
@@ -307,10 +378,38 @@ and open the template in the editor.
                             <input type="file" id="flArchivoProducto"/>
                         </li>
                         <li>
-                            <!--<input type="button"  value="Aceptar" id="btnSubirArchivo"/>-->
+                            <!--<input type="button"  value="Aceptar" id="btnSubirArchivo"/>
                         </li>
                         
-                    </ul>
+                    </ul>-->
+                     <ul id="materialDescargable">
+                        <li>
+                            <h2>Archivos descargable</h2>
+                        </li>
+                        <li>
+                            <select id="selArchiivosSubidos">
+                                <option value="0">--Debes subir el archivo via FTP--</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input id="txtNombreArchivoGrande" type="text" placeholder="Nombre Archivo">
+                        </li>
+                        <li>
+                            <select id="selTipoArchivoGrande" >
+                                <option value="0">--selecciona un tipo de archivo--</option>
+                                <option value="drivers">Controlador</option>
+                                <option value="manuales">Manuales de Usuario</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </li>                       
+                        <li>
+                            <input id="btnAgregarArchivoGrande" type="button" value="Agregar archivo">
+                        </li>
+                        <li id="liMiListaArchivos">
+                            
+                        </li>
+                    </ul>       
+                    
                     <input type="button" value="Crear Producto" id="btnCrearProducto"/>
                 </form>
             </div>
@@ -327,6 +426,10 @@ and open the template in the editor.
                         </li>
                         <li>
                             <input type="text" placeholder="Codigo Producto" required/>
+                        </li>
+                        <li>
+                            <input type="radio" name="tipo_busqueda_producto" value="P" checked>Producto
+                            <input type="radio" name="tipo_busqueda_producto" value="PI">Insumo
                         </li>
                         <li>
                             <input type="button" value="buscar" id="btnBuscarProducto"/>
@@ -351,17 +454,34 @@ and open the template in the editor.
                             <h2>Crear hoja de vida</h2>
                         </li>
                         <li>
-                            <input type="text" placeholder="Codigo Producto"  required/>
+                            <!--<input type="text" placeholder="Codigo Producto"  required/>-->
+                            <select id="selProductosHojaDeVida" required></select>
                         </li>
-                        <li>
+                        <!--<li>
                             <input type="button" value="Buscar Producto" id="btnBuscarProdHv" />
                         </li>
                         <li>
                             <h4 id="hNombreProducto">Nombre Producto</h4>
                             <input type="hidden"  id="hdIdProducto"  />
+                        </li>-->
+                        <li>
+                            <h4>Agrega fotos del equipo</h4>
                         </li>
                         <li>
-                            <input type="text" placeholder="Serial Producto"/>
+                            
+                            <input type="file" id="flvSubirArchivoImagenesHojaDeVida">
+                        </li>
+                        <li>
+                            <input type="button" id="btnSubirImgenHojDeVida" value="subir Imagen">
+                        </li>
+                        <li >
+                            <div id="divMisImagenes">
+                                
+                            </div>
+                        </li>
+                        <li>
+                            
+                            <input id="txtValidarSerialHV" type="text" placeholder="Serial Producto" required/>
                         </li>
                         
                         <li>
@@ -381,11 +501,19 @@ and open the template in the editor.
                             <h2>Crear mantenimiento</h2>
                         </li>
                         <li>
-                            <input type="text" placeholder="Serial Producto"  required/>
+                            <input id="txtSerialMant" type="text" placeholder="Serial Producto"  required/>
+                        </li>
+                        <li>
+                            <input type="file" id="flArchivoMantenimiento">
                         </li>
                         <li>
                             <input type="text" placeholder="Descripcion Mantenimiento"  required/>
-                        </li>    
+                        </li>
+                        <li>
+                            <div id="divMiListaArchivoMantenimiento">
+                                
+                            </div> 
+                        </li>
                         <li>
                             <input type="button" value="Crear" id="btnCrearMantenimiento" />
                         </li>
@@ -395,7 +523,7 @@ and open the template in the editor.
         </div>
         <!--FORMULARIO EDITAR PRODUCTO-->
         <div class="mascara" id="editarProductoE">
-            <h4 class="salirDescarga">x</h4>
+            <h4 class="salirContacto">x</h4>
             <div class="formularioProd">
                 <form id="formEditarProducto">
                     <ul>
@@ -474,7 +602,7 @@ and open the template in the editor.
                         
                     </ul >
                         <ul id="liEdicionCaracteristicas"></ul>
-                    <ul id="materialDescargableEdicion">
+                    <!--<ul id="materialDescargableEdicion">
                         <li>
                             <h2>Material Descargable</h2>
                         </li>
@@ -482,7 +610,7 @@ and open the template in the editor.
                             <input id="txtEdicionNombreArchivo" type="text" placeholder="Nombre Archivo">
                         </li>
                         <li>
-                            <select id="selTipoArchivoEdicion" required>
+                            <select id="selTipoArchivoEdicion" >
                                 <option value="0">--selecciona un tipo de archivo--</option>
                                 <option value="drivers">Controlador</option>
                                 <option value="manuales">Manuales de Usuario</option>
@@ -494,19 +622,46 @@ and open the template in the editor.
                         </li>
                         
                         
-                    </ul>
+                    </ul>-->
+                     <ul id="materialDescargableEdicion">
+                        <li>
+                            <h2>Archivos descargable</h2>
+                        </li>
+                        <li>
+                            <select id="selArchiivosSubidosEdicion">
+                                <option value="0">--Debes subir el archivo via FTP--</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input id="txtEdicionNombreArchivo" type="text" placeholder="Nombre Archivo">
+                        </li>
+                        <li>
+                            <select id="selTipoArchivoEdicion" >
+                                <option value="0">--selecciona un tipo de archivo--</option>
+                                <option value="drivers">Controlador</option>
+                                <option value="manuales">Manuales de Usuario</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </li>                       
+                        <li>
+                            <input id="btnAgregarArchivoEdicion" type="button" value="Agregar archivo">
+                        </li>
+                        <li id="liMiListaArchivosEdicion">
+                            
+                        </li>
+                    </ul>     
                     <ul id="listaArchivosDescargables">
                         <li>
 
                         </li>
                     </ul>    
-                    <input type="button" value="Crear Producto" id="btnEditarProducto"/>
+                    <input type="button" value="Editar Producto" id="btnEditarProducto"/>
                 </form>
             </div>
         </div>
         
         <!--CREAR INSUMO-->
-            <div class="mascara" id="formCrearInsumo">    
+        <div class="mascara" id="formCrearInsumo">    
             <div class="formulario">
                 <h4 class="salirContacto">x</h4>
                   <form id="formCrearProductoInsumo">
@@ -540,7 +695,35 @@ and open the template in the editor.
                 </form>
             </div>
         </div>
-
+        <!--BUSCAR HOJA DE VIDA-->
+        <div class="mascara" id="formBuscarHojaVida">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarHV">
+                    <ul>
+                        <li>
+                            <h2>Buscar Hoja de vida</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Serial Producto" required/>
+                        </li>
+                        
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarHV"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoHV" class="resultadoBus">
+                <h2 id="h2TituloTablaHV"></h2>
+                <h4 class="salirTabla">x</h4>
+               
+                <ul id="liRespuestaHV">
+                    
+                </ul>
+            </div>
+            
+        </div>
         <!--************************************CATEGORIA**************************************************************************-->
         <div class="mascara" id="crudCat">
             <h2 class="salirCrud">x</h2>
@@ -569,10 +752,14 @@ and open the template in the editor.
                             <h2>Registrar categoria</h2>
                         </li>
                         <li>
-                            <input type="text" placeholder="Nombre categoria">
+                            <input type="text" placeholder="Nombre categoria *" required>
                         </li>
                         <li>
                             <input type="text" placeholder="Descripcion categoria">
+                        </li>
+                        <li>
+                            <input type="radio" name="tipo" value="Servicio">Servicio
+                            <input type="radio" name="tipo" value="Producto">Producto
                         </li>
                         <li>
                             <input type="button" value="Crear" id="btnCrearCategoria">
@@ -593,6 +780,10 @@ and open the template in the editor.
                         </li>
                         <li>
                             <input type="text" placeholder="Nombre categoria" required/>
+                        </li>
+                        <li>
+                            <input type="radio" name="tipo" value="Servicio">Servicio
+                            <input type="radio" name="tipo" value="Producto">Producto
                         </li>
                         <li>
                             <input type="button" value="buscar" id="btnBuscarCategoria"/>
@@ -693,8 +884,12 @@ and open the template in the editor.
                     <h3>Crear Entrada Obsequio</h3>
                 </li>
                 <li id="crearEntOtr">
-                    <h3>Crear Entrada Otros</h3>
-                </li>-->                
+                    <h3>Crear Entrada Otros</h3>    
+                </li>-->   
+                <li id="crearETipoContable"><h4>Crear Tipo Entrada Contable</h4></li>
+                
+                <li id="crearEContable"><h4>Crear Entrada Contable</h4></li>
+                
             </ul>
         </div>
         <!--CREAR ENTRADA PEDIDO-->
@@ -767,6 +962,47 @@ and open the template in the editor.
             </div>
             
         </div>
+        <!--CREAR TIPO ENTRADA COONTABLE-->
+        <div class="mascara" id="crearTipoEntContable">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarTipoEntradaContable">
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="Nombre Tipo Entrada" required>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Descripcion Tipo Entrada">
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearTipoEntradaContable">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--CREAR TIPO ENTRADA -->
+        <div class="mascara" id="crearEntContable">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarEntradaContable">
+                    <ul>
+                        <li>
+                            <select id="selTipoEContable"></select>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Valor Entrada">
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearEntradaContable">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        
         <!--************************************SALIDAS**************************************************************************-->
         <div class="mascara" id="crudSal">
             <h2 class="salirCrud">x</h2>
@@ -774,6 +1010,8 @@ and open the template in the editor.
                 <li id="crearSalVenta">
                     <h3>Crear Salida Venta</h3>
                 </li>
+                <li id="crearSTipoContable"><h4>Crear Tipo Salida Contable</h4></li>
+                <li id="crearSContable"><h4>Crear Salida Contable</h4></li>
                                 
             </ul>
         </div>
@@ -787,6 +1025,46 @@ and open the template in the editor.
                         </li>
                         <li>                            
                             <input type="button" value="Crear" id="btnCrearSalidaVenta">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--CREAR TIPO SALIDA CONTABLE-->
+        <div class="mascara" id="crearTipoSalContable">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarTipoSalidaContable">
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="Nombre Tipo Salida" required>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Descripcion Tipo Salida">
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearTipoSalidaContable">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
+        <!--CREAR SALIDA CONTABLE-->
+        <div class="mascara" id="crearSalContable">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarSalidaContable">
+                    <ul>
+                        <li>
+                            <select id="selTipoSContable"></select>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Valor Salida">
+                        </li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearSalidaContable">
                         </li>
                     </ul>
                 </form>
@@ -821,16 +1099,16 @@ and open the template in the editor.
                             <h2>Registrar cliente</h2>
                         </li>
                         <li>
-                            <input placeholder="Documento cliente " required>
+                            <input placeholder="Documento cliente " type="text" required>
                         </li>
                         <li>
-                            <input placeholder="Nombre cliente " required>
+                            <input placeholder="Nombre cliente " type="text" required>
                         </li>
                         <li>
-                            <input placeholder="Apellido cliente" >
+                            <input placeholder="Apellido cliente" type="text">
                         </li>
                         <li>
-                            <input placeholder="Correo cliente" >
+                            <input placeholder="Correo cliente" type="text">
                         </li>
                         <li>
                             <select>
@@ -840,13 +1118,16 @@ and open the template in the editor.
                             </select>
                         </li>
                         <li>
-                            <input placeholder="contacto cliente" >
+                            <input placeholder="contacto cliente" type="text" >
                         </li>
                         <li>
-                            <input placeholder="Telefono cliente" >
+                            <input placeholder="Telefono cliente" type="text">
                         </li>
                         <li>
-                            <input placeholder="Direccion cliente" >
+                            <input placeholder="Direccion cliente" type="text">
+                        </li>
+                        <li>
+                            <input placeholder="Coordenadas" type="text">
                         </li>
                         <li>
                             <input type="button" value="Crear" id="btnCrearCliente">
@@ -888,6 +1169,9 @@ and open the template in the editor.
             <ul class="crud">
                 <li id="crearFac">
                     <h3>Crear Factura</h3>
+                </li>
+                <li id="crearCCobro">
+                    <h3>Crear Cuenta Cobro</h3>
                 </li>
                 
             </ul>
@@ -951,24 +1235,83 @@ and open the template in the editor.
             </div>
             
         </div>
+         <!--REGISTRO CUENTA COBRO-->
+        <div class="mascara" id="crearDivCCobro">
+            <div class="formulario">
+                <h4 class="salirContacto">X</h4>
+                <form id="formRegistrarCCobro">
+                    <ul>
+                        <li>
+                            <h2>Cuenta de cobro</h2>
+                        </li>
+                        <li>
+                            <input id="txtNumeroCedulaClienteCCobro" placeholder="Cedula Cliente" type="text">
+                                <input id="hdIdClienteCCobro" type="hidden">
+                        </li>
+                        <li>
+                            <input placeholder="Nombre Cliente" type="text" id="txtNombreClienteCCobro">
+                        </li>
+                        <li>
+                            <input placeholder="Codigo " type="text">
+                            <input id="hdIdProductoCCobro" type="hidden">
+                            
+                        </li>
+                        <li>
+                            <!--<input type="radio" value="servicio" name="tipo">Servicio-->
+                            <input type="radio" value="producto" name="tipo" checked>Producto
+                        </li>
+                        <li>
+                            <input id="btnBuscarProductoCCobro" type="button" value="Buscar " >
+                        </li>
+                        <li>
+                            
+                            <h4 id="hNombreProductoCCobro"></h4>
+                        </li>
+                        <li>
+                            <input id="txtPrecioProductoCCobro" type="text" placeholder="Precio ">
+                        </li>
+                        <li>
+                            <input id="numCantidadCCobro" type="number" placeholder="Cantidad ">
+                        </li>
+                        <li>
+                            <input id="txtPrecioUnidadCCobro" type="text" placeholder="Precio unidad" readonly>
+                        </li>
+                        <li>
+                            <input id="btnAgregarProductoListaCCobro" type="button" value="Agregar a lista" >
+                        </li>
+                        <li id="liListaProductosCuentaCobro"></li>
+                        
+                        <li>
+                            <h4 id="hSubTotal"></h4>
+                            <h4 id="hTotal"></h4>
+                        </li>
+                        <li>
+                            
+                            <input id="btnCrearCCobro" type="button" value="Crear Cuenta Cobro" >
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+        </div>
         <!--************************************ARRIENDOS**************************************************************************-->
         <div class="mascara" id="crudArr">
             <h2 class="salirCrud">x</h2>
             <ul class="crud">
                 <li id="crearArr">
-                    <h3>Crear Arriendo</h3>
+                    <h3>Crear Alquiler</h3>
                 </li>
                 <li id="buscarArr">
-                    <h3>Buscar Arriendo</h3>
+                    <h3>Buscar Alquiler</h3>
                 </li>
                 <li id="editarArr">
-                    <h3>Editar Arriendo</h3>
+                    <h3>Editar Alquiler</h3>
                 </li>
                 <li id="eliminarArr">
-                    <h3>Cancelar Arriendo</h3>
+                    <h3>Cancelar Alquiler</h3>
                 </li>
                 <li id="finalizarArr">
-                    <h3>Finalizar Arriendo</h3>
+                    <h3>Finalizar Alquiler</h3>
                 </li>
             </ul>
         </div>
@@ -979,7 +1322,7 @@ and open the template in the editor.
                 <form id="formRegistrarArriendo">
                     <ul>
                         <li>
-                            <h2>Registrar arriendo</h2>
+                            <h2>Registrar alquiler</h2>
                         </li>
                         <li>
                             <input id="txtDocumentoClienteArriendo" type="text" placeholder="Documento cliente " required>
@@ -989,7 +1332,7 @@ and open the template in the editor.
                             <input id="hdIdClienteArriendo" type="hidden">
                         </li>
                         <li>
-                            <input id="txtSerialEquipo" type="text" placeholder="Documento cliente " required>
+                            <input id="txtSerialEquipo" type="text" placeholder="Serial Equipo " required>
                                 <input id="hdIdEquipoArriendo" type="hidden">
                         </li>
                         
@@ -1001,15 +1344,15 @@ and open the template in the editor.
                         </li>
                         <li>
                             <select id="selServicio">
-                                <option value="1">Arriendo Equipo Mensual</option>
-                                <option value="2">Arriendo Equipo Numero Copias</option>
+                                <option value="1">Alquiler Equipo Mensual</option>
+                                <option value="2">Alquiler Equipo Numero Copias</option>
                             </select>
                         </li>
                         <li>
                             <input  type="text" placeholder="Comentario" >
                         </li>   
                         <li>
-                            <input type="button" value="Crear" id="btnCrearArriendo">
+                            <input type="button" value="Crear Alquiler" id="btnCrearArriendo">
                         </li>
                     </ul>
                 </form>
@@ -1023,7 +1366,7 @@ and open the template in the editor.
                 <form id="formBuscarArriendo">
                     <ul>
                         <li>
-                            <h2>Buscar arriendo</h2>
+                            <h2>Buscar Alquiler</h2>
                         </li>
                         <li>
                             <input type="text" placeholder="Cedula Cliente">
@@ -1067,6 +1410,9 @@ and open the template in the editor.
                 <li id="eliminarAge">
                     <h3>Cancelar Cita</h3>
                 </li>
+                <li id="finalizarAge">
+                    <h3>Finalizar Cita</h3>
+                </li>
             </ul>
         </div>
         
@@ -1107,9 +1453,10 @@ and open the template in the editor.
                             <input id="dtHoraAgenda" type="time"  required>
                         </li>
                         <li>
-                            <select id="selServicioAgenda">
+                            <select id="selServicioAgenda" required>
                                 <option value="3">Visita Tecnica</option>
                                 <option value="4">Capacitacion</option>
+                                <option value="5">Otro</option>
                             </select>
                         </li>
                         <li>
@@ -1124,7 +1471,7 @@ and open the template in the editor.
             
         </div>
         <!--BUSCAR CITA-->
-        <!--BUSCAR ARRIENDO-->
+        <!--BUSCAR AGENDA-->
         <div class="mascara" id="formBuscarAge">
             <div class="formulario">
                 <h4 class="salirContacto">x</h4>
@@ -1144,6 +1491,7 @@ and open the template in the editor.
                                 <option value="P">Programada</option>
                                 <option value="C">Cancelada</option>
                                 <option value="R">Reprogramada</option>
+                                <option value="F">Finalizada</option>
                             </select>
                         </li>
                         <li>
@@ -1157,28 +1505,255 @@ and open the template in the editor.
                 <h4 class="salirTabla">x</h4>
                 <table id="tblRespuestaCita"></table>
             </div>
-        
+        </div>
         <!--************************************REPORTES**************************************************************************-->
         <div class="mascara" id="crudRep">
             <h2 class="salirCrud">x</h2>
             <ul class="crud">
-                <li id="repoAgenda">
+                <!--<li id="repoAgenda">
                     <h3>Reporte agenda</h3>
-                </li>
-                <li id="repoFactura">
+                </li>-->
+                <!--<li id="repoFactura">
                     <h3>reporte Factura</h3>
-                </li>
+                </li>-->
                 <li id="repoEntrada">
                     <h3>Reporte entradas</h3>
                 </li>
                 <li id="repoSalida">
                     <h3>Reporte salidas</h3>
                 </li>
-                <li id="repoSolicitud">
+                <!--<li id="repoSolicitud">
                     <h3>Reporte solicitudes</h3>
-                </li>
+                </li>-->
                 
             </ul>
         </div>
-    </body>
+        
+        
+        <!--REPORTE ENTRADAS CONTABLES-->
+         <div class="mascara" id="formBuscarEContable">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscEContable">
+                    <ul>
+                        <li>
+                            <h2>Buscar entrada</h2>
+                        </li>
+                        <li>
+                            <input type="date" id="dtFechaEntrada">
+                        </li>
+                        <li>
+                            <select id="selTipoBuscarEContable">                                
+                            </select>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarEContable"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoBusEContable" class="resultadoBus">
+                <h2 id="h2TituloTablaCita"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaEContable"></table>
+            </div>
+        </div>
+        <!--REPORTE ENTRADAS CONTABLES-->
+         <div class="mascara" id="formBuscarSContable">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscSContable">
+                    <ul>
+                        <li>
+                            <h2>Buscar salidas</h2>
+                        </li>
+                        <li>
+                            <input type="date" id="dtFechaSalida">
+                        </li>
+                        <li>
+                            <select id="selTipoBuscarSContable">                                
+                            </select>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarSContable"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoBusSContable" class="resultadoBus">
+                <h2 id="h2TituloTablaCita"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaSContable"></table>
+            </div>
+        </div>
+        <!--*********************************SERVICIOS****************************************************-->
+          <!--SUBMENU-->
+        <div class="mascara" id="crudSer">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="crearSer">
+                    <h3>Crear Servicios</h3>
+                </li>
+                <li id="buscarSer">
+                    <h3>Buscar Servicios</h3>
+                </li>
+                <li id="editarSer">
+                    <h3>Editar Servicios</h3>
+                </li>
+                <li id="eliminarSer">
+                    <h3>Eliminar Servicios</h3>
+                </li>
+            </ul>
+        </div>
+        <!--SUBMENU-->
+        <!--REGISTRO SERVICIOS-->
+        <div class="mascara" id="formCrearSer">    
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formRegistrarServicio">
+                    <ul>
+                        <li>
+                            <h2>Crear de Servicio</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Codigo servicio *" required>
+                        <li>
+                        <li>
+                            <input type="text" placeholder="Nombre servicio *" required>
+                        <li>
+                            <li>
+                            <input type="text" placeholder="Descripcion servicio">
+                        <li>
+                            <li>
+                            <input type="text" placeholder="Precio servicio">
+                        <li>
+                        <li>
+                            <select id="selCatServicio" required>
+                                <option value="0">--Seleccciona una categoria(obligatorio)--</option>
+                                <option value="1">Arriendo</option>
+                                <option value="2">Servicio Tecnico</option>
+                                <option value="3">Capacitacion</option>
+                            </select>
+                        <li>
+                        <li>
+                            <input type="button" value="Crear" id="btnCrearServicio" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <!--BUSCAR SERVICIOS-->
+        <div class="mascara" id="formBuscarSer">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarServicio">
+                    <ul>
+                        <li>
+                            <h2>Buscar Servicio</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Codigo Servicio" required/>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarServicio"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoSer" class="resultadoBus">
+                <h2 id="h2TituloTablaSer"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaServicio"></table>
+            </div>
+            
+        </div>
+        <!--*********************************SOLICITUDES*********************************************-->
+          <!--SUBMENU-->
+        <div class="mascara" id="crudSol">
+            <h2 class="salirCrud">x</h2>
+            <ul class="crud">
+                <li id="buscarSol">
+                    <h3>Buscar Solicitudes</h3>
+                </li>
+                <li id="contactoWeb">
+                    <h3>Contactos web</h3>
+                </li>
+                <li id="suscripciones">
+                    <h3>Suscripciones</h3>
+                </li>
+            </ul>
+        </div>
+        <!--SUBMENU-->
+        <!--BUSCAR SOLICITUDES-->
+        <div class="mascara" id="formBuscarSol">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarSolicitudes">
+                    <ul>
+                        <li>
+                            <h2>Buscar Solicitudes</h2>
+                        </li>
+                        
+                        <li>
+                            <select >
+                                <option value="Abierta">Cotizacion Pendientes</option>
+                                <option value="Cerrada">Cotizacion Cerradas</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarSolicitud"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoSol" class="resultadoBus">
+                <h2 id="h2TituloTablaSol"></h2>
+                <h4 class="salirTabla">x</h4>
+                <ul id="liRespuestaSolicitud"></ul>
+            </div>
+            
+        </div>
+        <!--BUSCAR CONTACTOS WEB-->
+        <div class="mascara" id="formBuscarConWeb">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarConWeb">
+                    <ul>
+                        <li>
+                            <h2>Buscar Contactos</h2>
+                        </li>                        
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarContactoWeb"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoConWeb" class="resultadoBus">
+                <h2 id="h2TituloTablaSol"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaConWeb"></table>
+            </div>            
+        </div>
+        <!--Buscar suscripciones-->
+        <div class="mascara" id="formBuscarSuscripcion">
+            <div class="formulario">
+                <h4 class="salirContacto">x</h4>
+                <form id="formBuscarSus">
+                    <ul>
+                        <li>
+                            <h2>Buscar suscripciones</h2>
+                        </li>                        
+                        <li>
+                            <input type="button" value="buscar" id="btnBuscarSuscripcion"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="resultadoSus" class="resultadoBus">
+                <h2 id="h2TituloTablaSol"></h2>
+                <h4 class="salirTabla">x</h4>
+                <table id="tblRespuestaSus"></table>
+            </div>            
+        </div>
+     </body>
 </html>

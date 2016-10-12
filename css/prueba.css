@@ -1,0 +1,227 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+}
+a {
+    cursor: pointer;
+}
+.mascara {
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(1,1,1,0.9);
+    display: none;
+    position: fixed;
+    z-index: 9999;
+}
+.mascara1 {
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(1,1,1,0.9);
+    position: fixed;
+    overflow-x: hidden;
+    display: none; 
+    z-index: 9999;
+}
+
+.cerrar {
+    width: 50px;
+    height: 50px;
+    right: 100px;
+    margin-top: 50px;
+    background-image: url(../images/cancel.png);
+    background-size: 100% 100%;
+    position: fixed;
+    cursor: pointer;
+}
+.cerrar:hover {
+    background-image: url(../images/cancelA.png);
+}
+
+.clearMas {
+    clear: both;
+    width: 100%;
+    height: 50px;
+}
+.contieneProductos {
+    width: 90%;
+    margin: auto;
+    margin-top: 100px;
+    overflow-x: hidden; 
+}
+.filtroProd {
+    width: 15%;
+    position: fixed;
+    color: white;
+    text-align: center;
+}
+.filtroProd h4 {
+    background-color: white;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.filtroProd ul {
+    width: 100%;
+    display: table;
+}
+.filtroProd ul li {
+    width: 100%;
+    height: 30px;
+    display: table;
+}
+.filtroProd li input[type="checkbox"] {
+    float: left;
+    margin-top: 10px;
+}
+.filtroProd li h5 {
+    float: left;
+    color: white;
+    margin-left: 10px;
+}
+.resultadoProd {
+    width: 80%;
+    float: right;
+    border: 1px solid white;
+}
+.productos {
+    width: 30%;
+    float: left;
+    margin-left: 3%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid white;
+    color: white;
+}
+.imgProducto {
+    width: 90%;
+    margin: auto;
+}
+.imgProducto img {
+    width: 100%;
+    height: 250px;
+}
+.caracProd {
+    width: 60%;
+    float: left;
+}
+.caracProd ul {
+    list-style: none;
+    margin-top: 10px;
+}
+.accionProd {
+    width: 40%;
+    float: right;
+}
+.accionProd ul {
+    list-style: none;
+    text-align: center;
+    margin-top: 10px;
+}
+.accionProd ul li {
+    margin-top: 5px;
+}
+.accionProd li input[type="button"] {
+    padding: 5px;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
+}
+
+.contieneDetalle {
+    clear: both;
+    width: 80%;
+    margin: auto;
+    display: table;
+    padding-top: 50px;
+}
+.imgDetalle {
+    width: 49%;
+    float: left;
+    text-align: center;
+}
+.imgDetalle img {
+    width: 300px;
+    height: 300px;
+}
+.infoDetalle {
+    width: 49%;
+    float: right;
+    color: white;
+}
+.infoDetalle ul {
+    margin-left: 20px;
+}
+
+
+.tblDescargas {
+    margin: auto;
+    width: 70%;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid gray;
+    margin-top: 100px;
+    Background-color:white;
+}
+.tblDescargas td {
+    border: 1px solid gray;    
+    padding: 3px 0px;
+    
+}
+#titDescarga {
+    background-color: gray;
+    color: white;
+    text-shadow: 1px 2px 3px black;
+    font-size: 18px;
+    
+}
+.login {
+    display: none;
+    padding: 10px 20px;
+    position: fixed;
+    right: 0;
+    z-index: 9999;
+    margin-top: 50px;
+}
+.login ul {
+    background-image: url('../images/listaForm.jpg');
+    padding: 5px 10px;
+    display: table;
+    list-style: none;
+}
+.login ul li {
+    width: 200px;
+    margin: 10px auto;
+    text-align: center;
+    clear: both;
+}
+.login ul li:first-child {
+    border-radius: 100%;
+    border: none;
+}
+.login input[type="button"]{
+    padding: 3px 5px;
+}
+.login li img {
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/cancel.png');
+    background-size: 100% 100%;
+    cursor: pointer;
+    border-radius: 100%;
+    float: right;
+    
+}
+.login li img:hover {
+    background-image: url('../images/cancelA.png');
+}

@@ -29,7 +29,7 @@ function iniciar_contexto_proveedor(){
    agregarEvento("editarProv","click",cambiarAccion);
    agregarEvento("eliminarProv","click",cambiarAccion);
    agregarEvento("prov","click",iniciar_contexto);//menu principal
-   consultar_proveedores();
+   
 }
 
 /* INSERTAR CONTEXTO*/    
@@ -47,7 +47,7 @@ function registrarContextoProveedor(){
         
         };
         //Invoco mi funcion 
-        registrarDato(_contexto,"crear",datos,mostrarMensaje);
+        registrarDato(_contexto,"crear",datos,mostrarMensaje,_formRegistroProveedor);
     }else{
        mostrarMensaje({mensaje:"por favor ingresa valores"});
     }
@@ -59,8 +59,16 @@ function consultarContextoProveedor(){
     
     var vf=obtener_valores_formulario(_formConsultaProveedor);
     if(vf){
-        var dat={valor:vf.Texto[0]};
+        if(vf.Texto[0]=="*"){
+            
+            consultarDatos(_contexto,"consultar",{},dibujar_tabla_resultado_proveedor);   
+        }else{
+            var dat={valor:vf.Texto[0]};
             consultarDatos(_contexto,"consultarPorValor",dat,dibujar_tabla_resultado_proveedor);   
+            
+            
+        }
+        
     }else{
         mostrarMensaje({mensaje:"por favor ingresa valores"});
     }
@@ -102,7 +110,7 @@ function dibujar_tabla_resultado_proveedor(datos){
         for(var e in d){
             console.log(d[e]);
              var fila=document.createElement("tr");
-             fila.setAttribute("id",d[e].IdProveedor);        
+             fila.setAttribute("id","prov_"+d[e].IdProveedor);        
              
                         
              switch(accionUsuario){
@@ -236,7 +244,7 @@ function dibujar_tabla_resultado_proveedor(datos){
 /*EDITAR CONTEXTO*/
 function editarContextoProveedor(id){
     //Consulta las filas
-    var val=obtener_valores_filas_tabla(id);
+    var val=obtener_valores_filas_tabla("prov_"+id);
      console.log(val); 
     if(val.length > 0){
         var datos={
@@ -261,7 +269,4 @@ function eliminarContextoProveedor(id){
     }else{
         mostrarMensaje({mensaje:"por favor ingrese los valores requeridos"});
     }
-}
-function consultar_proveedores(){
-    console.log("consultando ando");
 }

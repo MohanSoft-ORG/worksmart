@@ -317,14 +317,74 @@ class Archivos{
                 $ext=  explode(".", $nombre);
                 //Asigno direccion completa de la ubicacion del archivo
                  $file=$directorio.$nombre;
+                 if(!file_exists($directorio)){
+                     mkdir($directorio, '0777');
+                 }
                  
-                if(move_uploaded_file($mi_archivo["tmp_name"],$file)){
+                 if(move_uploaded_file($mi_archivo["tmp_name"],$file)){
                     
                      return array("mensaje"=>"Archivo almacenado correctamente","respuesta"=>TRUE);
                     
                 }else{
                      return array("mensaje"=>"Error al mover archivo","respuesta"=>FALSE);
                 }
+                 
+    }
+    function cambiar_ruta_archivo($vieja_ruta,$nueva_ruta){
+        //echo $vieja_ruta."-";
+        //echo $nueva_ruta;
+        if(rename($vieja_ruta,$nueva_ruta)){
+                    
+             return array("mensaje"=>"Archivo almacenado correctamente","respuesta"=>TRUE);
+
+        }else{
+             return array("mensaje"=>"Error al mover archivo","respuesta"=>FALSE);
+        }
+    }
+    function listar_archivos_directorio($ruta){
+        //var_dump(is_dir($ruta));
+        //var_dump($ruta);
+        $arr=array();
+        //Abrir directorio y listarlo
+        if(is_dir($ruta)){
+            if($dh=  opendir($ruta)){
+                $i=0;                
+               // $arr=  scandir($ruta);
+                while(($archivo=  readdir($dh))!== false){
+                    //var_dump($dh);
+                    //var_dump($archivo);
+                    if($archivo!="." && $archivo!=".."){
+                        $arr[$i]=$archivo;
+                        $i++;
+                    }
+                    
+                }
+                return $arr;
+            }
+            closedir($dh);
+        }else{
+            return false;
+        }
+        
     }
 } 
+class CalendarioAPI{
+/********************************************************************
+* Función getGCalendar (Eduardo Revilla Vaquero)                    *
+* Genera url para la creación de un evento en google calendar.      *
+*********************************************************************/
+function getGoogleCalendarUrl($event){  
+        $titulo = urlencode($event['titulo']); 
+        $descripcion = urlencode($event['descripcion']); 
+        $localizacion = urlencode($event['localizacion']); 
+        $start=new DateTime($event['fecha_inicio'].' '.$event['hora_inicio'].' '.date_default_timezone_get()); 
+        $end=new DateTime($event['fecha_fin'].' '.$event['hora_fin'].' '.date_default_timezone_get()); 
+        $dates = urlencode($start->format("Ymd\THis")) . "/" . urlencode($end->format("Ymd\THis"));
+        $name = urlencode($event['nombre']);
+        $url = urlencode($event['url']);
+        //$gCalUrl = "http://www.google.com/calendar/event?action=TEMPLATE&amp;text=".$titulo."&amp;dates=".$dates."&amp;details=".$descripcion."&amp;location=".$localizacion."&amp;trp=false&amp;sprop=".$url."&amp;sprop=name:".$name;
+        $gCalUrl="https://calendar.google.com/calendar/render?action=TEMPLATE&text=".$titulo."&dates=".$dates."&details=".$descripcion."&location=".$localizacion."&trp=false&sprop=www.worksmart.com.co&sprop=name:worksmart&sf=true&output=xml#eventpage_6";
+return ($gCalUrl);
+}
+}
 ?>

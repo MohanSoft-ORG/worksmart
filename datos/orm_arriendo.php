@@ -62,7 +62,7 @@ class Arriendo extends ModeloBaseDeDatos{
         
     }
     function obtener_registro_filtro($filtro){
-        $this->sentencia_sql="SELECT * FROM vw_vista_arriendo WHERE ".$filtro;
+       $this->sentencia_sql="SELECT * FROM vw_vista_arriendo WHERE ".$filtro;
         
         
         if($this->consultar_registros()){
@@ -98,6 +98,7 @@ class Arriendo extends ModeloBaseDeDatos{
         $this->sentencia_sql="SELECT fun_actualizar_arriendo('$this->id_arriendo',"
                                                     . "'$this->id_equipo',"
                                                     . "'$this->fecha_inicial',"
+                                                    . "'$this->fecha_final',"
                                                     . "'$this->comentario') as respuesta";
         if($this->actualizar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,

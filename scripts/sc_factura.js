@@ -30,7 +30,7 @@ function iniciar_contexto_factura(){
    agregarEvento("elementoBuscarSubMenu","click",cambiarAccion);
    agregarEvento("elementoEditarSubMenu","click",cambiarAccion);
    agregarEvento("elementoeliminarSubMenu","click",cambiarAccion);
-   agregarEvento("fac","click",iniciar_contexto);//menu principal
+   agregarEvento("crearFac","click",iniciar_contexto);//menu principal
    
 }
 

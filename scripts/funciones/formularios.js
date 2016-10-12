@@ -44,11 +44,12 @@ function obtener_valores_formulario(idFormulario){
 
                                   if(elementos[i].value!="0"){
                                       sel.push(elementos[i].value);
-                                  }else{
+                                  }
+                                  /*else{
                                       elementos[i].style.borderColor="red";
                                       return false;
                                       break;
-                                  }
+                                  }*/
                                 break;
                              case "button":
                                 //console.log("SOY UN BOTTON");
@@ -179,4 +180,12 @@ function obtener_valores_filas_tabla(id){
     return valores;
     
     
+}
+function limpiar_elemento(id){
+    
+    if(document.getElementById(id)!= undefined && document.getElementById(id) != null){
+        document.getElementById(id).innerHTML="";
+    }else{
+        mostrarMensaje("estas intentando limpar u elemento que no existe");
+    }
 }

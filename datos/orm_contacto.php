@@ -16,6 +16,18 @@ class Contacto extends ModeloBaseDeDatos{
     }
     
 
+    function crear_registro_suscripcion(){
+        
+            $this->sentencia_sql="SELECT fun_crear_contacto_suscripcion('$this->correo_contacto','$this->fecha_contacto') as respuesta";
+                
+        if($this->insertar_registro()){
+            return array("mensaje"=> "Gracias por suscribirte",
+                "respuesta"=>TRUE,
+                "nuevo_registro"=>$this->respuesta_funcion->respuesta);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>FALSE);
+        }
+    } 
     function crear_registro(){
         
         $this->sentencia_sql="SELECT fun_crear_contacto('$this->nombre_contacto','$this->telefono_contacto','$this->correo_contacto','$this->observacion','$this->fecha_contacto') as respuesta";
@@ -27,7 +39,7 @@ class Contacto extends ModeloBaseDeDatos{
         }else{
             return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>FALSE);
         }
-    }    
+    }
 
     function obtener_registro_todos_los_registros(){
         
@@ -59,6 +71,15 @@ class Contacto extends ModeloBaseDeDatos{
     
     function eliminar_recurso(){
         $this->sentencia_sql="SELECT () as respuesta";
+        if($this->eliminar_registro()){
+            return array("mensaje"=> $this->mensajeDepuracion,
+                "respuesta"=>TRUE);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>TRUE);
+        }
+    }
+    function eliminar_suscripcion(){
+        $this->sentencia_sql="SELECT fun_eliminar_suscripcion('$this->correo_contacto') as respuesta";
         if($this->eliminar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);

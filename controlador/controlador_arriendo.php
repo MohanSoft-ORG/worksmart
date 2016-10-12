@@ -37,7 +37,8 @@ if(isset($_POST['datos'])){
              */
             $objeto->id_arriendo=trim($post->datos->id_arriendo);
             $objeto->id_equipo=trim($post->datos->id_equipo);
-            $objeto->fecha_inicial=trim($post->datos->fecha);
+            $objeto->fecha_inicial=trim($post->datos->fecha_inicial);
+            $objeto->fecha_final=trim($post->datos->fecha_final);
             $objeto->comentario=trim($post->datos->comentario);
                     
             echo json_encode($objeto->actualizar_recurso());
@@ -75,7 +76,7 @@ if(isset($_POST['datos'])){
             $e=$post->datos->estado;
             $filtro.="EstadoArriendo='$e'";
             
-            
+            //echo $filtro;
             echo json_encode($objeto->obtener_registro_filtro($filtro));
             break;
             

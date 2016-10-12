@@ -3,9 +3,11 @@
 /*AQUI EL NOMBRE DE LOS BOTONES QUE PERTENECEN A ESTE CONTEXTO*/
 var _btnRegistroUsuario;
 var _btnConsultaUsuario;
+var _btnGuardarPerfil;
 /*AQUI EL NOMBRE DE LOS FORMULARIOS QUE PERTENECEN A ESTE CONTEXTO*/
 var _formRegistroUsuario;
 var _formConsultaUsuario;
+var _formPerfilUsuario;
 var accionUsuario;
 
 function iniciar_contexto_usuario(){
@@ -15,15 +17,17 @@ function iniciar_contexto_usuario(){
     /*AQUI EL NOMBRE DE LOS BOTONES QUE PERTENECEN A ESTE CONTEXTO*/
      _btnRegistroUsuario="btnCrearUsuario";
      _btnConsultaUsuario="btnBuscarUsuario";
-
+     _btnGuardarPerfil="btnActualizarUsuario";
     /*AQUI EL NOMBRE DE LOS FORMULARIOS QUE PERTENECEN A ESTE CONTEXTO*/
      _formRegistroUsuario="formRegistrarUsuario";
      _formConsultaUsuario="formBuscarUsuario";
+     _formPerfilUsuario="formPerfil";
     
     
    agregarEvento(_btnRegistroUsuario,"click",registrarContextoUsuario);
    agregarEvento(_btnConsultaUsuario,"click",consultarContextoUsuario);
-   
+   agregarEvento(_btnGuardarPerfil,"click",editarPerfilUsuario);
+   agregarEvento("miPerfil","click",mostrarDatosPerfil);
    //Elemento del sub menu
    agregarEvento("buscarUsu","click",cambiarAccion);
    agregarEvento("editarUsu","click",cambiarAccion);
@@ -48,7 +52,7 @@ function registrarContextoUsuario(){
                      
         };
         //Invoco mi funcion 
-        registrarDato(_contexto,"crearEmpleado",datos,mostrarMensaje);
+        registrarDato(_contexto,"crearEmpleado",datos,mostrarMensaje,_formRegistroUsuario);
     }else{
        mostrarMensaje({mensaje:"por favor ingresa valores"});
     }
@@ -60,8 +64,14 @@ function consultarContextoUsuario(){
     
     var vf=obtener_valores_formulario(_formConsultaUsuario);
     if(vf){
-        var dat={valor:vf.Texto[0]};
-        consultarDatos(_contexto,"consultarEmpleadoPorValor",dat,dibujar_tabla_resultado_usuario);   
+        if(vf.Texto[0]=="*"){
+            var dat={valor:vf.Texto[0]};
+            consultarDatos(_contexto,"consultarTodosLosEmpleados",dat,dibujar_tabla_resultado_usuario);   
+        }else{
+            var dat={valor:vf.Texto[0]};
+            consultarDatos(_contexto,"consultarEmpleadoPorValor",dat,dibujar_tabla_resultado_usuario);   
+        }
+        
     }else{
         mostrarMensaje({mensaje:"por favor ingresa valores"});
     }
@@ -80,7 +90,7 @@ function dibujar_tabla_resultado_usuario(datos){
      var d=eval(datos.valores_consultados);
      console.log(d);
      if(datos.respuesta){
-         
+     $('#resultadoUsu').css({"visibility":"visible"});    
      var tabla=document.getElementById("tblRespuestaUsuario");
      if(tabla!=null){
          tabla.innerHTML="";
@@ -115,7 +125,7 @@ function dibujar_tabla_resultado_usuario(datos){
         for(var e in d){
             console.log(d[e]);
              var fila=document.createElement("tr");
-             fila.setAttribute("id",d[e].IdUsuario);        
+             fila.setAttribute("id","us_"+d[e].IdUsuario);        
              
                         
              switch(accionUsuario){
@@ -268,7 +278,7 @@ function dibujar_tabla_resultado_usuario(datos){
 /*EDITAR CONTEXTO*/
 function editarContextoUsuario(id){
     //Consulta las filas
-    var val=obtener_valores_filas_tabla(id);
+    var val=obtener_valores_filas_tabla("us_"+id);
      console.log(val); 
     if(val.length > 0){
         var datos={
@@ -294,4 +304,79 @@ function eliminarContextoUsuario(id){
     }else{
         mostrarMensaje({mensaje:"por favor ingrese los valores requeridos"});
     }
+}
+
+/*EDITAR CONTEXTO*/
+function editarPerfilUsuario(){
+    //Consulta las filas
+    var val=obtener_valores_formulario(_formPerfilUsuario);
+     console.log(val); 
+     
+        if(val){
+            var clave="";
+            var valido=true;
+            if(document.getElementById("pssClaveUsuario").value!=""){
+                console.log(document.getElementById("pssClaveUsuario").value);
+                console.log(document.getElementById("pssRepClaveUsuario").value);
+                if(document.getElementById("pssClaveUsuario").value==document.getElementById("pssRepClaveUsuario").value){
+
+                    clave=val.Clave;   
+
+                }else{
+                    valido=false;
+                }
+
+
+
+                
+            }    
+            
+            
+            if(valido){
+                        var datos={
+                        id_usuario:usuario.id_usuario,
+                        nombre:val.Texto[0],
+                        apellido:val.Texto[1],
+                        documento:val.Texto[2],
+                        correo:val.Texto[4],
+                        telefono:val.Texto[3],
+                        rol:val.Select[0],
+                        clave:clave
+
+                    };
+                    editarDato(_contexto,"actualizarPerfilUsuario",datos,mostrarMensaje);
+                }
+                else{
+                    mostrarMensaje({mensaje:"La contraseña no coincide"});
+                }
+        }
+        else{
+            mostrarMensaje({mensaje:"por favor ingrese los valores requeridos"});
+        }
+    
+}
+
+
+function mostrarDatosPerfil(){
+    
+    var dat={valor:usuario.documento} 
+    consultarDatos(_contexto,"consultarEmpleadoPorValor",dat,dibujar_info_perfil_usuario);   
+}
+function dibujar_info_perfil_usuario(d){
+    var v=d.valores_consultados[0];
+    console.log(d.valores_consultados);
+    var txtNombreUsuario=document.getElementById("txtNombreUsuario");
+    var txtApellidoUsuario=document.getElementById("txtApellidoUsuario");
+    var txtDocumentoUsuario=document.getElementById("txtDocumentoUsuario");
+    var txtTelefonoUsuario=document.getElementById("txtTelefonoUsuario");
+    var txtEmailUsuario=document.getElementById("txtEmailUsuario");
+    var selRolMp=document.getElementById("selRolMp");
+    
+    
+    txtNombreUsuario.value=v.NombreEmpleado;
+    txtApellidoUsuario.value=v.ApellidoEmpleado;
+    txtDocumentoUsuario.value=v.DocumentoUsuario;
+    txtTelefonoUsuario.value=v.Telefono;
+    txtEmailUsuario.value=v.CorreoUsuario;
+    selRolMp.value=v.IdRol;
 }

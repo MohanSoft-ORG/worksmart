@@ -30,6 +30,7 @@ function iniciar_contexto_agenda(){
    agregarEvento("buscarAge","click",cambiarAccion);
    agregarEvento("editarAge","click",cambiarAccion);
    agregarEvento("eliminarAge","click",cambiarAccion);
+   agregarEvento("finalizarAge","click",cambiarAccion);
    agregarEvento("age","click",iniciar_contexto);//menu principal
    
    var dt=horaCliente().split(" ")[0].split("-");
@@ -54,6 +55,7 @@ function registrarContextoAgenda(){
             comentario:vf.Texto[4],
             id_servicio:vf.Select[1],
             id_cliente:vf.Hidden[0],
+            nombre_cliente:vf.Texto[1],
             id_empleado:vf.Select[0],
             direccion:vf.Texto[2],
             coordenadas:vf.Texto[3]
@@ -93,6 +95,7 @@ function dibujar_tabla_resultado_agenda(datos){
     $('#crudAge').fadeOut(500);
     $('#resultadoCita').fadeIn(500);
     $('#mascara').fadeOut('fast');
+    $('#resultadoCita').css({"visibility":"visible"});
     
      var d=eval(datos.valores_consultados);
      if(datos.respuesta){
@@ -132,7 +135,8 @@ function dibujar_tabla_resultado_agenda(datos){
          
          var celda=document.createElement("td");
          celda.innerHTML="Comentario";
-         
+          fila.appendChild(celda);
+            
          var celda=document.createElement("td");
          celda.innerHTML="Nombre empleado"; 
          fila.appendChild(celda);
@@ -141,7 +145,7 @@ function dibujar_tabla_resultado_agenda(datos){
         for(var e in d){
             console.log(d[e]);
              var fila=document.createElement("tr");
-             fila.setAttribute("id",d[e].IdAgenda);        
+             fila.setAttribute("id","age_"+d[e].IdAgenda);        
              
              console.log(accionUsuario);           
              switch(accionUsuario){
@@ -149,7 +153,7 @@ function dibujar_tabla_resultado_agenda(datos){
                     var celda=document.createElement("td");  
                     var inp=document.createElement("input");
                     inp.setAttribute("type","text");
-                    inp.setAttribute("value",d[e].NombreCliente+" "+d[e].ApellidoCliente);
+                    inp.setAttribute("value",d[e].IdCliente+" "+d[e].NombreCliente+" "+d[e].ApellidoCliente);
                     celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
@@ -203,28 +207,47 @@ function dibujar_tabla_resultado_agenda(datos){
                     celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
-                    
                     var celda=document.createElement("td");  
-                    var inp=document.createElement("input");
-                    inp.setAttribute("type","text");
-                    inp.setAttribute("value",d[e].NombreEmpleado+" "+d[e].ApellidoEmpleado);
-                    celda.appendChild(inp);         
+                    var sel=document.createElement("select");
+                    for(var u in misEmpleados){
+                        var op=document.createElement("option");
+                        op.setAttribute("value",misEmpleados[u].IdEmpleado);
+                        op.innerHTML=misEmpleados[u].NombreEmpleado+" "+misEmpleados[u].ApellidoEmpleado ;
+                        if(d[e].Fk_Id_Empleado==misEmpleados[u].IdEmpleado){
+                            op.setAttribute("selected",true);
+                        }
+
+                        sel.appendChild(op);
+                    
+                    }
+                    
+                    celda.appendChild(sel);
                     fila.appendChild(celda);
+                    
                     
                         
                     var celda=document.createElement("td");  
                     
                     var sel=document.createElement("select");
                     var op=document.createElement("option");
-                    op.setAttribute("value","3");
-                    op.innerHTML="Visita tecnica";
                     if(d[e].Fk_Id_Servicio=="3"){
+                        var op=document.createElement("option");
+                        op.setAttribute("value","3");
+                        op.innerHTML="Visita tecnica";
                         op.setAttribute("selected",true);
                     }
-                    sel.appendChild(op);
-                    op.setAttribute("value","4");
-                    op.innerHTML="Capacitacion";
                     if(d[e].Fk_Id_Servicio=="4"){
+                        var op=document.createElement("option");
+                        sel.appendChild(op);
+                        op.setAttribute("value","4");
+                        op.innerHTML="Capacitacion";
+                    
+                        op.setAttribute("selected",true);
+                    }
+                     if(d[e].Fk_Id_Servicio=="5"){
+                        var op=document.createElement("option");
+                        op.setAttribute("value","5");
+                        op.innerHTML="Otros";
                         op.setAttribute("selected",true);
                     }
                     sel.appendChild(op);
@@ -233,14 +256,16 @@ function dibujar_tabla_resultado_agenda(datos){
                     fila.appendChild(celda);
                     
                     
+                      if(d[e].EstadoAgenda=="P"){
+                          var celda=document.createElement("td");
+                        var inpEditar=document.createElement("input");
+                        inpEditar.setAttribute("type","button");
+                        inpEditar.setAttribute("value","Reprogramar");
+                        inpEditar.setAttribute("onclick","reprogramarCita('"+d[e].IdAgenda+"')");
+                        celda.appendChild(inpEditar);         
+                        fila.appendChild(celda);
+                      }
                       
-                      var celda=document.createElement("td");
-                      var inpEditar=document.createElement("input");
-                      inpEditar.setAttribute("type","button");
-                      inpEditar.setAttribute("value","Reprogramar");
-                      inpEditar.setAttribute("onclick","reprogramarCita('"+d[e].IdAgenda+"')");
-                      celda.appendChild(inpEditar);         
-                      fila.appendChild(celda);
                       
                      break;
                  case "cancelarCita":
@@ -330,8 +355,8 @@ function dibujar_tabla_resultado_agenda(datos){
                       celda.appendChild(inpEliminar);         
                       fila.appendChild(celda);
                    break;
-               default :
-                    var celda=document.createElement("td");  
+                   case "finalizarCita":
+                      var celda=document.createElement("td");  
                     var inp=document.createElement("input");
                     inp.setAttribute("type","text");
                     inp.setAttribute("value",d[e].NombreCliente+" "+d[e].ApellidoCliente);
@@ -342,6 +367,13 @@ function dibujar_tabla_resultado_agenda(datos){
                     var inp=document.createElement("input");
                     inp.setAttribute("type","text");
                     inp.setAttribute("value",d[e].DireccionContactoCliente);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].Coordenadas);
                     celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
@@ -357,6 +389,13 @@ function dibujar_tabla_resultado_agenda(datos){
                     var inp=document.createElement("input");
                     inp.setAttribute("type","text");
                     inp.setAttribute("value",d[e].FechaInicioServicio);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].Hora_Inicio);
                     celda.appendChild(inp);         
                     fila.appendChild(celda);
                     
@@ -380,6 +419,126 @@ function dibujar_tabla_resultado_agenda(datos){
                     inp.setAttribute("type","text");
                     inp.setAttribute("value",d[e].NombreEmpleado+" "+d[e].ApellidoEmpleado);
                     celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].NombreServicio);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);  
+                      
+                        
+                        
+                      var celda=document.createElement("td");
+                      var inpEliminar=document.createElement("input");
+                      inpEliminar.setAttribute("type","button");
+                      console.log(d[e].EstadoAgenda);
+                      if(d[e].EstadoAgenda=="P" || d[e].EstadoAgenda=="R"){
+                          inpEliminar.setAttribute("value","Finalizar cita");
+                          inpEliminar.setAttribute("onclick","finalizarCita('"+d[e].IdAgenda+"')");
+                      }
+                      
+                      celda.appendChild(inpEliminar);         
+                      fila.appendChild(celda);
+                   break;
+               default :
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].NombreCliente+" "+d[e].ApellidoCliente);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].DireccionContactoCliente);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].Coordenadas);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].TelefonoContactoCliente);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","date");
+                    inp.setAttribute("value",d[e].FechaInicioServicio); 
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","time");
+                    inp.setAttribute("value",d[e].Hora_Inicio);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].FechaFinServicio);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].ComentarioInicial);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    
+                    var celda=document.createElement("td");  
+                    var inp=document.createElement("input");
+                    inp.setAttribute("type","text");
+                    inp.setAttribute("value",d[e].NombreEmpleado+" "+d[e].ApellidoEmpleado);
+                    celda.appendChild(inp);         
+                    fila.appendChild(celda);
+                    
+                    
+                        
+                    var celda=document.createElement("td");  
+                    
+                    
+                    console.log(d[e].Fk_Id_Servicio);
+                    var sel=document.createElement("select");
+                    if(d[e].Fk_Id_Servicio=="3"){
+                        var op=document.createElement("option");
+                        op.setAttribute("value","3");
+                        op.innerHTML="Visita tecnica";
+                        op.setAttribute("selected",true);
+                    }
+                   
+                    if(d[e].Fk_Id_Servicio=="4"){
+                        var op=document.createElement("option");
+                        op.setAttribute("value","4");
+                        op.innerHTML="Capacitacion";
+                        op.setAttribute("selected",true);
+                    }
+                    
+                    if(d[e].Fk_Id_Servicio=="5"){
+                        var op=document.createElement("option");
+                        op.setAttribute("value","5");
+                        op.innerHTML="Otros";
+                        op.setAttribute("selected",true);
+                    }
+                    
+                    sel.appendChild(op);
+                    
+                    celda.appendChild(sel);         
                     fila.appendChild(celda);
                     
                     
@@ -455,6 +614,7 @@ function consultarEmpleados(){
     consultarDatos("usuario","consultarTodosLosEmpleados",{},crear_select_empleados);   
     
 }
+var misEmpleados=[];
 function crear_select_empleados(dat){
     var datos=eval(dat.valores_consultados);
      console.log(datos);
@@ -467,7 +627,7 @@ function crear_select_empleados(dat){
     opt.value="0";  
     select.appendChild(opt);
     for(var d in datos){
-            
+        misEmpleados.push(datos[d])    
         var opt=document.createElement("option");
         opt.innerHTML=datos[d].NombreEmpleado+" "+datos[d].ApellidoEmpleado;
         opt.value=datos[d].IdEmpleado;
@@ -478,7 +638,7 @@ function crear_select_empleados(dat){
 }
 
 function reprogramarCita(id){
-    var val=obtener_valores_filas_tabla(id);
+    var val=obtener_valores_filas_tabla("age_"+id);
      console.log(val); 
     if(val.length > 0){
         var datos={
@@ -486,10 +646,11 @@ function reprogramarCita(id){
           direccion_cliente:val[1],
           coordenadas:val[2],
           fecha_cita:val[4],
-          hora_cita:val[5],
+          hora_cita:val[5]+":00",
           id_empleado:val[8],
           comentario:val[7],
-          id_servicio:val[9]
+          id_servicio:val[9],
+          id_cliente:val[0].split(" ")[0]
         };
         editarDato(_contexto,"reprogramarCita",datos,mostrarMensaje);
     }else{
@@ -499,6 +660,16 @@ function reprogramarCita(id){
 function cancelarCita(id){
      if(id){
         eliminarDato(_contexto,"cancelarCita",{id_agenda:id},mostrarMensaje);
+    }else{
+        mostrarMensaje({mensaje:"por favor ingrese los valores requeridos"});
+    }
+    
+    
+}
+
+function finalizarCita(id){
+     if(id){
+        eliminarDato(_contexto,"finalizarCita",{id_agenda:id},mostrarMensaje);
     }else{
         mostrarMensaje({mensaje:"por favor ingrese los valores requeridos"});
     }

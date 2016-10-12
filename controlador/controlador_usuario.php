@@ -59,8 +59,50 @@ if(isset($_POST['datos'])){
             if($r["respuesta"]){
                 $r2=$objeto->actualizar_registro_usuario_empleado(trim($post->datos->nombre), trim($post->datos->apellido),trim($post->datos->telefono));
                 if($r2["respuesta"]){
-                    $objeto->actualizar_rol($post->datos->rol);
-                    echo json_encode(array("respuesta"=>TRUE,"mensaje"=>"Usuario actualizado exitosamente"));
+                    $r3=$objeto->actualizar_rol($post->datos->rol);
+                    if($r3["respuesta"] && $post->datos->clave!=""){
+                        $r4=$objeto->id_usuario=$post->datos->id_usuario;
+                        $objeto->actualizar_clave($post->datos->clave, $post->hora_cliente);
+                    }
+                    if($r4["respuesta"]){
+                        echo json_encode(array("respuesta"=>TRUE,"mensaje"=>"Usuario actualizado exitosamente"));
+                    }else{
+                        echo json_encode(array("respuesta"=>FALSE,"mensaje"=>"Ha ocurrido un eror al actualziar el usuario por favor comunicate con tu administrador"));
+                    }
+                    
+                }else{
+                    echo json_encode(array("respuesta"=>FALSE,"mensaje"=>"No se ha podido actualizar los datos del empleado"));
+                }
+            }else{
+                echo json_encode(array("respuesta"=>FALSE,"mensaje"=>"No se ha podido actualizar los datos del usuario"));
+            }
+            
+            break;
+        case "actualizarPerfilUsuario":
+            /*
+             * AQUI DOY VALOR A CADA UNA DE LAS PROPIEDADES DE LA CLASE PARA ACTUALIZAR LOS VALORES
+             */
+            /*
+             * Para acceder a cada una de las propiedaes enviadas en el metodo POST se debe acceder desde objeto 
+             * $post a la proiedad datos ejemplo
+             * $post->datos->miDatoEnviadoDesdeElCliente
+             */
+            $objeto->id_usuario=trim($post->datos->id_usuario);
+            $objeto->correo=trim($post->datos->correo);
+            $objeto->documento=trim($post->datos->documento);
+            $r=$objeto->actualizar_recurso();
+            if($r["respuesta"]){
+                $r2=$objeto->actualizar_registro_usuario_empleado(trim($post->datos->nombre), trim($post->datos->apellido),trim($post->datos->telefono));
+                if($r2["respuesta"]){
+                    $r3=$objeto->actualizar_rol($post->datos->rol);
+                    if($r3["respuesta"]){
+                        if($post->datos->clave!=""){
+                            $objeto->actualizar_clave($post->datos->clave, $post->hora_cliente);
+                        }
+                        
+                        echo json_encode(array("respuesta"=>TRUE,"mensaje"=>"Usuario actualizado exitosamente"));
+                    }
+                    
                 }else{
                     echo json_encode(array("respuesta"=>FALSE,"mensaje"=>"No se ha podido actualizar los datos del empleado"));
                 }
@@ -84,6 +126,9 @@ if(isset($_POST['datos'])){
             break;
         case "consultar":
             echo json_encode($objeto->obtener_registro_todos_los_registros());
+            break;
+        case "consultarTodosLosEmpleados":
+            echo json_encode($objeto->consultar_todos_los_registros_usuario_empleado());
             break;
         case "consultarEmpleadoPorValor":
             echo json_encode($objeto->consultar_registro_usuario_empleado($post->datos->valor));
@@ -119,6 +164,26 @@ if(isset($_POST['datos'])){
             $m->enviarMailAmigo("contacto@worksmart.com.co", "contacto pagina web", $mensajeMail);
             
             echo json_encode($con->crear_registro());
+            break;
+        case "suscripcion":
+            $con=new Contacto();
+           
+            
+            $con->correo_contacto=trim($post->datos->correo);
+          
+            $con->fecha_contacto=trim($post->hora_cliente);
+            
+            echo json_encode($con->crear_registro_suscripcion());
+            break;
+        case "cancelar_suscripcion":
+            $con=new Contacto();
+           
+            
+            $con->correo_contacto=trim($post->datos->correo);
+          
+            
+            
+            echo json_encode($con->eliminar_suscripcion());
             break;
         case "consularRol":
             echo json_encode($objeto->consultar_menu_rol($post->datos->id_rol));

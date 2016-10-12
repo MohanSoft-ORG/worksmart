@@ -235,7 +235,17 @@ function cambiarAccion(){
             break;
         case "editarProd":
              accionUsuario="editar";
-            break;           
+            break;      
+        //SERVICIO
+        case "buscarSer":
+             accionUsuario="consulta";
+            break;
+         case "eliminarSer":
+             accionUsuario="eliminar";
+            break;
+        case "editarSer":
+             accionUsuario="editar";
+            break;      
         //PROVEEDOR
         case "buscarProv":
              accionUsuario="consulta";
@@ -286,9 +296,21 @@ function cambiarAccion(){
         case "eliminarAge":
              accionUsuario="cancelarCita";
             break;
+        case "finalizarAge":
+             accionUsuario="finalizarCita";
+            break;
         case "editarAge":
              accionUsuario="reprogramarCita";
             break;   
+         //SOLICITUDES
+         case "buscarSol":
+             accionUsuario="consulta";
+            break;
+        case "contactoWeb":
+             accionUsuario="consulta";
+            break;
+         
+         
          //DEFAULT   
          default:
              mostrarMensaje({mensaje:"Por favor agrega una accion para el usuario "+accionUsuario});
@@ -303,6 +325,9 @@ function iniciar_contexto(){
            break;
        case "prod":
            _contexto="producto";
+           break;
+       case "ser":
+         _contexto="servicio";
            break;
        case "cat":
             _contexto="categoria";
@@ -319,18 +344,43 @@ function iniciar_contexto(){
        case "cli":
            _contexto="cliente";
            break;
-       case "fac":
+       case "crearFac":
            _contexto="factura";
            break;
+       case "crearCCobro":
+           _contexto="cuenta_cobro";
+           break;
+       
        case "arr":
            _contexto="arriendo";
            break;
        case "age":
            _contexto="agenda";
            break;  
+       case "sol":
+           _contexto="solicitudes";
+           break;      
        case "rep":
            _contexto="reporte";
            break;
+       case "crearETipoContable":
+           _contexto="econtable";
+            break;
+       case "crearEContable":
+           _contexto="econtable";
+            break;
+        case "repoEntrada":
+           _contexto="econtable";
+            break;
+       case "crearSTipoContable":
+           _contexto="scontable";
+            break;
+       case "crearSContable":
+           _contexto="scontable";
+            break;   
+        case "repoSalida":
+           _contexto="scontable";
+            break;        
        case "elementoMenuPrincipal":
            mostrarMensaje({mensaje:"por favor agrega el elemto a la funcion"});
         break;
@@ -339,7 +389,7 @@ function iniciar_contexto(){
          break;
    }
    
-   //mostrarMensaje(_contexto);
+   console.log(_contexto);
 }
 
 function salir(){
@@ -359,4 +409,27 @@ function salir(){
        mostrarMensaje({mensaje:"por favor ingresa correctamente al sistema"});
        location.href="index.html";
     }
+}
+
+
+/*
+ * Funcion para convertir los valores enviados por GET 
+ * a un array
+ * 
+ * @returns {recibirValorGet.tmparr}
+ */
+function recibirValorGet(){
+   var url=decodeURIComponent(window.location.search);
+    var paramstr = url.substr(1);
+    var paramarr = paramstr.split ("&");
+    var params = {};
+    
+    for ( var i = 0; i < paramarr.length; i++) {
+    var tmparr = paramarr[i].split("=");
+        params[tmparr[0]] = tmparr[1];
+    } 
+    console.log("parametros GET"); 
+    console.log(params);
+    return params;
+      
 }

@@ -13,8 +13,9 @@ var _formConsultaFiltro;
 
 
 function iniciar_contexto_filtro(){
-   
-     _contextoFiltro="producto";//Aqui nombre del contexto ejemplo => _contexto='_producto';En este caso se usara el valor producto como nombre del contexto
+    var valor=recibirValorGet();
+    //console.log(valor);
+    _contextoFiltro="producto";//Aqui nombre del contexto ejemplo => _contexto='_producto';En este caso se usara el valor producto como nombre del contexto
     //ejemplo => _
     /*AQUI EL NOMBRE DE LOS BOTONES QUE PERTENECEN A ESTE CONTEXTO*/
      
@@ -30,7 +31,7 @@ function iniciar_contexto_filtro(){
    
    agregarEvento(_btnConsultaFiltro,"click",consultarContexto);
    agregarEvento(_btnCarro,"click",mostrarCarrito);
-   consultarContextoInicial(); 
+   consultarContextoInicial(valor); 
    
 }
 /* CONSULTAR CONTEXTO */    
@@ -44,178 +45,201 @@ function consultarContexto(){
         var ca_arreglo=[];
         var color=document.getElementsByName("color");
         var co_arreglo=[];
+        
         for(var m in  marca){
-            console.log(marca[m].value);
-            console.log(marca[m].checked);
-            if(marca[m].value!=undefined && marca[m].checked){
-                m_arreglo.push(marca[m].value);
-            }
-             
-        }
+                      //console.log(marca[m].value);
+                      //console.log(marca[m].checked);
+                      if(marca[m].value!=undefined && marca[m].checked){
+                          m_arreglo.push(marca[m].value);
+                      }
+
+                  }
+
+
+                  for(var ca in categoria){
+                      //console.log(categoria[ca].value);
+                      if(categoria[ca].value!=undefined && categoria[ca].checked){
+                          ca_arreglo.push(categoria[ca].value);
+                      }
+
+                  }
+
+                  for(var co in color){
+                      //console.log(color[co].value);
+                      if(color[co].value!=undefined && color[co].checked){
+                          co_arreglo.push(color[co].value);
+                      }
+
+                  }
         
-        for(var ca in categoria){
-            console.log(categoria[ca].value);
-            if(categoria[ca].value!=undefined && categoria[ca].checked){
-                ca_arreglo.push(categoria[ca].value);
-            }
-            
+        if(m_arreglo.length == 0 && ca_arreglo.length == 0 && co_arreglo.length == 0){
+                  for(var m in  marca){
+                      //console.log(marca[m].value);
+                      //console.log(marca[m].checked);
+                      if(marca[m].value!=undefined ){
+                          m_arreglo.push(marca[m].value);
+                      }
+
+                  }
+
+
+                  for(var ca in categoria){
+                      //console.log(categoria[ca].value);
+                      if(categoria[ca].value!=undefined ){
+                          ca_arreglo.push(categoria[ca].value);
+                      }
+
+                  }
+
+                  for(var co in color){
+                      //console.log(color[co].value);
+                      if(color[co].value!=undefined ){
+                          co_arreglo.push(color[co].value);
+                      }
+
+                  }
+                    
+                    
+                   
         }
-        
-        for(var co in color){
-            console.log(color[co].value);
-            if(color[co].value!=undefined && color[co].checked){
-                co_arreglo.push(color[co].value);
-            }
-            
-        }
-        
         
         var d={
-            marcas:m_arreglo,
-            categorias:ca_arreglo,
-            colores:co_arreglo
-        };
+                marcas:m_arreglo,
+                categorias:ca_arreglo,
+                colores:co_arreglo
+            };
+        
         consultarDatos(_contextoFiltro,"consultarFiltro",d,dibujar_resultado_filtro);   
     }else{
         mostrarMensaje("por favor selecciona una opcion del filtro");
     }
     
 }
-function consultarContextoInicial(){
-   
+function consultarContextoInicial(valorGet){
+        //console.log(valorGet);
         var marca=document.getElementsByName("marca");
         var m_arreglo=[];
         var categoria=document.getElementsByName("categoria");
         var ca_arreglo=[];
         var color=document.getElementsByName("color");
         var co_arreglo=[];
-        for(var m in  marca){
-            console.log(marca[m].value);
-            console.log(marca[m].checked);
-            if(marca[m].value!=null){
-                m_arreglo.push(marca[m].value);
-            }  
-             
+        if(valorGet.m!=undefined){
+           switch(valorGet.m){
+                    case "Toshiba":
+                        m_arreglo.push(3);
+                        break;
+                    case "Sharp":
+                        m_arreglo.push(2);
+                        break;    
+                    case "Kyocera":
+                        m_arreglo.push(1);
+                        break;
+                    default:
+                        console.log("Marca no registrada");
+                        m_arreglo.push(1);
+                        m_arreglo.push(2);
+                        m_arreglo.push(3);
+                    break;
+                } 
+        }else{
+            m_arreglo.push(1);
+            m_arreglo.push(2);
+            m_arreglo.push(3);
             
-             
+        }
+    
+        if(valorGet.c!=undefined){
+            console.log(valorGet.c);
+           
+            
+            ca_arreglo.push(valorGet.c);
         }
         
-        for(var ca in categoria){
-            console.log(categoria[ca].value);
-            if(categoria[ca].value!=null){
-                ca_arreglo.push(categoria[ca].value);
-            }
-            
-            
-            
-        }
         
-        for(var co in color){
+        
+        /*for(var co in color){
             console.log(color[co].value);
             if(color[co].value!=null){
-               //co_arreglo.push(color[co].value); 
+               co_arreglo.push(color[co].value); 
             }
             
             
             
-        }
+        }*/
         
-        
+       
         var d={
             marcas:m_arreglo,
             categorias:ca_arreglo,
             colores:co_arreglo
         };
+        console.log(d);
         consultarDatos(_contextoFiltro,"consultarFiltro",d,dibujar_resultado_filtro);   
     
 }
 function dibujar_resultado_filtro(d){
     if(d.respuesta){
         var datos=eval(d.valores_consultados);
-        var lista=document.getElementById("liResultadoFiltro");
-        lista.innerHTML="";
+        var listaGeneral=document.getElementById("divResultadoFiltro");
+        listaGeneral.innerHTML="";
         for(var d in datos){
             lista_productos.push(datos[d]);
-            var li=document.createElement("li");
-            li.setAttribute("id",datos[d].IdProducto);
-            var marca=document.createElement("h2");
-            marca.innerHTML=datos[d].NombreMarca;
-            li.appendChild(marca);
-            var nombre=document.createElement("li");
-            nombre.innerHTML=datos[d].NombreProducto;
-            li.appendChild(nombre);
-            var img=document.createElement("img");
-           if(datos[d].imagenes!=undefined){
+            var div =document.createElement("div");
+            div.className="productos";
+            var h3 =document.createElement("h3");
+            h3.innerHTML=datos[d].NombreProducto;
+            div.appendChild(h3);
+            var div2 =document.createElement("div");
+            div2.className="imgProducto";
+            var img =document.createElement("img");
+            if(datos[d].imagenes!=undefined){
                 img.src=datos[d].imagenes[0].DireccionMultimedia;
-                console.log(datos[d]);            
-                console.log(datos[d].imagenes[0]);
-           }else{
-               img.src="Estilos/Imagenes/LogoFot.png";
-           }
-            li.appendChild(img);            
-            var tipoFuncional=document.createElement("h4");
-            tipoFuncional.innerHTML=datos[d].TipoProducto;
-            li.appendChild(tipoFuncional);
-            var velocidad=document.createElement("h4");
-            velocidad.innerHTML="Velocidad Impresion:"+datos[d].Ppm+" ppm";
-            li.appendChild(velocidad);
-            var color=document.createElement("h4");
-            color.innerHTML="Impreme a: "+datos[d].Color;
-            li.appendChild(color);
-            var inpVerCaracteristicas=document.createElement("input");
-            inpVerCaracteristicas.setAttribute("type","button");
-            inpVerCaracteristicas.setAttribute("value","Caracteristicas");
-            inpVerCaracteristicas.setAttribute("onclick","verCaracteristicas('"+datos[d].IdProducto+"');");
-            li.appendChild(inpVerCaracteristicas);
-            var agregarCarrito=document.createElement("input");
-            agregarCarrito.setAttribute("type","button");
-            agregarCarrito.setAttribute("value","Agregar Cotizacion");
-            agregarCarrito.setAttribute("onclick","agregarAlCarrito("+datos[d].IdProducto+")");
-            li.appendChild(agregarCarrito);
-            
-            
-            
-            var mas=document.createElement("input");
-            mas.setAttribute("type","button");
-            mas.setAttribute("value","+");
-            mas.setAttribute("onclick","sumarCantidad("+datos[d].IdProducto+")");
-            li.appendChild(mas);
-            
-            var cant=document.createElement("input");
-            cant.setAttribute("type","text");
-            cant.setAttribute("value",1);
-            cant.setAttribute("id","cant_"+datos[d].IdProducto);            
-            li.appendChild(cant);
-            
-            var menos=document.createElement("input");
-            menos.setAttribute("type","button");
-            menos.setAttribute("value","-");
-            menos.setAttribute("onclick","restarCantidad("+datos[d].IdProducto+")");
-            li.appendChild(menos);
-            
-            
-            
-            var listaCaracteristica=document.createElement("ul");
-            listaCaracteristica.setAttribute("id","liCar_"+datos[d].IdProducto);
-            listaCaracteristica.style.display="none";
-            var ca=datos[d].caracteristicas;
-            //console.log(ca);
-            if(ca!=undefined){
-                for(var c in ca){
-                    console.log(ca[c]);
-                    var lis=document.createElement("li");
-
-                    lis.innerHTML=ca[c].DescripcionCaracteristica;
-                    listaCaracteristica.appendChild(lis);
-
-                }
+            }else{
+                img.src="n/a";
             }
             
+            div2.appendChild(img);
+            div.appendChild(div2);
             
-            li.appendChild(listaCaracteristica);
+            var div3 =document.createElement("div");
+            div3.className="caracProd";
+            var lista =document.createElement("ul");
+           
+            var li =document.createElement("li");
+            li.innerHTML=datos[d].Color;
             lista.appendChild(li);
-            console.log(lista);
-       }
+            
+            var li =document.createElement("li");
+            li.innerHTML=datos[d].Ppm+" PPM";
+            lista.appendChild(li);
+            
+            var li =document.createElement("li");
+            li.innerHTML=datos[d].TipoProducto;
+            lista.appendChild(li);
+            
+           
+            div3.appendChild(lista);
+            div.appendChild(div3);
+            
+            var div4 =document.createElement("div");
+            div4.className="accionProd";
+            var lista =document.createElement("ul");
+            var mas =document.createElement("input");
+            mas.setAttribute("type","button");
+            mas.setAttribute("value","Caracteristicas");
+            mas.className="busCaracProd";
+            mas.setAttribute("onclick","verCaracteristicas('"+datos[d].IdProducto+"')");
+            var cotizar =document.createElement("input");
+            cotizar.setAttribute("type","button");
+            cotizar.setAttribute("value","Cotizar");
+            cotizar.setAttribute("onclick","agregarAlCarrito('"+datos[d].IdProducto+"')");
+            div4.appendChild(mas);
+            div4.appendChild(cotizar);
+            div.appendChild(div4);
+            listaGeneral.appendChild(div);
+       }    
+       console.log(listaGeneral);
+        
         
         
     }else{
@@ -235,43 +259,84 @@ function verCaracteristicas(id){
 }
 function mostrarCaracteristicas(d){
     
-   var ul=document.getElementById("liCar_"+d.IdProducto);
-   console.log(ul);
+   /*var ul=document.getElementById("liCar_"+d.IdProducto);
+   //console.log(ul);
    if(ul.style.display=='none'){
    
        ul.style.display='block';
    }else{
    
         ul.style.display='none';
-   }
+   }*/
+     $('#detalleProd').fadeIn('slow');
+     console.log(d);
+     //Imagen
+     var img=document.getElementById("imgProd");
+     if(d.imagenes!=undefined){
+         img.src=d.imagenes[0].DireccionMultimedia;
+     }else{
+         img.src="n/a";
+     }
+     //Nombre
+     var nom=document.getElementById("hNombreProd");
+     nom.innerHTML=d.NombreProducto;
+     //Descripcion
+     var des=document.getElementById("hDescripProd");
+     des.innerHTML=d.DescripcionProducto;
+     //Caracteristicas
+     var car=document.getElementById("liCaracteristicas");
+     car.innerHTML="";
+     if(d.caracteristicas!=undefined){
+         for(var c in d.caracteristicas){
+             var l=document.createElement("li");
+             l.innerHTML=d.caracteristicas[c].DescripcionCaracteristica;
+             car.appendChild(l);
+         }
+     }
        
 }
  
-
+var indice_carro=1;
 function agregarAlCarrito(id){
+   
+    var o={};
     for(var c in lista_productos){
         if(lista_productos[c].IdProducto==id){
-            console.log(lista_productos[c]);
-            agregarProductoACarro(lista_productos[c]);
-            document.getElementById("cant_"+id).value="1";
+            
+            //lista_productos[c].CantidadSolicitada=document.getElementById("nCant_"+id).value;
+            lista_productos[c].CantidadSolicitada=1;
+            o=lista_productos[c];
+            break;
+            
+            //document.getElementById("nCant_"+id).value="1";
         }
     }
+    
+    agregarProductoACarro(o);
 }
 
 function agregarProductoACarro(d){
+    
     var agregar=true;
+    //console.log(d);
     for(var c in carrito_compras){
         if(carrito_compras[c].IdProducto==d.IdProducto){
             agregar=false;
+            console.log(carrito_compras[c]);
             break;
         }
     }
+    console.log(d);
+    console.log(agregar);
     if(agregar){
         carrito_compras.push(d);
+        indice_carro++;
+         console.log(indice_carro);
         agregar_session_storage("ssListaCarrito",carrito_compras);
     }else{
         mostrarMensaje({mensaje:"Ya has agregado este producto al carrito"});
     }
+    console.log(carrito_compras);
 }
 function mostrarCarrito(repintar){
     
@@ -285,7 +350,7 @@ function mostrarCarrito(repintar){
                 lista.style.display='none';
             }
         }
-        console.log(carrito_compras);
+        //console.log(carrito_compras);
         for(var c in carrito_compras){
             var li=document.createElement("li");
             li.innerHTML="Nombre producto:"+carrito_compras[c].NombreProducto;
@@ -295,6 +360,7 @@ function mostrarCarrito(repintar){
             var inp=document.createElement("input");            
             inp.setAttribute("type","number");
             inp.setAttribute("id","nCant_"+carrito_compras[c].IdProducto);
+            
             inp.setAttribute("value",carrito_compras[c].CantidadSolicitada);
             inp.setAttribute("onchange","cambiarCantidadSolicitada("+carrito_compras[c].IdProducto+");");
             li.appendChild(inp);
@@ -362,7 +428,7 @@ function solicitarListaCarro(){
     var tel=document.getElementById("txtTelefonoSolicitudCarrito");
     if(nom.value!="" && corr.value!=""){
         var c=obtener_session_storage("ssListaCarrito");
-        console.log(c);
+        //console.log(c);
         var dat={
             nombre_cliente:nom.value,
             correo_cliente:corr.value,
@@ -377,7 +443,7 @@ function solicitarListaCarro(){
 }
 function sumarCantidad(id){
     
-    var c=document.getElementById("cant_"+id);
+    var c=document.getElementById("nCant_"+id);
     var n=new Number(c.value);
     c.value=n+1;
     for(var l in lista_productos){
@@ -389,7 +455,7 @@ function sumarCantidad(id){
     
 }
 function restarCantidad(id){
-    var c=document.getElementById("cant_"+id);
+    var c=document.getElementById("nCant_"+id);
     var n=new Number(c.value);
     c.value=n-1;
     for(var l in lista_productos){

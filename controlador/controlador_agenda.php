@@ -28,7 +28,47 @@ if(isset($_POST['datos'])){
             $objeto->id_empleado=trim($post->datos->id_empleado);
             $objeto->direccion=trim($post->datos->direccion);
             $objeto->coordenadas=trim($post->datos->coordenadas);
-            echo json_encode($objeto->crear_registro());
+            $r=$objeto->crear_registro();
+            if($r["respuesta"]){
+                $c= new Usuario();
+                $e=new Usuario();
+                
+                $miEmpleado=$e->consultar_registro_usuario_empleado_id($post->datos->id_empleado);
+                //  var_dump($e->filas[0]);
+            
+                $CorreoEmpleado=$e->filas[0]['CorreoUsuario'];
+                $miCliente=$c->consultar_registro_usuario_cliente_id($post->datos->id_cliente);
+                $direccionCliente=$post->datos->direccion;
+                $cliente=$post->datos->nombre_cliente;
+                $correo=new Mail();
+                $mensajeMail="Hola, este es un recordatorio para la cita del dia\n fecha ".$objeto->fecha_inicio_servicio
+                        ."\nhora ".$objeto->hora_inicio." \n"
+                        . "Debes visitar al cliente ".$cliente
+                        ."\n El lugar de la visita es ".$direccionCliente."\n"
+                        ."Si deseas agregar esta cita a tu calendario da click en en esta direccion \n"
+                        . "";
+                
+                
+                $hi=explode(":", $post->datos->hora);
+                $evento = array(
+                    'titulo' => 'Cita Worksmart',
+                    'descripcion' => $post->datos->comentario,
+                    'localizacion' => $post->datos->direccion,
+                    'fecha_inicio' => $post->datos->fecha_inicio, // Fecha de inicio de evento en formato AAAA-MM-DD
+                  'hora_inicio'=>  $hi[0].":".$hi[1], // Hora Inicio del evento
+                  'fecha_fin'=>$post->datos->fecha_inicio, // Fecha de fin de evento en formato AAAA-MM-DD
+                  'hora_fin'=>'', // Hora final del evento
+                  'nombre'=>$post->datos->nombre_cliente, // Nombre del sitio
+                  'url'=>'www.worksmart.com.co' // Url de la página
+                  );
+                $calendario=new CalendarioAPI();                
+                $r["urlCalendar"]=$calendario->getGoogleCalendarUrl($evento);
+                $correo->enviarMailAmigo($CorreoEmpleado, "Hola tienes una nueva cita para el dia ".$objeto->fecha_inicio_servicio, $mensajeMail.$r['urlCalendar']);
+                echo json_encode($r);
+            }else{
+                echo json_encode($r);
+            }
+            
             
             break;
         case "actualizar":
@@ -64,6 +104,18 @@ if(isset($_POST['datos'])){
              */
             $objeto->id_agenda=trim($post->datos->id_agenda);
             echo json_encode($objeto->cancelar_cita());
+        case "finalizarCita":
+            
+            /*
+             * AQUI DOY VALOR DEL ISD QUE DESEO ELIMINAR
+             */
+            /*
+             * Para acceder a cada una de las propiedaes enviadas en el metodo POST se debe acceder desde objeto 
+             * $post a la proiedad datos ejemplo
+             * $post->datos->miDatoEnviadoDesdeElCliente
+             */
+            $objeto->id_agenda=trim($post->datos->id_agenda);
+            echo json_encode($objeto->finalizar_cita());    
             break;
         case "consultar":
             echo json_encode($objeto->obtener_registro_todos_los_registros());
@@ -82,6 +134,7 @@ if(isset($_POST['datos'])){
                 $filtro.=" EstadoAgenda = '".$post->datos->estado."'";
                 
             }
+            //echo $filtro;
             echo json_encode($objeto->obtener_registro_filtro($filtro));
             break;
         case "reprogramarCita":
@@ -94,7 +147,9 @@ if(isset($_POST['datos'])){
             $objeto->coordenadas=trim($post->datos->coordenadas);
             $objeto->id_agenda=trim($post->datos->id_agenda);
             $objeto->id_servicio=trim($post->datos->id_servicio);
-            
+            $objeto->fecha_fin_servicio=$post->hora_cliente;
+            $objeto->id_cliente=trim($post->datos->id_cliente);
+            $objeto->hora_inicio=trim($post->datos->hora_cita);
             echo json_encode($objeto->repogramar_cita());
             break;
         case "validarCita":

@@ -33,20 +33,59 @@ function iniciar_contexto_index(){
    agregarEvento(_btnContactoDos,"click",contactar);
    agregarEvento(_btnDescargas,"click",buscarArchivoDescargar);
    agregarEvento("selMarca","change",buscarProductoMarca);
-   agregarEvento("busProd","click",buscar);
+   agregarEvento("liAltVol","click",buscarCategoria);
+   agregarEvento("liMedVol","click",buscarCategoria);
+   agregarEvento("liPeqVol","click",buscarCategoria);
+   agregarEvento("slide2","click",llevame);
+   agregarEvento("slide1","click",llevame);
+   agregarEvento("slide3","click",llevame);
+   agregarEvento("slide4","click",llevame);
+}
+function llevame(){
+    switch(this.id){
+        case "slide2":
+            
+            redireccionar("fotocopias.html");
+            break;
+        case "slide1":
+            
+            redireccionar("fotocopias.html");
+            break;    
+        case "slide3":
+            
+            redireccionar("servicios.html");
+            break;
+        case "slide4":
+            
+            redireccionar("servicios.html");
+            break;    
+    }
 }
 
-function buscar(){
-    redireccionar("consulta.html");
+function buscarCategoria(){
+    var v;
+    switch(this.id){
+        case "liAltVol":
+            v="Alto Volumen";
+            break;
+        case "liMedVol":
+            v="Mediano Volumen";
+            break;
+        case "liPeqVol":
+            v="Bajo Volumen";
+            break;
+    }
+    redireccionar("consulta.html?c="+v);
 }
 
 /* CONSULTAR CONTEXTO */    
 function consultarIngreso(e){
     var vf=obtener_valores_formulario(_formIngresar);
+    console.log(vf);
         if(vf != false && vf.Texto[0]!="" && vf.Clave[0]!=""){
             var dat={
                 nombre_usuario:vf.Texto[0],
-                clave:vf.Clave[0]
+                clave:vf.Clave
             };
             consultarDatos(_contextoIngresar,"login",dat,redireccionar_usuario);   
         }else{
@@ -61,10 +100,11 @@ function redireccionar_usuario(d){
         console.log(v);
         var us={
             id_usuario:v[0].IdUsuario,
-            nombre_usuario:v[0].NombreUsuario+" "+v[0].ApellidoUsuario,
+            nombre_usuario:v[0].NombreEmpleado+" "+v[0].ApellidoEmpelado,
             correo_usuario:v[0].CorreoUsuario,
             ultima_actividad:horaCliente(),
-            rol:v[0].IdRol
+            rol:v[0].IdRol,
+            id_empleado:v[0].IdEmpleado
         };
         agregar_session_storage("ssUsuario",us);
         
@@ -174,7 +214,7 @@ function dibujar_archivos_descarga(datos){
             var an=document.createElement("a");
             an.innerHTML="↓";
 
-            an.setAttribute("download",arc[a].UrlArchivo);
+            an.setAttribute("download",arc[a].NombreArchivo);
             an.setAttribute("href","Archivos/Productos/"+arc[a].UrlArchivo);
             celda.appendChild(an);
             fila.appendChild(celda);

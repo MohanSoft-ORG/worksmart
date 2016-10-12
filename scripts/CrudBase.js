@@ -16,11 +16,11 @@ function registrarDato(url,evento_server,datos,funcion_despues,formulario){
             console.log(r.mensaje);
             console.log(r.respuesta);
             console.log(r.nuevo_registro);
-                if(formulario!=undefined){
-                    limpiarFormulario(formulario);
-                }                 
+                               
                  funcion_despues(r);
-            
+                 if(formulario!=undefined && r.respuesta== true){
+                    limpiarFormulario(formulario);
+                }  
             
         }).fail(function(){});
     
@@ -100,7 +100,7 @@ function consultarDatos(url,evento_server,datos,funcion_despues){
  * {datos} objeto con la estructira que voy a  enviaren la peticion HTTP
  * {funcion_depues} funccion que se realizara despues de recibir la respuesta del servidor
  * */
-function editarDato(url,evento_server,datos,funcion_despues){
+function editarDato(url,evento_server,datos,funcion_despues,form){
     console.log(datos);
     if(datos){
         
@@ -113,6 +113,9 @@ function editarDato(url,evento_server,datos,funcion_despues){
             console.log(r.respuesta);
             console.log(r.nuevo_registro);
             funcion_despues(r);
+            if(r.respuesta){
+                limpiarFormulario(form);
+            }
         }).fail(function(){});
     
     }else{

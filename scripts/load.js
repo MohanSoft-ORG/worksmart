@@ -12,9 +12,15 @@ function cargarFuncionesMenu(){
           iniciar_contexto_entrada(); 
           iniciar_contexto_salida(); 
           iniciar_contexto_factura();
+          iniciar_contexto_cuenta_cobro();
           iniciar_contexto_cliente(); 
           iniciar_contexto_arriendo(); 
           iniciar_contexto_agenda(); 
+          iniciar_contexto_servicio();
+          iniciar_contexto_solicitud();
+          iniciar_contexto_econtable();
+          iniciar_contexto_scontable();
+          iniciar_contexto_reportes();
           consultar_menu_rol(usuario);
           agregarEvento("salir","click",salir);
     }else{

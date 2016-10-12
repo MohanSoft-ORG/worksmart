@@ -121,7 +121,7 @@ function dibujar_tabla_resultado(datos){
         for(var e in d){
             console.log(d[e]);
              var fila=document.createElement("tr");
-             fila.setAttribute("id",d[e].IdArriendo);        
+             fila.setAttribute("id","arr_"+d[e].IdArriendo);        
              
                         
              switch(accionUsuario){
@@ -406,13 +406,14 @@ function dibujar_tabla_resultado(datos){
 function editarContextoArriendo(id){
     //Consulta las filas
     if(document.getElementById("hdSerialArriendo").value!="0"){
-        var val=obtener_valores_filas_tabla(id);
+        var val=obtener_valores_filas_tabla("arr_"+id);
         console.log(val); 
        if(val.length > 0){
            var datos={
                id_arriendo:id,
                id_equipo:document.getElementById("hdSerialArriendo").value,
-               fecha:val[2],
+               fecha_inicial:val[2],
+               fecha_final:val[3],
                comentario:val[4]
            };
            editarDato(_contexto,"actualizar",datos,mostrarMensaje);
@@ -456,10 +457,10 @@ function mostrar_datos_cliente_arriendo(datos){
 function consultarProductoArriendo(){
    if(this.id!=undefined){
        var dat={serial:this.value};
-       consultarDatos("producto","consultarHojaDeVida",dat,mostrar_datos_producto_arriendo);  
+       consultarDatos("producto","consultarHojaVida",dat,mostrar_datos_producto_arriendo);  
    }else{
        var dat={serial:document.getElementById("txtSerialArriendo").value};
-       consultarDatos("producto","consultarHojaDeVida",dat,cambiar_valor_id_equipo);  
+       consultarDatos("producto","consultarHojaVida",dat,cambiar_valor_id_equipo);  
    }
     
      
@@ -494,7 +495,7 @@ function validarFecha(){
     var selEmpleadoAgenda;
 }
 function finalizarArriendo(id){
-    var val=obtener_valores_filas_tabla(id);
+    var val=obtener_valores_filas_tabla("arr_"+id);
     
      if(val.length>0){
         eliminarDato(_contexto,"finalizar",{id_arriendo:id,comentario:val[4],fecha:val[3]},mostrarMensaje);

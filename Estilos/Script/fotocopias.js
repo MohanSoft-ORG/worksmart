@@ -65,5 +65,10 @@ $(document).ready(function(){
 });
 
 function enviarConsulta(){
-    location.href="consulta.html";
+    console.log(this);
+    console.log(this.id);
+    var v=this.id.slice(6,this.id.length);
+    redireccionar("consulta.html?m="+v);
+    
+    
 }

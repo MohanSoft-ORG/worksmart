@@ -63,8 +63,33 @@ if(isset($_POST['datos'])){
         case "consultar":
             echo json_encode($objeto->obtener_registro_todos_los_registros());
             break;
-        case "consultarporvalor":
-            echo json_encode($objeto->obtener_registro_por_valor());
+        case "consultarPorValor":
+            $r=$objeto->obtener_registro_por_valor($post->datos->valor);
+           if($r["respuesta"]){
+               $arr=array();
+               $i=0;
+               
+               
+               $s=new Solicitudes();
+               foreach ($objeto->filas as $key => $value) {
+                   //var_dump($value);
+                   $arr[$i]=$value;
+                   $s->obtener_detalle_solicitud($value["IdSolicitud"]);
+                   $arr[$i]["detalle_solicitud"]=$s->filas;
+                   $i++;
+                   
+               }
+               echo json_encode(array("respuesta"=>true,"mensaje"=>"Cotizaciones","valores_consultados"=>$arr));
+           }else{
+               echo json_encode($r);
+           } 
+            
+            break;
+        case "consultarContactoWeb":
+            echo json_encode($objeto->obtener_registro_todos_los_registros_contacto_web());
+            break;
+        case "consultarSuscripciones":
+            echo json_encode($objeto->obtener_registro_todos_los_registros_suscritos());
             break;
         default :
             echo json_encode(array("respuesta"=>FALSE,"mensaje"=>"Por favor defina una operacion o agrege una opcion en el swicth"));

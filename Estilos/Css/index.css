@@ -2,7 +2,9 @@
     font-family: "h1";
     src: url('../Fuentes/h1.ttf');
 }
-
+a {
+    color: black;
+}
 
 * {
     padding: 0;
@@ -52,6 +54,10 @@ body {
 .marca li:last-child {
     border: none;
 }
+.car img{
+    width: 40px;
+    height: 40px;
+}
 .navMenu {
     width: 100%;
     display: table;
@@ -63,7 +69,7 @@ body {
     font-size: 19px;
     font-family: calibri light;
     text-align: center;
-    padding-top: 30px;
+    padding-top: 40px;
     cursor: pointer;
     border-bottom: 3px solid black;
 }
@@ -76,6 +82,7 @@ body {
 .slider {
     width: 100%;
     margin: auto;
+    
 }
 .slider ul {
     display: flex;
@@ -89,6 +96,7 @@ body {
 .slider img {
     width: 100%;
     height: 500px;
+    z-index: 9999;
 }
 #slide1 {
     background-image: url('../Imagenes/001.jpg');
@@ -111,6 +119,7 @@ section {
     background-attachment: fixed;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    padding-bottom: 24px;
 }
 .mascaraUno {
     width: 100%;
@@ -125,7 +134,7 @@ section {
     background-size: 100% 140%;
 }
 .tituloSect {
-    font-family: h1;
+    font-family: sans-serif;
     width: 40%;
     text-align: center;
     float: left;
@@ -195,12 +204,11 @@ section {
 .dos h1 {
     width: 100%;
     text-align: center;
-    font-family: h1;
+    font-family: sans-serif;
     font-size: 75px;
 }
 .categorias {
     width: 100%;
-    font-family: calibri ligth;
 }
 .categorias ul {
     width: 90%;
@@ -216,12 +224,12 @@ section {
 .categorias ul li:nth-child(2) {
     margin: 1% 0;
 }
-.categorias li h1 {
+.categorias li h3 {
     width: 100%;
     font-size: 35px;
-    text-align: center;
-    
-    font-family: h1;
+    text-align: center;    
+    font-family: calibri light;
+    background-color: rgba(1,1,1,0.7);
 }
 .categorias li img {
     width: 100%;
@@ -229,12 +237,13 @@ section {
     cursor: pointer;
 }
 .categorias li img:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: 1s;
 }
 .tituloCat {
     visibility: hidden;
     transition: 1s;
+    margin-top: -20px;
 }
 .imgCat {
     margin-left: -50px;
@@ -252,7 +261,7 @@ section {
     background-image: url('../Imagenes/fondos/tres.jpg');
 }
 .tres h1 {
-    font-family: h1;
+    font-family: sans-serif;
     font-size: 60px;
     width: 100%;
     color: white;
@@ -301,7 +310,7 @@ section {
     background-size: 100% 140%;
 }
 .cuatro h1 {
-    font-family: h1;
+    font-family: sans-serif;
     font-size: 45px;
     margin-top: 40px;
     color: white;
@@ -411,7 +420,7 @@ section {
 .redes {
     width: 15%;
     float: left;
-    font-family: h1;
+    font-family: Calibri Light;
 }
 .redes li {
     width: 100%;
@@ -425,7 +434,7 @@ section {
     margin-right: 5px;
 }
 .sitio {
-    font-family: h1;
+    font-family: Calibri Light;
     font-size: 25px;
 }
 .sitio li {

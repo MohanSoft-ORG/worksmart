@@ -154,7 +154,7 @@ class Producto extends ModeloBaseDeDatos{
         
     }
     function obtener_registro_por_filtro($filtro){
-          $this->sentencia_sql="SELECT * FROM `vw_vista_producto_electronico` WHERE ".$filtro;
+       $this->sentencia_sql="SELECT * FROM `vw_vista_producto_electronico` WHERE ".$filtro;
         if($this->ejecutar_consulta_sql()){
            return array("respuesta"=>TRUE,"mensaje"=>"Valores consultados","valores_consultados"=> json_encode($this->filas_json));
         }else{
@@ -173,7 +173,7 @@ class Producto extends ModeloBaseDeDatos{
     }
     function actualizar_recurso(){
         
-        $this->sentencia_sql="SELECT fun_actualizar_producto ('$this->id_producto',"
+          $this->sentencia_sql="SELECT fun_actualizar_producto ('$this->id_producto',"
                                 . "'$this->codigo_producto',"
                                 . "'$this->nombre_producto',"
                                 . "'$this->descripcion_producto',"
@@ -184,6 +184,7 @@ class Producto extends ModeloBaseDeDatos{
                                 . "'$this->color',"
                                 . "'$this->ppm') as respuesta ";
         if($this->actualizar_registro()){
+            //var_dump($this->respuesta_funcion);
             $this->id_producto=$this->respuesta_funcion->respuesta;
             
             foreach($this->archivos as $key => $value){
@@ -211,9 +212,9 @@ class Producto extends ModeloBaseDeDatos{
             return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>TRUE);
         }
     }
-    function actualizar_recurso_insumo($codigo_insumo,$nombre_insumo,$descipcion_insumo,$marca,$valor_venta){
+    function actualizar_recurso_insumo($codigo_insumo,$nombre_insumo,$descipcion_insumo,$marca,$valor_venta,$id_padre){
         
-        $this->sentencia_sql="SELECT fun_actualizar_producto_insumo ('$this->id_producto','$codigo_insumo','$nombre_insumo','$descipcion_insumo','$marca','$valor') as respuesta ";
+        $this->sentencia_sql="SELECT fun_actualizar_producto_insumo ('$this->id_producto','$codigo_insumo','$nombre_insumo','$descipcion_insumo','$marca','$valor_venta','$id_padre') as respuesta ";
         if($this->actualizar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);
@@ -288,7 +289,17 @@ class Producto extends ModeloBaseDeDatos{
             return array("mensaje"=> $this->mensajeDepuracion,
                 "respuesta"=>TRUE);
         }else{
-            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>TRUE);
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>FALSE);
+        }
+    }
+    function eliminar_insumo($id){
+        
+        $this->sentencia_sql="SELECT fun_eliminar_producto_insumo('$id') as respuesta";
+        if($this->eliminar_registro()){
+            return array("mensaje"=> $this->mensajeDepuracion,
+                "respuesta"=>TRUE);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>FALSE);
         }
     }
     function actualizar_archivo($id_recurso,$id_producto,$nombre_archivo,$descripcion_archivo,$url_archivo){
@@ -341,6 +352,20 @@ class Producto extends ModeloBaseDeDatos{
         }
         
     }
+    function obtener_multimedia_producto_hoja_vida($id){
+        $this->sentencia_sql="CALL pa_consultar_multimedia_producto_hv('$id')";
+        
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+        }
+        
+    }
+    
     
     function obtener_hoja_de_vida_producto($serial){
         $this->sentencia_sql="SELECT * FROM vw_vista_hoja_de_vida WHERE Serial = '$serial'";
@@ -356,15 +381,39 @@ class Producto extends ModeloBaseDeDatos{
         
     }
     
-    function crear_registro_hoja_de_vida($serial,$fecha){
+    function obtener_mantenimiento_producto($id){
+        $this->sentencia_sql="CALL pa_consultar_mantenimiento('$id')";
         
-        $this->sentencia_sql="SELECT fun_crear_hoja_de_vida('$this->id_producto',"
+        
+        if($this->consultar_registros()){
+            return array("mensaje"=>$this->mensajeDepuracion,
+                "respuesta"=>TRUE,
+                "valores_consultados"=>$this->filas_json);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=> FALSE);
+        }
+        
+    }
+    
+    
+    function crear_registro_hoja_de_vida($serial,$fecha,$imagenes){
+        
+          $this->sentencia_sql="SELECT fun_crear_hoja_de_vida('$this->id_producto',"
                             . "'$serial',"
                             . "'$fecha') as respuesta";
             
         if($this->insertar_registro()){
-                      
+            $id=$this->respuesta_funcion->respuesta;
             
+            foreach ($imagenes as $key => $value) {
+                 $this->sentencia_sql="SELECT fun_agregar_multimedia_hv('$id','$value->url','$value->tam','$fecha')as respuesta";
+            
+                if($this->insertar_registro()){
+
+                }else{
+
+                }
+            }    
             
             
             return array("mensaje"=> $this->mensajeDepuracion,
@@ -374,11 +423,38 @@ class Producto extends ModeloBaseDeDatos{
             return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>FALSE);
         }
     }    
-    function crear_registro_mantenimiento($id,$fecha,$tecnico,$descripcion){
+    function crear_registro_hoja_de_vida_dos($serial,$fecha,$imagenes){
+        
+          $this->sentencia_sql="INSERT INTO hoja_de_vida( Fk_Id_Producto, Serial, Fecha_Inicio) VALUES('$this->id_producto',"
+                            . "'$serial',"
+                            . "'$fecha')";
+            
+        if($this->ejecutar_sentencia_sql()){
+            $id=$this->ultimoRegistro;
+            
+            foreach ($imagenes as $key => $value) {
+                 $this->sentencia_sql="SELECT fun_agregar_multimedia_hv('$id','$value->url','$value->tam','$fecha')as respuesta";
+            
+                if($this->insertar_registro()){
+
+                }else{
+
+                }
+            }    
+            
+            
+            return array("mensaje"=> "Serial registrado",
+                "respuesta"=>TRUE,
+                "nuevo_registro"=>$this->ultimoRegistro);
+        }else{
+            return array("mensaje"=>  $this->mensajeDepuracion,"respuesta"=>FALSE);
+        }
+    }    
+    function crear_registro_mantenimiento($id,$fecha,$tecnico,$descripcion,$hoja_servicio){
         
         $this->sentencia_sql="SELECT fun_crear_mantenimiento('$id',"
                             . "'$fecha',"
-                            . "'$tecnico','$descripcion') as respuesta";
+                            . "'$tecnico','$descripcion','$hoja_servicio') as respuesta";
             
         if($this->insertar_registro()){
             return array("mensaje"=> $this->mensajeDepuracion,
