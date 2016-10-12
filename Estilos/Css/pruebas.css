@@ -1,0 +1,41 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.mascara {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: rgba(1,1,1,0.8);
+}
+.vistaProductos {
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+    display: table;
+    border: 1px solid white;
+}
+.vistaProductos li {
+    width: 50%;
+    float: left;
+}
+.vistaProductos li img {
+    float: left;
+    width: 350px;
+    height: 350px;
+}
+.vistaProductos li h1,h2,h4 {
+    float: left;
+    color: white;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Pantallas Interactivas WorkSmart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link type="text/css" rel="stylesheet" href="Estilos/Css/oneScreen.css" />
+        <link href="Estilos/Css/index.css" rel="stylesheet" type="text/css"/>
+        <!--Scripts agregados Edgar-->
+        <!--<script src="Estilos/Script/jquery-2.1.3.js" type="text/javascript"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="scripts/funciones/formatos.js" type="text/javascript"></script>
+        <script src="scripts/funciones/formularios.js" type="text/javascript"></script>
+        <script src="scripts/funciones/peticiones_ajax.js" type="text/javascript"></script>
+        <script src="scripts/funciones/session_storage.js" type="text/javascript"></script>
+        <script src="scripts/funciones/utilidades.js" type="text/javascript"></script>
+        <script src="scripts/prototipos/prototipos.js" type="text/javascript"></script>
+        <script src="scripts/CrudBase.js" type="text/javascript"></script>
+        <script src="scripts/sc_index.js" type="text/javascript"></script>
+        <script src="Estilos/Script/prueba.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <ul class="marca">
+            <a href="index.html">
+                <li>
+                    <img src="Estilos/Imagenes/logoFot.png"><br>
+                    <img src="Estilos/Imagenes/solucion.png">
+                </li>
+            </a>
+            <li id="iniLo">Login</li>
+            <li class="car">
+                <img src="Estilos/Imagenes/carrito.png" />
+            </li>
+            <li>Buscar</li>
+        </ul>
+        <div class="mascara" id="formInicio">
+            <div class="formulario" id="formLogin">
+                <h4 class="salirMenu">x</h4>
+                <form id="formInicioSesion">
+                     <ul>
+                        <li>
+                            <h2>Inicio Sesion</h2>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Usuario" />
+                        </li>
+                        <li>
+                            <input type="password" placeholder="Contraseña" id="pssClave"/>
+                        </li>
+                        <li>
+                            <input type="button" Value="Ingresar" id="btnIniciarSesion"/>
+                        </li>
+                        <li>
+                            <a>Olvido Contraseña</a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <ul class="navMenu">
+            <a href="oneScreen.html">
+                <li>PANTALLAS INTERACTIVAS</li>
+            </a>
+            <a href="fotocopiadoras.html">
+                <li>FOTOCOPIADORAS</li>
+            </a>
+            <a href="servicios.html">
+                <li>SERVICIOS</li>
+            </a>
+            <li id="contactoMen">CONTACTO</li>
+            <li id="descargarMen">DESCARGAS</li>
+        </ul>
+        <div class="formulario" id="formContactoMen">
+            <h4 class="salirMenu">x</h4>
+            <form class="contactoMenu" id="formContactar">
+                <ul>
+                    <li>
+                        <h2>Contactanos</h2>
+                    </li>
+                    <li>
+                        <h4>Telefono</h4>
+                        <h3>413 74 66</h3>
+                    </li>
+                    <li>
+                        <h4>Dirección Oficina principal</h4>
+                        <h3>Carrera 71G # 6D-04 </h3>
+                    </li>
+                    <li>
+                        <input type="text" placeholder="Nombre *" required/>
+                    </li>
+                    <li>
+                        <input type="text" placeholder="Telefono" />
+                    </li>
+                    <li>
+                        <input type="text" placeholder="E-mail *" required/>
+                    </li>
+                    <li>
+                        <input type="text" placeholder="Observaciones" />
+                    </li>
+                    <li>
+                        <input type="button" value="Enviar" id="btnContactar" />
+                    </li>
+                </ul>
+            </form>
+        </div>
+        
+        <section>
+            <div class="cabeza">
+                <div class="infCab">
+                    <img src="Estilos/Imagenes/oneScreen/logo.png" />
+                    <h2>Todas sus herramientas de colaboracion estan aqui.</h2>
+                    <p>
+                        De vídeo, audio y conferencias web, pizarras, presentando,
+                        formación, anotaciones, compartir, todo ello desde una sola pantalla.
+                    </p>
+                    <a>Ver OneScreen en uso</a>
+                </div>
+                <div class="imgCab">
+                    <img src="Estilos/Imagenes/oneScreen/imgCab.png">
+                </div>
+            </div>
+            <div class="usosOne">
+                <h1>Conferencias web</h1>
+                <ul>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Utilice WebEx, Lync, Connect y más</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Elija una herramienta de conferencia desde la pantalla de un lanzamiento</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Iniciar reuniones instantáneas, ad hoc con un solo toque</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Ver y utilizar contenido de vídeo y, al mismo tiempo</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Ejecutar retroalimentación en tiempo real anotada</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Tire de sus datos grande ... o los datos pequeños</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Super-tamaño de las repercusiones de su seminario</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Grabar, guardar y compartir sesiones de trabajo</h3>
+                    </li>
+                    <li>
+                        <h2>Mas Informacion</h2>
+                    </li>
+                </ul>
+                <img src="Estilos/Imagenes/oneScreen/conferencia.png" />
+            </div>
+            <div class="usosOne">
+                
+                <h1>Videoconferencia</h1>
+                <ul>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Códec integrado de software OneScreen Connect ™</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>También es compatible con IOCOM, Polycom, Cisco y más</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>toque único para la conexión de vídeo instantánea</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Incluir hasta 99 participantes a la vez</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>De forma libre el tamaño de pantalla en ventanas de vídeo y contenido</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Tableta, móvil y un ordenador portátil</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>calidad de vídeo cara a cara con HD 1080p y zoom de 10x</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Se ajusta a los requisitos de ancho de banda</h3>
+                    </li>
+                    <li>
+                        <h2>Mas Informacion</h2>
+                    </li>
+                </ul>
+                <img src="Estilos/Imagenes/oneScreen/video.png" />
+             </div>
+            <div class="usosOne">
+                <h1>En el aula</h1>
+                <ul>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Anotar en casi cualquier cosa</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Grabar y correo electrónico clases y sesiones de trabajo</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>convierte al instante escribir a mano en texto</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Flujo de los medios de comunicación televisión inteligente incorporada</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Acceso a información en tiempo real sobre el sujeto</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>cuota de pantalla con tabletas</h3>
+                    </li>
+                    <li>
+                        <img src="Estilos/Imagenes/oneScreen/vector.png">
+                        <h3>Compatible con los sistemas de enseñanza a distancia</h3>
+                    </li>
+                    <li>
+                        <h2>Mas Informacion</h2>
+                    </li>
+                </ul>
+                <img src="Estilos/Imagenes/oneScreen/colegio.png" />
+            </div>
+        </section>
+        <div class="footer">
+            <div class="imgLogoFot">
+                <img src="Estilos/Imagenes/logoFot.png">
+                <img src="Estilos/Imagenes/solucion.png">
+            </div>
+            <ul class="datosFooter">
+                <li>
+                    <img src="Estilos/Imagenes/tel.png">
+                    <h4>Tel: 413 7466</h4>
+                </li>
+                <li>
+                    <img src="Estilos/Imagenes/mail.png">
+                    <h4>E-mail: contacto@worksmart.com.co</h4>
+                </li>
+                <li>
+                    <img src="Estilos/Imagenes/ubi.png">
+                    <h4>Carrera 71g # 6d - 04</h4>
+                </li>
+            </ul>
+            <ul class="redes">
+                <li>
+                    <img src="Estilos/Imagenes/facebook.png">
+                    <h4>faceboock</h4>
+                </li>
+                <li>
+                    <img src="Estilos/Imagenes/twitter.png">
+                    <h4>twitter</h4>
+                </li>
+                <li>
+                    <img src="Estilos/Imagenes/youtube.png">
+                    <h4>youtube</h4>
+                </li>
+            </ul>
+            <ul class="sitio">
+                <li>
+                    <a href="fotocopiadoras.html">
+                        <h5>Fotocopiadoras</h5>
+                    </a>
+                    <a href="oneScreen.html">
+                        <h5>Pantallas Interactivas</h5>
+                    </a>
+                    <a href="servicios.html">
+                        <h5>Servicios</h5>
+                    </a>
+                    <a>
+                        <h5 id="descargarMen2">Descargas</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--Seccion descargas-->
+        <div class="mascara" id="ventanaDescarga">
+            <h4 class="salirDescarga">x</h4>
+            <form class="formulario" id="formDescarga">
+                <ul>
+                    <li><h2>Descargas</h2></li>
+                    <li>
+                        <h4>Marca</h4>
+                        <select id="selMarca">
+                            <option value="0">Seleciona una marca</option>
+                            <option value="2">Sharp</option>
+                            <option value="3">Toshiba</option>
+                            <option value="1">Kyocera</option>
+                        </select>
+                    </li>
+                    <li>
+                        <h4>Referencia</h4>
+                        <select id="selProductos">
+                            
+                        </select>
+                    </li>
+                    <li>
+                        <input type="button" value="Buscar" id="btnBuscarDescarga" />
+                    </li>
+                </ul>
+            </form>
+            <div class="resultadoBus" id="divDescargables">
+            </div>
+        </div>
+    </body>
+</html>

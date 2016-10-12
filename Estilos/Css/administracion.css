@@ -1,0 +1,333 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.resultadoBus {
+    margin: auto;
+    margin-top: 20px;
+    display: table;
+    visibility: hidden;
+    border: 2px solid black;
+    text-align: center;
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    font-family: Calibri Light;
+}
+.resultadoBus h2 {
+    color: white;
+}
+.resultadoBus table {
+    display: table;
+    margin: 5px;
+    border-collapse: collapse;
+}
+.resultadoBus td {
+    background-color: rgba(255,255,255,0.8);
+    padding: 5px;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+.resultadoBus td input {
+    height: 25px;
+    padding: 0 10px;
+    border-radius: 3px;
+}
+.resultadoBus td select {
+    height: 25px;
+    border-radius: 3px;
+}
+.resultadoBus td input[type="button"] {
+    cursor: pointer;
+    border-radius: 0;
+}
+.resultadoBus td input[type="button"]:hover {
+    background-color: black;
+    color: white;
+}
+.resultadoDescarga td:last-child {
+    cursor: pointer;
+    color: red;
+}
+.resultadoDescarga td:last-child:hover {
+    color: blue;  
+}
+.salirTabla {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border-radius: 100%;
+    border: 1px solid white;
+    margin-top: -25px;
+    margin-left: 5px;
+    cursor: pointer;
+    color: white;
+}
+.salirTabla:hover {
+    background-color: white;
+    color: black;
+}
+.menuAdmin {
+    width: 50%;
+    display: table;
+    margin: auto;
+    margin-top: 30px;
+    font-family: Calibri Light;
+}
+.menuAdmin ul {
+    width: 100%;
+    display: table;
+}
+.menuAdmin ul li {
+    width: 30%;
+    float: left;
+    margin: 15px 1%;
+    text-align: center;
+    font-size: 20px;
+}
+.menuAdmin li img {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menuAdmin li:hover img {
+    border-radius: 100%;
+    opacity: 0.5;
+    background-color: #CECEF6;
+}
+
+.mascara {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(1,1,1,0.7);
+    overflow-x: hidden;
+    padding-bottom: 50px;
+    display: none;
+}
+.salirCrud {
+    float: right;
+    margin-right: 30%;
+    margin-top: 150px;
+    background-color: gray;
+    color: white;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-family: kalinga;
+    cursor: pointer;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirCrud:hover {
+    background-color: #A9BCF5;
+}
+.crud {
+    width: 20%;
+    display: table;
+    margin: auto;
+    margin-top: 200px;
+    text-align: center;
+}
+.crud li {
+    width: 100%;
+    font-family: Calibri Light; 
+    background-color: #0B2161;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin: 1%;
+    cursor: pointer;
+}
+.crud li:hover {
+    background-color: gray;
+}
+.formulario {
+    width: 400px;
+    margin: auto;
+    margin-top: 100px;
+    display: table;
+    border: 1px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    z-index: 9999;
+}
+.salirContacto {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    font-family: kalinga;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirContacto:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.salirDescarga {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    font-family: kalinga;
+    text-align: center;
+    color: white;
+    float: right;
+    margin-top: 35px;
+    margin-right: 250px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirDescarga:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.salirMenu {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    font-family: kalinga;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.salirMenu:hover {
+    background-color: white;color: white;
+    color: black;
+}
+.formulario ul {
+    width: 95%;
+    margin: auto;
+    margin-top: 5px;
+    display: table;
+    background-image: url('../Imagenes/fondos/listaForm.jpg');
+}
+.formulario ul li {
+    width: 100%;
+    display: table;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: Calibri Light;
+}
+.contactoMenu li:nth-child(2) {
+    width: 50%;
+    float: left;
+}
+.contactoMenu li:nth-child(3) {
+    width: 50%;
+    float: left;
+}
+.formulario li input[type="text"] {
+    width: 90%;
+    height: 30px;
+}
+.formulario li input[type="password"] {
+    width: 90%;
+    height: 30px;
+}
+.formulario li input[type="button"] {
+    width: 100px;
+    height: 30px;
+}
+.formulario li input[type="button"]:hover {
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    background-size: 100% 100%;
+    color: white;
+    cursor: pointer;
+}
+.formulario li select {
+    width: 90%;
+    height: 30px;
+}
+
+
+#crearProducto {
+    width: 60%;
+}
+
+.formularioProd {
+    width: 60%;
+    margin: auto;
+    margin-top: 100px;
+    display: table;
+    border: 1px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    z-index: 9999;
+}
+.formularioProd input[type="button"] {
+    margin-top: 10px;
+    height: 30px;
+    width: 120px;
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    background-size: 100% 100%;
+    color: white;
+    cursor: pointer;
+}
+.formularioProd input[type="button"]:hover {
+    background-image: url('../Imagenes/fondos/listaForm.jpg');
+    color: black;
+}
+.formularioProd ul {
+    width: 95%;
+    margin: auto;
+    margin-top: 5px;
+    display: table;
+    background-image: url('../Imagenes/fondos/listaForm.jpg');
+}
+.formularioProd ul li {
+    width: 33%;
+    float: left;
+    height: 35px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: Calibri Light;
+}
+.formularioProd ul li:first-child {
+    width: 100%;
+}
+.formularioProd li input[type="text"] {
+    width: 90%;
+    height: 30px;
+}
+.formularioProd li input[type="password"] {
+    width: 90%;
+    height: 30px;
+}
+.formularioProd li input[type="button"] {
+    width: 100px;
+    height: 30px;
+}
+.formularioProd li input[type="button"]:hover {
+    background-image: url('../Imagenes/fondos/formulario.jpg');
+    background-size: 100% 100%;
+    color: white;
+    cursor: pointer;
+}
+.formularioProd li select {
+    width: 90%;
+    height: 30px;
+}
+#caracteristicas li {
+    width: 100%;
+    display: table;
+}

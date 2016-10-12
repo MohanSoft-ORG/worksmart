@@ -1,0 +1,147 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.clear {
+    width: 100%;
+    height: 100px;
+    clear: both;
+}
+.marca {
+    width: 100%;
+    display: table;
+    padding: 10px;
+    background-color: black;
+}
+.car img{
+    width: 40px;
+    height: 40px;
+}
+.marca li {
+    float: left;
+    width: 8%;
+    display: table;
+    padding: 30px 20px 1px 20px;
+    color: white;
+    font-family: verdana,sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+.marca li:first-child {
+    width: 50%;
+    border: none;
+    text-align: left;
+    padding-top: 1px;
+}
+.marca li:first-child img {
+    width: 200px;
+    height: 40px;
+    margin-left: 100px;
+}
+.marca li:first-child img:nth-child(2) {
+    height: 30px;
+}
+.marca li:last-child {
+    border: none;
+}
+.navMenu {
+    width: 100%;
+    display: table;
+}
+.navMenu li {
+    float: left;
+    width: 20%;
+    height: 60px;
+    font-size: 19px;
+    font-family: calibri light;
+    text-align: center;
+    padding-top: 30px;
+    cursor: pointer;
+    border-bottom: 3px solid black;
+}
+.navMenu li:hover {
+    background-color: gray;
+    color: white;
+    opacity: 0.8;
+    transition: 1s;
+}
+section {
+    width: 100%;
+    display: table;
+}
+.cabeza {
+    width: 100%;
+    height: 400px;
+}
+.infCab {
+    width: 60%;
+    height: 100%;
+    text-align: center;
+    float: left;
+    font-family: calibri light;
+}
+.infCab img {
+    margin-top: 20px;
+}
+.infCab h2 {
+    font-size: 30px;
+    margin-top: 20px;
+}
+.infCab p {
+    width: 80%;
+    margin: 20px auto 0 auto;
+    font-size: 20px;
+}
+.imgCab {
+    width: 39%;
+    height: 100%;
+    float: right;
+    text-align: center;
+}
+.imgCab img {
+    height: 100%;
+}
+.usosOne {
+    width: 100%;
+    margin: auto;
+    border: 1px solid blue;
+    display: table;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.usosOne h1 {
+    font-family: calibri Light;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+.usosOne ul {
+    width: 50%;
+    margin-left: 10%;
+    display: table;
+    float: left;
+}
+.usosOne ul li {
+    width: 100%;
+    display: table;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.usosOne li img {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin-right: 0;
+}
+.usosOne li h3 {
+    float: left;
+    font-family: calibri light;
+    font-size: 17px;
+    margin-left: 5px;
+}
+.usosOne img {
+    width: 30%;
+    margin-right: 10%;
+    float: right;
+}
